@@ -1,0 +1,283 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="hero-section wf-section">
+    <div class="default-section-content">
+        <div class="hero-title-wrap">
+            <div class="web-title">Innovation is right around the corner</div>
+            <h1 class="hero-heading-large">Get <span class="gradient-span">Ready,</span></h1>
+            <div class="w-layout-grid hero-content-wrapper">
+                <div id="w-node-_89bf7ac5-0bb9-dfa3-90f4-5f58cbfd9d31-4c83a91e" class="hero-icon"
+                    data-w-id="89bf7ac5-0bb9-dfa3-90f4-5f58cbfd9d31" data-animation-type="lottie"
+                    data-src="{% static 'blog/documents/lf30_editor_dme8e8w6.json' %}" data-loop="1" data-direction="1"
+                    data-autoplay="1" data-is-ix2-target="0" data-renderer="svg"
+                    data-default-duration="2.669335893945058" data-duration="0"></div>
+                <div class="hero-content">
+                    <h1 class="hero-heading-large">For <span class="gradient-span">Liftoff.</span></h1>
+                    <p class="hero-paragraph">Future proof and <span class="gradient-span">grow</span> your business
+                        with <span class="gradient-span">web3</span> and the <span
+                            class="gradient-span">metaverse</span> in mind.</p>
+                </div>
+            </div>
+            <div class="w-layout-grid double-btn-padding">
+                <a href="blog.html" class="btn w-button">Our blog</a>
+                <a href="contact.html" class="btn w-button">Build a website</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="section-gradiant wf-section">
+    <div class="default-section-content">
+        <div class="w-layout-grid title-grid no-margin">
+            <div class="title-div">
+                <p class="web-title">Creatively driven</p>
+                <h2>Project Portfolio</h2>
+                <p>Passionate for our craft, we seek to accomplish unique and elegant website designs, and to wow our
+                    clients along with their customers. All while fitting their plan and goals.</p>
+            </div>
+            <div class="title-div">
+                <a href="portfolio.html" class="btn-white w-button">See all projects</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="default-section wf-section">
+    <div class="default-section-content">
+        <div class="w-layout-grid title-grid">
+            <p class="web-title-gradient">Welcome to the Information Galaxy</p>
+            <h2>Our latest posts</h2>
+        </div>
+        <div id="w-node-_74d6fc1a-0e68-1a3c-e3da-0f13ea13f9c8-4c83a91e" class="w-layout-grid single-col-grid">
+            <a href="{% url 'blog-post' post_list.0.pk %}" class="blog-card w-inline-block">
+                <div class="blog-card-left" style="background-image: url({{ post_list.0.image.url }});"></div>
+                <div class="blog-card-right">
+                    <div class="top-wrapper">
+                        <div class="tag-flex start-justify">
+                            <div class="tag-block">
+                                <div class="hashtag-purple">#</div>
+                                <div class="hashtag">Security</div>
+                            </div>
+                            <div class="tag-block">
+                                <div class="hashtag-purple">#</div>
+                                <div class="hashtag">Linux</div>
+                            </div>
+                            <div class="tag-block">
+                                <div class="hashtag-purple">#</div>
+                                <div class="hashtag">Article</div>
+                            </div>
+                        </div>
+                        <div class="hashtag-purple">{{ post_list.0.created_on|date:"F d, Y" }}</div>
+                    </div>
+                    <h3 class="card-heading">{{ post_list.0.title }}</h3>
+                    <div class="card-description">{{post_list.0.summary|truncatechars:100 }}<br></div>
+                    <div class="arrow-btn-txt">Read more <span class="fa900solid-span"></span></div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="default-section-light-purple wf-section">
+    <div class="default-section-content">
+        <div class="w-layout-grid dynamic-grid">
+            <a href="blog/post.html" class="blog-card-square w-inline-block">
+                <div class="blog-card-div">
+                    <div class="tag-flex">
+                        <div class="tag-block">
+                            <div class="hashtag">#</div>
+                            <div class="hashtag">Security</div>
+                        </div>
+                        <div class="tag-block">
+                            <div class="hashtag">#</div>
+                            <div class="hashtag">Linux</div>
+                        </div>
+                        <div class="tag-block">
+                            <div class="hashtag">#</div>
+                            <div class="hashtag">Article</div>
+                        </div>
+                    </div>
+                    <h3 class="card-heading centered">Most Common Attack Vectors, Introduction</h3>
+                    <div class="hashtag">April 5, 2022</div>
+                </div>
+                <div class="gradient-overlay"></div>
+            </a>
+            <a href="blog/post.html" class="blog-card-square w-inline-block">
+                <div class="blog-card-div">
+                    <div class="tag-flex">
+                        <div class="tag-block">
+                            <div class="hashtag">#</div>
+                            <div class="hashtag">Security</div>
+                        </div>
+                        <div class="tag-block">
+                            <div class="hashtag">#</div>
+                            <div class="hashtag">Linux</div>
+                        </div>
+                        <div class="tag-block">
+                            <div class="hashtag">#</div>
+                            <div class="hashtag">Article</div>
+                        </div>
+                    </div>
+                    <h3 class="card-heading centered">Most Common Attack Vectors, Introduction</h3>
+                    <div class="hashtag">April 5, 2022</div>
+                </div>
+                <div class="gradient-overlay"></div>
+            </a>
+            <a href="blog/post.html" class="blog-card-square w-inline-block">
+                <div class="blog-card-div">
+                    <div class="tag-flex">
+                        <div class="tag-block">
+                            <div class="hashtag">#</div>
+                            <div class="hashtag">Security</div>
+                        </div>
+                        <div class="tag-block">
+                            <div class="hashtag">#</div>
+                            <div class="hashtag">Linux</div>
+                        </div>
+                        <div class="tag-block">
+                            <div class="hashtag">#</div>
+                            <div class="hashtag">Article</div>
+                        </div>
+                    </div>
+                    <h3 class="card-heading centered">Most Common Attack Vectors, Introduction</h3>
+                    <div class="hashtag">April 5, 2022</div>
+                </div>
+                <div class="gradient-overlay"></div>
+            </a>
+            <a href="blog/post.html" class="blog-card-square w-inline-block">
+                <div class="blog-card-div">
+                    <div class="tag-flex">
+                        <div class="tag-block">
+                            <div class="hashtag">#</div>
+                            <div class="hashtag">Security</div>
+                        </div>
+                        <div class="tag-block">
+                            <div class="hashtag">#</div>
+                            <div class="hashtag">Linux</div>
+                        </div>
+                        <div class="tag-block">
+                            <div class="hashtag">#</div>
+                            <div class="hashtag">Article</div>
+                        </div>
+                    </div>
+                    <h3 class="card-heading centered">Most Common Attack Vectors, Introduction</h3>
+                    <div class="hashtag">April 5, 2022</div>
+                </div>
+                <div class="gradient-overlay"></div>
+            </a>
+        </div>
+        <div class="pagination-div short-top-margin">
+            <a href="blog.html" class="btn w-button">View popular topics</a>
+        </div>
+    </div>
+</div>
+<section id="web-design" class="default-section wf-section">
+    <div class="default-section-content">
+        <div class="banner-content-div">
+            <h2 class="h4-heading">A website tailored to you</h2>
+            <p>Build a robust website using a comprehensive set of tools and integerations. Show the world your
+                creativity and talent, the business you have talken off the ground, or take your current website to a
+                whole new level.</p>
+            <a href="#web-design-options" class="btn-white w-button">View options</a>
+        </div>
+    </div>
+</section>
+<div class="default-section-light-purple wf-section">
+    <div class="default-section-content">
+        <div img-attrib="Photo by &lt;a href=&quot;https://unsplash.com/@orwhat?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText&quot;&gt;Richard Horvath&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText&quot;&gt;Unsplash&lt;/a&gt;"
+            class="w-layout-grid special-block">
+            <div id="w-node-_65e56648-d038-a693-a295-30f09b03cf4a-4c83a91e" class="w-layout-grid title-grid">
+                <h2 class="special-heading">Open Your Digital Doors</h2>
+                <p>A website makes your business have credibility and personality. It also serves as a means to protect
+                    and grow your brand online. No business is too small to have a website, so show yourselves to the
+                    world!</p>
+                <a href="contact.html" class="btn-white w-button">Get in touch</a>
+            </div>
+            <div id="w-node-_5e6942b6-edc3-0635-e9c4-81b9bf2f3c58-4c83a91e" class="w-layout-grid special-grid">
+                <div id="w-node-_5e6942b6-edc3-0635-e9c4-81b9bf2f3c59-4c83a91e" class="special-card">
+                    <div class="card-img-block">
+                        <div class="card-img lottie-large" data-w-id="5e6942b6-edc3-0635-e9c4-81b9bf2f3c5b"
+                            data-animation-type="lottie"
+                            data-src="{% static 'blog/documents/72583-business-goal-target-illustration.json' %}"
+                            data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0"
+                            data-renderer="svg" data-default-duration="3.033333333333333" data-duration="0"></div>
+                    </div>
+                    <h3 class="h4-heading">More Business</h3>
+                    <p>A modern website is now crucial for doing business nowadays, and to reach the most remote of
+                        customers. </p>
+                </div>
+                <div id="w-node-_5e6942b6-edc3-0635-e9c4-81b9bf2f3c6a-4c83a91e" class="special-card">
+                    <div class="card-img-block">
+                        <div class="card-img lottie-large" data-w-id="5e6942b6-edc3-0635-e9c4-81b9bf2f3c6c"
+                            data-animation-type="lottie"
+                            data-src="{% static 'blog/documents/73195-business-partnership-contract-handshake.json' %}"
+                            data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0"
+                            data-renderer="svg" data-default-duration="3.033333333333333" data-duration="0"></div>
+                    </div>
+                    <h3 class="h4-heading">Online Presence</h3>
+                    <p>The Internet is one giant phone book, so get one browser search ahead of your competitors, and
+                        make the switch.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section id="web-design-options" class="anti-hero-section wf-section">
+    <div class="default-section-content">
+        <div class="w-layout-grid title-grid-wide">
+            <div id="w-node-_8d4f1777-899c-f3e8-50d3-64d2b5b73996-4c83a91e" class="title-left">
+                <p id="w-node-_8d4f1777-899c-f3e8-50d3-64d2b5b73997-4c83a91e" class="web-title-gradient">Now is the time
+                    to make the move</p>
+                <h2>Open Shop</h2>
+            </div>
+            <div id="w-node-_8d4f1777-899c-f3e8-50d3-64d2b5b7399b-4c83a91e" class="title-right">
+                <a href="contact.html" class="btn w-button">Let&#x27;s make it happen</a>
+            </div>
+        </div>
+        <div class="w-layout-grid grid-3">
+            <div id="w-node-_028f8429-c84e-ffd0-6264-dbee2e751dc4-4c83a91e" class="card-content">
+                <div class="w-layout-grid absolute-badge-grid">
+                    <div class="tag-div">Starting from <strong>$300</strong></div>
+                </div>
+                <div class="card-img-block">
+                    <div class="card-img lottie-medium" data-w-id="028f8429-c84e-ffd0-6264-dbee2e751dcb"
+                        data-animation-type="lottie"
+                        data-src="{% static 'blog/documents/53902-online-shopping-and-delivery.json' %}" data-loop="1"
+                        data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg"
+                        data-default-duration="5.15" data-duration="0"></div>
+                </div>
+                <h3 class="h4-heading">Single Page Site</h3>
+                <p class="web-title">Recommended for <span class="gradient-span">landing pages</span> &amp; <span
+                        class="gradient-span">portfolio</span> websites.</p>
+            </div>
+            <div id="w-node-_028f8429-c84e-ffd0-6264-dbee2e751dd9-4c83a91e" class="card-content">
+                <div class="w-layout-grid absolute-badge-grid">
+                    <div class="tag-div">Starting from <strong>$600</strong></div>
+                </div>
+                <div class="card-img-block">
+                    <div class="card-img lottie-medium" data-w-id="028f8429-c84e-ffd0-6264-dbee2e751de0"
+                        data-animation-type="lottie" data-src="{% static 'blog/documents/31997-dynamic-media.json' %}"
+                        data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg"
+                        data-default-duration="5.04" data-duration="0"></div>
+                </div>
+                <h3 class="h4-heading">Multi-Page Site</h3>
+                <p class="web-title">Recommended for <span class="gradient-span">personal</span>, <span
+                        class="gradient-span">blog</span> &amp; <span class="gradient-span">event</span> websites.</p>
+            </div>
+            <div id="w-node-_028f8429-c84e-ffd0-6264-dbee2e751ded-4c83a91e" class="card-content">
+                <div class="w-layout-grid absolute-badge-grid">
+                    <div class="tag-div">Starting from <strong>$850</strong></div>
+                </div>
+                <div class="card-img-block">
+                    <div class="card-img lottie-medium" data-w-id="028f8429-c84e-ffd0-6264-dbee2e751df4"
+                        data-animation-type="lottie" data-src="{% static 'blog/documents/70897-online-payments.json' %}"
+                        data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg"
+                        data-default-duration="4.85" data-duration="0"></div>
+                </div>
+                <h3 class="h4-heading">E-Commerce Site</h3>
+                <p class="web-title">Recommended for <span class="gradient-span">businesses</span> &amp; <span
+                        class="gradient-span">membership</span> websites.</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
