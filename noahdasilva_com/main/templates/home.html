@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div class="w-layout-grid double-btn-padding">
-                <a href="blog.html" class="btn w-button">Our blog</a>
+                <a href="{% url 'blog' %}" class="btn w-button">Our blog</a>
                 <a href="{% url 'contact' %}" class="btn w-button">Build a website</a>
             </div>
         </div>
@@ -85,7 +85,7 @@
 <div class="default-section-light-purple wf-section">
     <div class="default-section-content">
         <div class="w-layout-grid dynamic-grid">
-            <a href="{{ post_list.1.slug }}" class="blog-card-square w-inline-block" style="background-image: url({{ post_list.1.image.url }});">
+            <a href="{% url 'blog-post' post_list.1.slug %}" class="blog-card-square w-inline-block" style="background-image: url({{ post_list.1.image.url }});">
                 <div class="blog-card-div">
                     <div class="tag-flex">
                         {% for tag in post_list.1.get_tags %}
@@ -96,11 +96,11 @@
                         {% endfor %}
                     </div>
                     <h3 class="card-heading centered">{{ post_list.1.title }}</h3>
-                    <div class="hashtag">{{ post_list.1.created_on }}</div>
+                    <div class="hashtag">{{ post_list.1.created_on|date:"F d, Y" }}</div>
                 </div>
                 <div class="gradient-overlay"></div>
             </a>
-            <a href="{{ post_list.2.slug }}" class="blog-card-square w-inline-block" style="background-image: url({{ post_list.2.image.url }});">
+            <a href="{% url 'blog-post' post_list.2.slug %}" class="blog-card-square w-inline-block" style="background-image: url({{ post_list.2.image.url }});">
                 <div class="blog-card-div">
                     <div class="tag-flex">
                         {% for tag in post_list.2.get_tags %}
@@ -111,11 +111,11 @@
                         {% endfor %}
                     </div>
                     <h3 class="card-heading centered">{{ post_list.2.title }}</h3>
-                    <div class="hashtag">{{ post_list.2.created_on }}</div>
+                    <div class="hashtag">{{ post_list.2.created_on|date:"F d, Y" }}</div>
                 </div>
                 <div class="gradient-overlay"></div>
             </a>
-            <a href="{{ post_list.3.slug }}" class="blog-card-square w-inline-block" style="background-image: url({{ post_list.3.image.url }});">
+            <a href="{% url 'blog-post' post_list.3.slug %}" class="blog-card-square w-inline-block" style="background-image: url({{ post_list.3.image.url }});">
                 <div class="blog-card-div">
                     <div class="tag-flex">
                         {% for tag in post_list.3.get_tags %}
@@ -126,11 +126,11 @@
                         {% endfor %}
                     </div>
                     <h3 class="card-heading centered">{{ post_list.3.title }}</h3>
-                    <div class="hashtag">{{ post_list.3.created_on }}</div>
+                    <div class="hashtag">{{ post_list.3.created_on|date:"F d, Y" }}</div>
                 </div>
                 <div class="gradient-overlay"></div>
             </a>
-            <a href="{{ post_list.4.slug }}" class="blog-card-square w-inline-block" style="background-image: url({{ post_list.4.image.url }});">
+            <a href="{% url 'blog-post' post_list.4.slug %}" class="blog-card-square w-inline-block" style="background-image: url({{ post_list.4.image.url }});">
                 <div class="blog-card-div">
                     <div class="tag-flex">
                         {% for tag in post_list.4.get_tags %}
@@ -141,13 +141,13 @@
                         {% endfor %}
                     </div>
                     <h3 class="card-heading centered">{{ post_list.4.title }}</h3>
-                    <div class="hashtag">A{{ post_list.4.created_on }}</div>
+                    <div class="hashtag">{{ post_list.4.created_on|date:"F d, Y" }}</div>
                 </div>
                 <div class="gradient-overlay"></div>
             </a>
         </div>
         <div class="pagination-div short-top-margin">
-            <a href="blog.html" class="btn w-button">View popular topics</a>
+            <a href="{% url 'blog' %}" class="btn w-button">View popular topics</a>
         </div>
     </div>
 </div>

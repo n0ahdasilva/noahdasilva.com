@@ -34,7 +34,7 @@
 <body>
     {% block navbar %}
     <div class="nav-banner-wrapper">
-        <a href="{blog.html}" class="banner-link w-inline-block">
+        <a href="{% url 'blog' %}" class="banner-link w-inline-block">
             <div class="w-layout-grid nav-banner-grid">
                 <div id="w-node-_1be03d6a-790c-629e-8122-d0fe113d13b0-113d13ad" class="banner-info">
                     <div id="w-node-_1be03d6a-790c-629e-8122-d0fe113d13b1-113d13ad" class="banner-new-tag">New Article!
@@ -63,7 +63,7 @@
                     </a>
                 </div>
                 <div class="w-layout-grid nav-menu-grid">
-                    <a href="blog/tags.html" id="w-node-_073a6cad-f6aa-4cb3-d13c-226c4e688500-4e6884ef"
+                    <a href="{% url 'tags' %}" id="w-node-_073a6cad-f6aa-4cb3-d13c-226c4e688500-4e6884ef"
                         class="nav-link-block w-inline-block"><img src="{% static 'blog/img/search-img.png' %}"
                             loading="lazy" alt="" class="nav-menu-icon small"></a>
                     {% if user.is_authenticated %}
@@ -80,7 +80,7 @@
             <nav role="navigation" class="mobile-nav w-nav-menu">
                 <a href="{% url 'home' %}" class="mobile-nav-link w-nav-link">Home</a>
                 <a href="{% url 'about' %}" class="mobile-nav-link w-nav-link">About</a>
-                <a href="blog.html" class="mobile-nav-link w-nav-link">Blog</a>
+                <a href="{% url 'blog' %}" class="mobile-nav-link w-nav-link">Blog</a>
                 <a href="portfolio.html" class="mobile-nav-link w-nav-link">Portfolio</a>
                 <a href="{% url 'sign-up' %}" class="nav-btn w-button">Create Account</a>
                 <a href="{% url 'login' %}" class="nav-btn w-button">Log in</a>
@@ -94,7 +94,7 @@
 
     {% block footer %}
     <div class="footer-wrapper">
-        <a href="blog.html" class="banner-link w-inline-block">
+        <a href="{% url 'blog' %}" class="banner-link w-inline-block">
             <div class="w-layout-grid footer-banner-grid">
                 <div id="w-node-_5cb3cddc-fa2b-074d-8094-68ef9e176817-9e176815" class="banner-info">
                     <div id="w-node-_5cb3cddc-fa2b-074d-8094-68ef9e176818-9e176815" class="banner-new-tag">New Article!
@@ -123,8 +123,8 @@
                 </div>
                 <div id="w-node-_5cb3cddc-fa2b-074d-8094-68ef9e176832-9e176815" class="footer-link-column">
                     <div class="footer-header">Community</div>
-                    <a href="blog.html" class="footer-link">Blog</a>
-                    <a href="blog/tags.html" class="footer-link">View all tags</a>
+                    <a href="{% url 'blog' %}" class="footer-link">Blog</a>
+                    <a href="{% url 'tags' %}" class="footer-link">View all tags</a>
                     <a href="{% url 'contact' %}" class="footer-link">Contact</a>
                 </div>
                 <div class="footer-link-column">

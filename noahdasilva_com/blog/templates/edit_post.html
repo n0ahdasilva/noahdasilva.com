@@ -8,6 +8,7 @@
 
 {% block content %}
 {% if user.is_authenticated %}
+  {% if user.id == post.author.id %}
 <div class="default-section wf-section">
   <div class="default-section-content">
     <div class="form-wrapper">
@@ -68,5 +69,6 @@
     </div>
   </div>
 </div>
+  {% endif %}
 {% endif %}
 {% endblock %}

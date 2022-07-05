@@ -8,6 +8,7 @@
 
 {% block content %}
 {% if user.is_authenticated %}
+  {% if user.id == post.author.id %}
 <div class="auth-section wf-section">
   <div class="form-wrapper">
     <div class="auth-form-card-invisible">
@@ -26,5 +27,6 @@
     </div>
   </div>
 </div>
+  {% endif %}
 {% endif %}
 {% endblock %}

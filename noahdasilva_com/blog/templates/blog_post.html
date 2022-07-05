@@ -1,18 +1,16 @@
-{% extends 'base.html' %} 
-{% load static %} 
-
-{% block seo %}
+{% extends 'base.html' %} {% load static %} {% block seo %}
 <title>{{ post.title }} - Noah Da Silva</title>
-<meta name="description" content="{{ post.summary }}"/>
+<meta name="description" content="{{ post.summary }}" />
 <meta property="og:type" content="article" />
 <meta property="og:site_name" content="Noah Da Silva" />
 <meta propety="og:title" content="{{ post.title }}" />
-<meta propety="og:description" content="{{ post.summary }}"/>
-<meta property="og:url" content="https://www.noahdasilva.com/blog/{{ post.slug }}" />
-<meta propety="og:image" content="{{ post.image.url }}"/>
-{% endblock %}
-
-{% block content %}
+<meta propety="og:description" content="{{ post.summary }}" />
+<meta
+  property="og:url"
+  content="https://www.noahdasilva.com/blog/{{ post.slug }}"
+/>
+<meta propety="og:image" content="{{ post.image.url }}" />
+{% endblock %} {% block content %}
 <div class="default-section wf-section">
   <div class="w-layout-grid grid-blog-post">
     <div
@@ -78,16 +76,16 @@
     </div>
     <div class="blog-post-body w-richtext">{{ post.content|safe }}</div>
     {% if user.is_authenticated %}
+      {% if user.id == post.author.id %}
     <div class="pagination-div short-top-margin">
-      <a href="{% url 'edit-post' post.slug %}" class="btn w-button"
-        >Edit post</a
-      >
+      <a href="{% url 'edit-post' post.slug %}" class="btn w-button">Edit post</a>
     </div>
     <div class="pagination-div short-top-margin">
       <a href="{% url 'delete-post' post.slug %}" class="btn w-button"
         >Delete post</a
       >
     </div>
+      {% endif %}
     {% endif %}
   </div>
   <div class="section-container-post-body w-container">
@@ -112,7 +110,7 @@
             name="user-comment"
             maxlength="5000"
             data-name="user-comment"
-            placeholder="Add a comment..."
+            placeholder="Add a comment."
             class="input form-comment w-input"
           ></textarea>
         </div>
@@ -206,118 +204,70 @@
       <h2>Check out other posts just like this one.</h2>
     </div>
     <div class="w-layout-grid dynamic-grid">
-      <a
-        href="../blog/post.html"
-        aria-current="page"
-        class="blog-card-square w-inline-block w--current"
-      >
-        <div class="blog-card-div">
-          <div class="tag-flex">
-            <div class="tag-block">
-              <div class="hashtag">#</div>
-              <div class="hashtag">Security</div>
-            </div>
-            <div class="tag-block">
-              <div class="hashtag">#</div>
-              <div class="hashtag">Linux</div>
-            </div>
-            <div class="tag-block">
-              <div class="hashtag">#</div>
-              <div class="hashtag">Article</div>
-            </div>
+      <a href="{% url 'blog-post' post_list.0.slug %}" class="blog-card-square w-inline-block" style="background-image: url({{ post_list.0.image.url }});">
+          <div class="blog-card-div">
+              <div class="tag-flex">
+                  {% for tag in post_list.0.get_tags %}
+                  <div class="tag-block">
+                      <div class="hashtag">#</div>
+                      <div class="hashtag">{{ tag }}</div>
+                  </div>
+                  {% endfor %}
+              </div>
+              <h3 class="card-heading centered">{{ post_list.0.title }}</h3>
+              <div class="hashtag">{{ post_list.1.created_on|date:"F d, Y" }}</div>
           </div>
-          <h3 class="card-heading centered">
-            Most Common Attack Vectors, Introduction
-          </h3>
-          <div class="hashtag">April 5, 2022</div>
+          <div class="gradient-overlay"></div>
+      </a>
+      <a href="{% url 'blog-post' post_list.1.slug %}" class="blog-card-square w-inline-block" style="background-image: url({{ post_list.1.image.url }});">
+        <div class="blog-card-div">
+            <div class="tag-flex">
+                {% for tag in post_list.1.get_tags %}
+                <div class="tag-block">
+                    <div class="hashtag">#</div>
+                    <div class="hashtag">{{ tag }}</div>
+                </div>
+                {% endfor %}
+            </div>
+            <h3 class="card-heading centered">{{ post_list.1.title }}</h3>
+            <div class="hashtag">{{ post_list.1.created_on|date:"F d, Y" }}</div>
         </div>
         <div class="gradient-overlay"></div>
-      </a>
-      <a
-        href="../blog/post.html"
-        aria-current="page"
-        class="blog-card-square w-inline-block w--current"
-      >
-        <div class="blog-card-div">
-          <div class="tag-flex">
-            <div class="tag-block">
-              <div class="hashtag">#</div>
-              <div class="hashtag">Security</div>
-            </div>
-            <div class="tag-block">
-              <div class="hashtag">#</div>
-              <div class="hashtag">Linux</div>
-            </div>
-            <div class="tag-block">
-              <div class="hashtag">#</div>
-              <div class="hashtag">Article</div>
-            </div>
+    </a>
+      <a href="{% url 'blog-post' post_list.2.slug %}" class="blog-card-square w-inline-block" style="background-image: url({{ post_list.2.image.url }});">
+          <div class="blog-card-div">
+              <div class="tag-flex">
+                  {% for tag in post_list.2.get_tags %}
+                  <div class="tag-block">
+                      <div class="hashtag">#</div>
+                      <div class="hashtag">{{ tag }}</div>
+                  </div>
+                  {% endfor %}
+              </div>
+              <h3 class="card-heading centered">{{ post_list.2.title }}</h3>
+              <div class="hashtag">{{ post_list.2.created_on|date:"F d, Y" }}</div>
           </div>
-          <h3 class="card-heading centered">
-            Most Common Attack Vectors, Introduction
-          </h3>
-          <div class="hashtag">April 5, 2022</div>
-        </div>
-        <div class="gradient-overlay"></div>
+          <div class="gradient-overlay"></div>
       </a>
-      <a
-        href="../blog/post.html"
-        aria-current="page"
-        class="blog-card-square w-inline-block w--current"
-      >
-        <div class="blog-card-div">
-          <div class="tag-flex">
-            <div class="tag-block">
-              <div class="hashtag">#</div>
-              <div class="hashtag">Security</div>
-            </div>
-            <div class="tag-block">
-              <div class="hashtag">#</div>
-              <div class="hashtag">Linux</div>
-            </div>
-            <div class="tag-block">
-              <div class="hashtag">#</div>
-              <div class="hashtag">Article</div>
-            </div>
+      <a href="{% url 'blog-post' post_list.3.slug %}" class="blog-card-square w-inline-block" style="background-image: url({{ post_list.3.image.url }});">
+          <div class="blog-card-div">
+              <div class="tag-flex">
+                  {% for tag in post_list.3.get_tags %}
+                  <div class="tag-block">
+                      <div class="hashtag">#</div>
+                      <div class="hashtag">{{ tag }}</div>
+                  </div>
+                  {% endfor %}
+              </div>
+              <h3 class="card-heading centered">{{ post_list.3.title }}</h3>
+              <div class="hashtag">{{ post_list.3.created_on|date:"F d, Y" }}</div>
           </div>
-          <h3 class="card-heading centered">
-            Most Common Attack Vectors, Introduction
-          </h3>
-          <div class="hashtag">April 5, 2022</div>
-        </div>
-        <div class="gradient-overlay"></div>
+          <div class="gradient-overlay"></div>
       </a>
-      <a
-        href="../blog/post.html"
-        aria-current="page"
-        class="blog-card-square w-inline-block w--current"
-      >
-        <div class="blog-card-div">
-          <div class="tag-flex">
-            <div class="tag-block">
-              <div class="hashtag">#</div>
-              <div class="hashtag">Security</div>
-            </div>
-            <div class="tag-block">
-              <div class="hashtag">#</div>
-              <div class="hashtag">Linux</div>
-            </div>
-            <div class="tag-block">
-              <div class="hashtag">#</div>
-              <div class="hashtag">Article</div>
-            </div>
-          </div>
-          <h3 class="card-heading centered">
-            Most Common Attack Vectors, Introduction
-          </h3>
-          <div class="hashtag">April 5, 2022</div>
-        </div>
-        <div class="gradient-overlay"></div>
-      </a>
-    </div>
-    <div class="pagination-div">
-      <a href="../blog.html" class="btn w-button">Browse all articles</a>
-    </div>
+  </div>
+  <div class="pagination-div short-top-margin">
+      <a href="{% url 'tags' %}" class="btn w-button">Explore all topics</a>
+  </div>
   </div>
 </div>
 {% endblock %}
