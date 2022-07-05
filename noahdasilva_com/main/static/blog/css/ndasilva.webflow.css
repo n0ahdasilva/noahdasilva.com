@@ -1022,7 +1022,7 @@ a {
   -ms-flex-align: center;
   align-items: center;
   border-radius: 1rem 0.5rem;
-  background-image: url('../img/andras-vas-Bd7gNnWJBkU-unsplash.jpg');
+  background-image: url('../img/placeholder-3x4.jpg');
   background-position: 50% 50%;
   background-size: cover;
   box-shadow: 0 16px 2rem 0 rgba(48, 54, 77, 0.1);
@@ -1119,6 +1119,7 @@ a {
   align-self: stretch;
   border-right: 2px solid #6e44ff;
   background-color: #ebebeb;
+  background-image: url('../img/placeholder-3x4.jpg');
   background-position: 50% 50%;
   background-size: cover;
   box-shadow: 0 0 0.5rem 0 rgba(176, 153, 255, 0.5);

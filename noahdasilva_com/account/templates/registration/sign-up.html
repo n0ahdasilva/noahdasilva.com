@@ -1,0 +1,37 @@
+{% extends 'base.html' %} {% load widget_tweaks %} {% block content %}
+
+<div class="auth-section wf-section">
+  <div class="form-wrapper">
+    <div class="auth-form-card-invisible">
+      <h1 class="h4-heading">Sign up</h1>
+      <div class="auth-form w-form">
+        <form method="post" action="#" class="auth-form">
+          {% csrf_token %} {{ form.non_field_errors }}
+          <div>
+            <label>Username</label>
+            {% render_field form.username type="text" class="input w-input" placeholder="Enter a username..." %}
+            {{ form.username.errors }}
+          </div>
+          <div>
+            <label>Password</label>
+            {% render_field form.password1 type="password" class="input w-input" placeholder="Enter a strong password..." %}
+            {{ form.password1.errors }}
+          </div>
+          <div>
+            <label>Confirm Password</label>
+            {% render_field form.password2 type="password" class="input w-input" placeholder="Confirm your password..." %}
+            {{ form.password2.errors }}
+          </div>
+          <button class="submit-btn w-button">Sign up</button>    
+          <div class="auth-form-redirect-div">
+            <a href="{% url 'login' %}" class="auth-redirect-link w-inline-block">
+              <div>Already have an account?</div>
+              <div><span class="gradient-span">Log in</span></div>
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

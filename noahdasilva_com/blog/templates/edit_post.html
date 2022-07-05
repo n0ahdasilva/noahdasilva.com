@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %} 
+
+{% block seo %}
+<meta name=”robots” content=”noindex”/>
+<title>Edit Post - Noah Da Silva</title>
+{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<div class="default-section wf-section">
+  <div class="default-section-content">
+    <div class="form-wrapper">
+      <h1 class="h3-heading">Edit post...</h1>
+      <div class="w-form">
+        <form
+          class="auth-form"
+          action="#"
+          method="POST"
+          enctype="multipart/form-data"
+        >
+          {% csrf_token %} {{ form.media }} {{ form.non_field_errors }}
+          <div>
+            {{ form.title.label_tag }}
+            {{ form.title|add_class:"input w-input" }}
+            {{ form.title.errors }}
+          </div>
+          <div>
+            {{ form.author.label_tag }}
+            {{ form.author|add_class:"input form-selection w-input" }}
+            {{ form.author.errors }}
+          </div>
+          <div>
+            {{ form.author_plug.label_tag }}
+            {{ form.author_plug|add_class:"input w-input" }}
+            {{ form.author_plug.errors }}
+          </div>
+          <div>
+            {{ form.image.label_tag }}
+            {{ form.image|add_class:"input w-input" }}
+            {{ form.image.errors }}
+          </div>
+          <div>
+            {{ form.tags.label_tag }}
+            {{ form.tags|add_class:"input form-message w-input" }}
+            {{ form.imtagsage.errors }}
+          </div>
+          <div>
+            {{ form.summary.label_tag }}
+            {{ form.summary|add_class:"input form-message w-input" }}
+            {{ form.summary.errors }}
+          </div>
+          <div>
+            {{ form.content.label_tag }}
+            {{ form.content|add_class:"input form-message w-input" }}
+            {{ form.content.errors }}
+          </div>
+          <div>
+            {{ form.status.label_tag }}
+            {{ form.status|add_class:"input form-selection w-input" }}
+            {{ form.status.errors }}
+          </div>
+          <div>
+            <button class="submit-btn w-button">Update</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endblock %}

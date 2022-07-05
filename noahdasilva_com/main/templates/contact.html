@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block seo %}
+<title>Contact - Noah Da Silva</title>
+<meta name="description" content="The Internet is one giant phone book, so get one browser search ahead of your competitors, and make the switch.">
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="Noah Da Silva" />
+<meta propety="og:title" content="Contact"/>
+<meta propety="og:description" content="The Internet is one giant phone book, so get one browser search ahead of your competitors, and make the switch."/>
+<meta property="og:url" content="https://www.noahdasilva.com/contact/"/>
+<meta propety="og:image" content="{% static 'blog/img/IMG_0074-1250px.png' %}"/>
+{% endblock %}
+
+{% block content %}
+<div class="default-section wf-section">
+  <div class="default-section-content">
+    <div class="form-wrapper">
+      <div class="contact-form-card">
+        <h1 class="h3-heading">Contact form</h1>
+        <div class="w-form">
+          <form
+            id="email-form"
+            name="email-form"
+            data-name="Email Form"
+            method="post"
+            class="contact-form"
+            action="#"
+          >
+            <div id="w-node-_92f09ec5-7e34-2292-6911-ac82a81f1d73-9383a921">
+              <label for="Contact-Name"
+                >Your Name <span class="text-color-purple">*</span></label
+              ><input
+                type="text"
+                class="input w-input"
+                maxlength="256"
+                name="Contact-Name"
+                data-name="Contact Name"
+                placeholder="Enter your name..."
+                id="Contact-Name"
+              />
+            </div>
+            <div id="w-node-_92f09ec5-7e34-2292-6911-ac82a81f1d77-9383a921">
+              <label for="Contact-Email"
+                >Email Address <span class="text-color-purple">*</span></label
+              ><input
+                type="email"
+                class="input w-input"
+                maxlength="256"
+                name="Contact-Email"
+                data-name="Contact Email"
+                placeholder="Enter your email..."
+                id="Contact-Email"
+                required=""
+              />
+            </div>
+            <div id="w-node-fb1b6738-34b3-98dd-d69a-6204ae5fa12d-9383a921">
+              <label for="Contact-Company">Company</label
+              ><input
+                type="text"
+                class="input w-input"
+                maxlength="256"
+                name="Contact-Company"
+                data-name="Contact Company"
+                placeholder="Enter company name..."
+                id="Contact-Company"
+              />
+            </div>
+            <div id="w-node-c349e396-5177-8d0a-efff-6d2b125bc931-9383a921">
+              <label for="Contact-Phone">Phone Number</label
+              ><input
+                type="tel"
+                class="input w-input"
+                maxlength="256"
+                name="Contact-Phone"
+                data-name="Contact Phone"
+                placeholder="Enter your phone number..."
+                id="Contact-Phone"
+              />
+            </div>
+            <div id="w-node-da7f182b-a4d0-381b-3c4d-0e2b75615def-9383a921">
+              <label for="Contact-Subject"
+                >Subject <span class="text-color-purple">*</span></label
+              ><select
+                id="Contact-Subject"
+                name="Contact-Subject"
+                data-name="Contact Subject"
+                required=""
+                class="input form-selection w-select"
+              >
+                <option value="">Select one...</option>
+                <option value="Contact-Inquiry-General">General Inquiry</option>
+                <option value="Contact-Inquiry-Service">Service Inquiry</option>
+              </select>
+            </div>
+            <div id="w-node-_92f09ec5-7e34-2292-6911-ac82a81f1d87-9383a921">
+              <label for="Contact-Message">Message</label
+              ><textarea
+                id="Contact-Message"
+                name="Contact-Message"
+                maxlength="5000"
+                data-name="Contact Message"
+                placeholder="How can we help you?"
+                class="input form-message w-input"
+              ></textarea>
+            </div>
+            <input
+              type="submit"
+              value="Send Message"
+              data-wait="Please wait..."
+              id="w-node-_92f09ec5-7e34-2292-6911-ac82a81f1d8b-9383a921"
+              class="submit-btn w-button"
+            />
+          </form>
+          <div class="w-form-done">
+            <div>Thank you! Your submission has been received!</div>
+          </div>
+          <div class="w-form-fail">
+            <div>Oops! Something went wrong while submitting the form.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block seo %}
+<title>About - Noah Da Silva</title>
+<meta name="description" content="I'm Noah. A passionate technophile that happens to be a Network Technology undergraduate.">
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Noah Da Silva" />
+<meta propety="og:title" content="Home" />
+<meta propety="og:description" content="I'm Noah. A passionate technophile that happens to be a Network Technology undergraduate." />
+<meta property="og:url" content="https://www.noahdasilva.com/about/" />
+<meta propety="og:image" content="{% static 'blog/img/IMG_0074-1250px.png' %}" />
+{% endblock %}
+
+{% block content %}
+<div class="body-wrap">
+    <section id="content-start" class="default-section wf-section">
+        <div class="default-section-content">
+            <div class="w-layout-grid about-grid">
+                <div id="w-node-f750af23-c0ce-b6de-283d-1d89c2ad357d-fc83a91f" class="grid-content-div about">
+                    <div class="location-div"><img src="{% static 'blog/img/location-svgrepo-com.svg' %}" loading="lazy"
+                            alt="" class="location-icon">
+                        <div class="web-title">Ottawa, Canada</div>
+                    </div>
+                    <div class="header-wrap">
+                        <h1 class="hero-heading-large">Hello, <br>I&#x27;m Noah</h1>
+                    </div>
+                    <p class="hero-paragraph">A passionate technophile that happens to be a Network Technology
+                        undergraduate.</p>
+                    <div class="w-layout-grid double-btn-padding">
+                        <a href="blog.html" class="btn w-button">blog</a>
+                        <a href="contact.html" class="btn-white w-button">Portfolio</a>
+                    </div>
+                </div>
+                <div class="grid-content-div">
+                    <div class="hero-img-content"><img src="{% static 'blog/img/Self_Portrait_2022-01-03-3.png' %}"
+                            sizes="92vw" width="1120"
+                            srcset="{% static 'blog/img/Self_Portrait_2022-01-03-3-p-500.png' %} 500w, {% static 'blog/img/Self_Portrait_2022-01-03-3-p-800.png' %} 800w, {% static 'blog/img/Self_Portrait_2022-01-03-3-p-1080.png' %} 1080w, {% static 'blog/img/Self_Portrait_2022-01-03-3-p-1600.png' %} 1600w, {% static 'blog/img/Self_Portrait_2022-01-03-3-p-2000.png' %} 2000w, {% static 'blog/img/Self_Portrait_2022-01-03-3-p-2600.png' %} 2600w, {% static 'blog/img/Self_Portrait_2022-01-03-3-p-3200.png' %} 3200w, {% static 'blog/img/Self_Portrait_2022-01-03-3.png' %} 5000w"
+                            alt="" class="large-circular-img"><img src="{% static 'blog/img/ight-accent.png' %}" loading="lazy" height=""
+                            srcset="{% static 'blog/img/ight-accent-p-500.png' %} 500w, {% static 'blog/img/ight-accent-p-800.png' %} 800w, {% static 'blog/img/ight-accent-p-1080.png' %} 1080w, {% static 'blog/img/ight-accent.png' %} 1280w"
+                            sizes="100vw" alt="" class="image-accent"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="default-section wf-section">
+        <div class="default-section-content">
+            <div class="w-layout-grid about-info-grid single-col-tablet">
+                <div id="w-node-f750af23-c0ce-b6de-283d-1d89c2ad3595-fc83a91f" class="grid-content-div">
+                    <h2>A little about me</h2>
+                    <div class="hero-paragraph w-richtext">
+                        <p>Operating in both design and hardware to develop solutions for people and help companies
+                            to grow and succeed. I am a Canadian freelancer and student living and working in the
+                            Nation&#x27;s Capital, and primarily focused on designing websites for businesses and
+                            individuals.</p>
+                        <p>In the past couple of years, I have been widening my experience and knowledge in the
+                            technology space. I run a side business in web design and advanced home network
+                            configurations.</p>
+                        <p>I have now familiarized myself with the computer networking domain, and I am excited to
+                            continue broadening my knowledge, especially in the cybersecurity and decentralized
+                            technology space.</p>
+                    </div>
+                </div>
+                <div id="w-node-f750af23-c0ce-b6de-283d-1d89c2ad359f-fc83a91f" class="grid-content-div end-align">
+                    <div class="w-layout-grid double-btn-padding-reverse">
+                        <a href="https://github.com/n0ahdasilva" target="_blank" class="btn w-button">Github</a>
+                        <a href="https://www.linkedin.com/in/n0ahdasilva/" target="_blank"
+                            class="btn-white w-button">Linkedin</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

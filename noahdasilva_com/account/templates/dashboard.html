@@ -1,0 +1,386 @@
+{% extends 'base.html' %} {% load widget_tweaks %} {% block content %}
+
+  <div class="default-section no-padding wf-section">
+    <div class="dashboard-wrapper">
+      <div data-duration-in="300" data-duration-out="100" data-current="Profile" data-easing="ease" class="dashboard-tabs w-tabs">
+        <div class="dashboard-nav-menu w-tab-menu">
+          <a data-w-tab="Profile" class="navigation-item w-inline-block w-tab-link w--current">
+            <div class="dashboard-nav-icon"></div>
+            <div>Profile</div>
+          </a>
+          <a data-w-tab="Security" class="navigation-item w-inline-block w-tab-link">
+            <div class="dashboard-nav-icon"></div>
+            <div>Security</div>
+          </a>
+          <a data-w-tab="Log out" class="navigation-item w-inline-block w-tab-link">
+            <div class="dashboard-nav-icon"></div>
+            <div>Log out</div>
+          </a>
+        </div>
+        <div class="dashboard-tabs-wrapper w-tab-content">
+          <div data-w-tab="Profile" class="default-section w-tab-pane w--tab-active">
+            <div class="dashboard-tab-content">
+              <h1 class="h3-heading">Welcome back, <span class="gradient-span">{{ user.username }}</span>!</h1>
+              <div class="dashboard-row">
+                <div class="dashboard-info-box third">
+                  <div class="dashboard-box-padding">
+                    <div class="colourful-icon"></div>
+                    <h2 class="dashboard-heading">12,500</h2>
+                    <div>Points</div>
+                  </div>
+                </div>
+                <div class="dashboard-info-box third">
+                  <div class="dashboard-box-padding">
+                    <div class="colourful-icon green"></div>
+                    <h2 class="dashboard-heading"><span ms-data="spend">54</span></h2>
+                    <div>Total comments</div>
+                  </div>
+                </div>
+                <div class="dashboard-info-box third mobile-full-box">
+                  <div class="dashboard-box-padding">
+                    <div class="colourful-icon red"></div>
+                    <h2 ms-data="launch" class="dashboard-heading">237</h2>
+                    <div>Total likes</div>
+                  </div>
+                </div>
+                <div class="dashboard-info-box two-third">
+                  <div class="dashboard-box-padding">
+                    <div class="colourful-icon yellow"></div>
+                    <h2 class="dashboard-heading">2022-05-20</h2>
+                    <div>Date joined <span class="unfocused-text-span">(YYYY-MM-DD)</span></div>
+                  </div>
+                </div>
+                <div class="dashboard-info-box third mobile-full-box">
+                  <div class="dashboard-box-padding">
+                    <div class="colourful-icon purple"></div>
+                    <h2 ms-data="launch" class="dashboard-heading">5</h2>
+                    <div>Post written</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="dashboard-tab-content">
+              <h2 class="h4-heading">My Profile</h2>
+              <div class="dashboard-row">
+                <div class="dashboard-info-box full-width">
+                  <div class="dashboard-box-padding horizontal-flex"><img sizes="96px" width="100" srcset="images/IMG_0074-1250px-p-500.png 500w, images/IMG_0074-1250px-p-800.png 800w, images/IMG_0074-1250px-p-1080.png 1080w, images/IMG_0074-1250px.png 1250w" src="images/IMG_0074-1250px.png" alt="" class="dashboard-img profile">
+                    <div>
+                      <a href="#" class="dashboard-heading-small gray">Change Avatar</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="dashboard-info-box full-width">
+                  <div class="dashboard-box-padding horizontal-flex">
+                    <div>
+                      <h3 class="dashboard-heading-small">Username</h3>
+                    </div>
+                    <div class="account-form w-form">
+                      <form id="account-username-form" name="wf-form-Account-Form" data-name="Account Form" method="post" class="account-form-div">
+                        <div id="w-node-_6c96194b-262c-23cf-81db-5c4df3519fc9-fd0192b4"><input type="text" class="account-input w-input" maxlength="256" name="account-username" data-name="account-username" placeholder="tonystark" id="account-username"></div>
+                        <div>
+                          <a href="#" class="dashboard-heading-small gray">Update</a>
+                        </div>
+                      </form>
+                      <div class="w-form-done">
+                        <div>Thank you! Your submission has been received!</div>
+                      </div>
+                      <div class="w-form-fail">
+                        <div>Oops! Something went wrong while submitting the form.</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="dashboard-info-box full-width">
+                  <div class="dashboard-box-padding horizontal-flex">
+                    <div>
+                      <h3 class="dashboard-heading-small">Name</h3>
+                    </div>
+                    <div class="account-form w-form">
+                      <form id="account-name-form" name="wf-form-Account-Form-2" data-name="Account Form" method="post" class="account-form-div">
+                        <div id="w-node-c9c26216-c24c-aeac-b6ac-5fea8b1cc640-fd0192b4"><input type="text" class="account-input w-input" maxlength="256" name="account-name" data-name="account-name" placeholder="Tony Stark" id="account-name"></div>
+                        <div>
+                          <a href="#" class="dashboard-heading-small gray">Update</a>
+                        </div>
+                      </form>
+                      <div class="w-form-done">
+                        <div>Thank you! Your submission has been received!</div>
+                      </div>
+                      <div class="w-form-fail">
+                        <div>Oops! Something went wrong while submitting the form.</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="dashboard-info-box full-width">
+                  <div class="dashboard-box-padding horizontal-flex">
+                    <div>
+                      <h3 class="dashboard-heading-small">Email</h3>
+                    </div>
+                    <div class="account-form w-form">
+                      <form id="account-email-form" name="wf-form-Account-Form-2" data-name="Account Form" method="post" class="account-form-div">
+                        <div id="w-node-_42c6b1e2-7125-6e35-ef86-9f5ee616eb8f-fd0192b4"><input type="email" class="account-input w-input" maxlength="256" name="account-email" data-name="account-email" placeholder="tstark@starkindustries.com" id="account-email"></div>
+                        <div>
+                          <a href="#" class="dashboard-heading-small gray">Update</a>
+                        </div>
+                      </form>
+                      <div class="w-form-done">
+                        <div>Thank you! Your submission has been received!</div>
+                      </div>
+                      <div class="w-form-fail">
+                        <div>Oops! Something went wrong while submitting the form.</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="dashboard-box-padding horizontal-flex">
+                    <div>
+                      <h3 class="dashboard-heading-small">Mobile</h3>
+                    </div>
+                    <div class="account-form w-form">
+                      <form id="account-phone-form" name="wf-form-Account-Form-2" data-name="Account Form" method="post" class="account-form-div">
+                        <div id="w-node-_4cc443e1-8c5c-af16-de8f-353fced0a5d8-fd0192b4"><input type="tel" class="account-input w-input" maxlength="256" name="account-phone" data-name="account-phone" placeholder="+1 (123) 456-7890" id="account-phone"></div>
+                        <div>
+                          <a href="#" class="dashboard-heading-small gray">Update</a>
+                        </div>
+                      </form>
+                      <div class="w-form-done">
+                        <div>Thank you! Your submission has been received!</div>
+                      </div>
+                      <div class="w-form-fail">
+                        <div>Oops! Something went wrong while submitting the form.</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="dashboard-tab-content">
+              <h2 class="h4-heading">Intergrations</h2>
+              <div class="dashboard-row">
+                <a href="#" class="dashboard-info-box link-box w-inline-block">
+                  <div class="dashboard-box-padding horizontal-flex"><img src="images/5cbcc29efad96cf6f89a0d61_Webflow-round.svg" width="100" alt="Webflow logo" class="dashboard-img circle">
+                    <div>
+                      <h3 class="dashboard-heading-small">Webflow</h3>
+                      <div class="dashboard-heading-small green">Connected</div>
+                      <div class="email-text-block">Tony Stark</div>
+                    </div>
+                  </div>
+                </a>
+                <a href="#" class="dashboard-info-box link-box w-inline-block">
+                  <div class="dashboard-box-padding horizontal-flex"><img src="images/google-analytics-3.svg" width="100" alt="Google Analytics logo
+" class="dashboard-img">
+                    <div>
+                      <h3 class="dashboard-heading-small">Analytics</h3>
+                      <div class="dashboard-heading-small gray">Connect</div>
+                      <div class="email-text-block">tstark@gmail.com</div>
+                    </div>
+                  </div>
+                </a>
+                <a href="#" class="dashboard-info-box link-box w-inline-block">
+                  <div class="dashboard-box-padding horizontal-flex"><img sizes="(max-width: 479px) 40px, (max-width: 991px) 4vw, 3vw" width="100" srcset="images/Twitter-p-500.png 500w, images/Twitter.png 1350w" src="images/Twitter.png" alt="Twitter logo" class="dashboard-img">
+                    <div>
+                      <h3 class="dashboard-heading-small">Twitter</h3>
+                      <div class="dashboard-heading-small red">Disconnected</div>
+                      <div class="email-text-block">@IronMan</div>
+                    </div>
+                  </div>
+                </a>
+                <a href="#" class="dashboard-info-box link-box w-inline-block">
+                  <div class="dashboard-box-padding horizontal-flex"><img sizes="(max-width: 479px) 40px, (max-width: 991px) 4vw, 3vw" width="100" srcset="images/google-p-500.png 500w, images/google-p-800.png 800w, images/google-p-1080.png 1080w, images/google-p-1600.png 1600w, images/google-p-2000.png 2000w, images/google.png 2400w" src="images/google.png" alt="Google logo" class="dashboard-img">
+                    <div>
+                      <h3 class="dashboard-heading-small">Google</h3>
+                      <div class="dashboard-heading-small green">Connected</div>
+                      <div class="email-text-block">tstark@gmail.com</div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div data-w-tab="Security" class="default-section w-tab-pane">
+            <div class="dashboard-tab-content">
+              <h1 class="h3-heading">Completion Score</h1>
+              <div class="dashboard-row">
+                <div class="dashboard-info-box progress-box">
+                  <div class="dashboard-box-padding">
+                    <div class="progress-wrapper">
+                      <div class="progress-text-row">
+                        <div class="progress-text-column">
+                          <div class="progress-icon">
+                            <div>1</div>
+                          </div>
+                          <div>Created</div>
+                        </div>
+                        <div class="progress-text-column">
+                          <div class="progress-icon">
+                            <div>2</div>
+                          </div>
+                          <div>Verified Email</div>
+                        </div>
+                        <div class="progress-text-column">
+                          <div class="progress-icon">
+                            <div>3</div>
+                          </div>
+                          <div>Email 2FA</div>
+                        </div>
+                        <div class="progress-text-column">
+                          <div class="progress-icon">
+                            <div>4</div>
+                          </div>
+                          <div>App 2FA</div>
+                        </div>
+                        <div class="progress-text-column">
+                          <div class="progress-icon">
+                            <div>5</div>
+                          </div>
+                          <div>Recovery Code</div>
+                        </div>
+                      </div>
+                      <div class="progress-bar-wrap">
+                        <div class="progress-bar"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="dashboard-tab-content">
+              <h2 class="h4-heading">Account Status</h2>
+              <div class="dashboard-row">
+                <div class="dashboard-info-box third">
+                  <div class="dashboard-box-padding">
+                    <div class="colourful-icon red"></div>
+                    <h3 class="dashboard-heading">0</h3>
+                    <div>Failed login attempts <span class="unfocused-text-span">(since last login)</span></div>
+                  </div>
+                </div>
+                <div class="dashboard-info-box third">
+                  <div class="dashboard-box-padding">
+                    <div class="colourful-icon yellow"></div>
+                    <h3 class="dashboard-heading">Secured<span ms-data="spend"></span></h3>
+                    <div>Account status</div>
+                  </div>
+                </div>
+                <div class="dashboard-info-box third mobile-full-box">
+                  <div class="dashboard-box-padding">
+                    <div class="colourful-icon purple"></div>
+                    <h3 ms-data="launch" class="dashboard-heading">2022-05-20</h3>
+                    <div>Last login <span class="unfocused-text-span">(YYYY-MM-DD)</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="dashboard-tab-content">
+              <h2 class="h4-heading">My Information</h2>
+              <div class="dashboard-row">
+                <div class="dashboard-info-box full-width">
+                  <div class="dashboard-box-padding horizontal-flex">
+                    <div>
+                      <h3 class="dashboard-heading-small">Account ID</h3>
+                    </div>
+                    <div>
+                      <div>a430c589bcf6cf82</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="dashboard-info-box full-width">
+                  <div class="dashboard-box-padding horizontal-flex">
+                    <div>
+                      <h3 class="dashboard-heading-small">Email</h3>
+                    </div>
+                    <div>
+                      <a href="#" class="dashboard-heading-small gray">Verify</a>
+                      <div class="dashboard-heading-small red">Not Verified</div>
+                      <div class="dashboard-heading-small green">Verified</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="dashboard-info-box full-width">
+                  <div class="dashboard-box-padding horizontal-flex">
+                    <div>
+                      <h3 class="dashboard-heading-small">Password</h3>
+                    </div>
+                    <div class="account-form w-form">
+                      <form id="account-password-form" name="wf-form-Account-Form-2" data-name="Account Form" method="post" class="account-form-div">
+                        <div id="w-node-e5767b64-4a5b-2213-1a98-36099f2bd055-fd0192b4"><input type="password" class="account-input w-input" maxlength="256" name="account-current-password" data-name="account-current-password" placeholder="Current password" id="account-current-password"></div>
+                        <div><input type="password" class="account-input w-input" maxlength="256" name="account-new-password" data-name="account-new-password" placeholder="New password" id="account-new-password"></div>
+                        <div>
+                          <a href="#" class="dashboard-heading-small gray">Update</a>
+                        </div>
+                      </form>
+                      <div class="w-form-done">
+                        <div>Thank you! Your submission has been received!</div>
+                      </div>
+                      <div class="w-form-fail">
+                        <div>Oops! Something went wrong while submitting the form.</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="dashboard-info-box full-width">
+                  <div class="dashboard-box-padding horizontal-flex">
+                    <div>
+                      <h3 class="dashboard-heading-small">2FA via Email</h3>
+                    </div>
+                    <div>
+                      <a href="#" class="dashboard-heading-small gray">Setup</a>
+                      <div class="dashboard-heading-small red">Inactive</div>
+                      <div class="dashboard-heading-small green">Active</div>
+                    </div>
+                  </div>
+                  <div class="dashboard-box-padding horizontal-flex">
+                    <div>
+                      <h3 class="dashboard-heading-small">2FA via App</h3>
+                    </div>
+                    <div>
+                      <a href="#" class="dashboard-heading-small gray">Setup</a>
+                      <div class="dashboard-heading-small red">Inactive</div>
+                      <div class="dashboard-heading-small green">Active</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="dashboard-info-box full-width">
+                  <div class="dashboard-box-padding horizontal-flex">
+                    <div>
+                      <h3 class="dashboard-heading-small">Recovery Codes</h3>
+                    </div>
+                    <div>
+                      <a href="#" class="dashboard-heading-small gray">View</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="dashboard-tab-content">
+              <h2 class="h4-heading">Manage Account</h2>
+              <div class="dashboard-row">
+                <a href="#" class="dashboard-info-box link-box w-inline-block">
+                  <div class="dashboard-box-padding horizontal-flex">
+                    <div>
+                      <h3 class="dashboard-heading-small">Delete Account</h3>
+                      <div class="dashboard-heading-small red">Permanent</div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div data-w-tab="Log out" class="default-section w-tab-pane">
+            <div class="dashboard-tab-content">
+              <h2 class="h4-heading">Close your session</h2>
+              <div class="dashboard-row">
+                <a href="{% url 'logout' %}" class="dashboard-info-box link-box w-inline-block">
+                  <div class="dashboard-box-padding horizontal-flex">
+                    <div>
+                      <h3 class="dashboard-heading-small">Log out</h3>
+                      <div class="dashboard-heading-small yellow">Currently logged in</div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
