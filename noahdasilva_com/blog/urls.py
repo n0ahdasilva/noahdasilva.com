@@ -9,6 +9,6 @@ urlpatterns = [
     path('blog/<slug:slug>/edit', EditPostView.as_view(), name="edit-post"),
     path('blog/<slug:slug>/remove', DeletePostView.as_view(), name="delete-post"),
     path('blog/', BlogView.as_view(), name="blog"),
-    path('blog/tags/', TagsView.as_view(), name="tags"),
-    path('blog/tags/<slug:slug>', TagDetailView.as_view(), name="tag-detail"),
+    path('tags/', TagsView.as_view(), name="tags"),
+    path('tags/<slug:slug>', TagDetailView.as_view(), name="tag-detail"),
 ]
