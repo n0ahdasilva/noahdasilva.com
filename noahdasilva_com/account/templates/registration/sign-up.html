@@ -13,6 +13,11 @@
             {{ form.username.errors }}
           </div>
           <div>
+            <label>Email</label>
+            {% render_field form.email type="email" class="input w-input" placeholder="Enter an email..." %}
+            {{ form.email.errors }}
+          </div>
+          <div>
             <label>Password</label>
             {% render_field form.password1 type="password" class="input w-input" placeholder="Enter a strong password..." %}
             {{ form.password1.errors }}

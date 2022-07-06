@@ -2473,6 +2473,15 @@ a {
   line-height: 1.6;
 }
 
+.dashboard-heading-date {
+  display: inline-block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 28px;
+  line-height: 32px;
+  font-weight: 700;
+}
+
 .progress-icon {
   width: 40px;
   height: 40px;

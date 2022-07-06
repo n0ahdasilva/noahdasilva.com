@@ -46,7 +46,7 @@
                 <div class="dashboard-info-box two-third">
                   <div class="dashboard-box-padding">
                     <div class="colourful-icon yellow"></div>
-                    <h2 class="dashboard-heading">2022-05-20</h2>
+                    <h2 class="dashboard-heading">{{ user.date_joined|date:"F d, Y"  }}</h2>
                     <div>Date joined <span class="unfocused-text-span">(YYYY-MM-DD)</span></div>
                   </div>
                 </div>
@@ -65,7 +65,7 @@
                 <div class="dashboard-info-box full-width">
                   <div class="dashboard-box-padding horizontal-flex"><img sizes="96px" width="100" srcset="images/IMG_0074-1250px-p-500.png 500w, images/IMG_0074-1250px-p-800.png 800w, images/IMG_0074-1250px-p-1080.png 1080w, images/IMG_0074-1250px.png 1250w" src="images/IMG_0074-1250px.png" alt="" class="dashboard-img profile">
                     <div>
-                      <a href="#" class="dashboard-heading-small gray">Change Avatar</a>
+                      <button class="dashboard-heading-small gray">Change Avatar</button>
                     </div>
                   </div>
                 </div>
@@ -75,10 +75,12 @@
                       <h3 class="dashboard-heading-small">Username</h3>
                     </div>
                     <div class="account-form w-form">
-                      <form id="account-username-form" name="wf-form-Account-Form" data-name="Account Form" method="post" class="account-form-div">
-                        <div id="w-node-_6c96194b-262c-23cf-81db-5c4df3519fc9-fd0192b4"><input type="text" class="account-input w-input" maxlength="256" name="account-username" data-name="account-username" placeholder="tonystark" id="account-username"></div>
+                      <form action"#" id="account-username-form" name="wf-form-Account-Form" data-name="Account Form" method="post" class="account-form-div">
+                        {% csrf_token %} 
+                        <div id="w-node-_6c96194b-262c-23cf-81db-5c4df3519fc9-fd0192b4">
+                          <input type="text" class="account-input w-input" maxlength="256" name="account-username" data-name="account-username" placeholder="tonystark" id="account-username"></div>
                         <div>
-                          <a href="#" class="dashboard-heading-small gray">Update</a>
+                          <button class="dashboard-heading-small gray">Update</button>
                         </div>
                       </form>
                       <div class="w-form-done">
@@ -96,10 +98,12 @@
                       <h3 class="dashboard-heading-small">Name</h3>
                     </div>
                     <div class="account-form w-form">
-                      <form id="account-name-form" name="wf-form-Account-Form-2" data-name="Account Form" method="post" class="account-form-div">
-                        <div id="w-node-c9c26216-c24c-aeac-b6ac-5fea8b1cc640-fd0192b4"><input type="text" class="account-input w-input" maxlength="256" name="account-name" data-name="account-name" placeholder="Tony Stark" id="account-name"></div>
+                      <form action"#" id="account-name-form" name="wf-form-Account-Form-2" data-name="Account Form" method="post" class="account-form-div">
+                        {% csrf_token %} 
+                        <div id="w-node-c9c26216-c24c-aeac-b6ac-5fea8b1cc640-fd0192b4">
+                          <input type="text" class="account-input w-input" maxlength="256" name="account-name" data-name="account-name" placeholder="Tony Stark" id="account-name"></div>
                         <div>
-                          <a href="#" class="dashboard-heading-small gray">Update</a>
+                          <button class="dashboard-heading-small gray">Update</button>
                         </div>
                       </form>
                       <div class="w-form-done">
@@ -117,10 +121,12 @@
                       <h3 class="dashboard-heading-small">Email</h3>
                     </div>
                     <div class="account-form w-form">
-                      <form id="account-email-form" name="wf-form-Account-Form-2" data-name="Account Form" method="post" class="account-form-div">
-                        <div id="w-node-_42c6b1e2-7125-6e35-ef86-9f5ee616eb8f-fd0192b4"><input type="email" class="account-input w-input" maxlength="256" name="account-email" data-name="account-email" placeholder="tstark@starkindustries.com" id="account-email"></div>
+                      <form action"#" id="account-email-form" name="wf-form-Account-Form-2" data-name="Account Form" method="post" class="account-form-div">
+                        {% csrf_token %} 
+                        <div id="w-node-_42c6b1e2-7125-6e35-ef86-9f5ee616eb8f-fd0192b4">
+                          <input type="email" class="account-input w-input" maxlength="256" name="account-email" data-name="account-email" placeholder="tstark@starkindustries.com" id="account-email"></div>
                         <div>
-                          <a href="#" class="dashboard-heading-small gray">Update</a>
+                          <button class="dashboard-heading-small gray">Update</button>
                         </div>
                       </form>
                       <div class="w-form-done">
@@ -136,10 +142,12 @@
                       <h3 class="dashboard-heading-small">Mobile</h3>
                     </div>
                     <div class="account-form w-form">
-                      <form id="account-phone-form" name="wf-form-Account-Form-2" data-name="Account Form" method="post" class="account-form-div">
-                        <div id="w-node-_4cc443e1-8c5c-af16-de8f-353fced0a5d8-fd0192b4"><input type="tel" class="account-input w-input" maxlength="256" name="account-phone" data-name="account-phone" placeholder="+1 (123) 456-7890" id="account-phone"></div>
+                      <form action"#" id="account-phone-form" name="wf-form-Account-Form-2" data-name="Account Form" method="post" class="account-form-div">
+                        {% csrf_token %}
+                        <div id="w-node-_4cc443e1-8c5c-af16-de8f-353fced0a5d8-fd0192b4">
+                          <input type="tel" class="account-input w-input" maxlength="256" name="account-phone" data-name="account-phone" placeholder="+1 (123) 456-7890" id="account-phone"></div>
                         <div>
-                          <a href="#" class="dashboard-heading-small gray">Update</a>
+                          <button class="dashboard-heading-small gray">Update</button>
                         </div>
                       </form>
                       <div class="w-form-done">
@@ -249,7 +257,7 @@
                 <div class="dashboard-info-box third">
                   <div class="dashboard-box-padding">
                     <div class="colourful-icon red"></div>
-                    <h3 class="dashboard-heading">0</h3>
+                    <h3 class="dashboard-heading">-</h3>
                     <div>Failed login attempts <span class="unfocused-text-span">(since last login)</span></div>
                   </div>
                 </div>
@@ -263,7 +271,7 @@
                 <div class="dashboard-info-box third mobile-full-box">
                   <div class="dashboard-box-padding">
                     <div class="colourful-icon purple"></div>
-                    <h3 ms-data="launch" class="dashboard-heading">2022-05-20</h3>
+                    <h3 ms-data="launch" class="dashboard-heading-date">{{ user.last_login|date:"F d, Y, G:H" }}</h3>
                     <div>Last login <span class="unfocused-text-span">(YYYY-MM-DD)</span></div>
                   </div>
                 </div>
@@ -278,7 +286,7 @@
                       <h3 class="dashboard-heading-small">Account ID</h3>
                     </div>
                     <div>
-                      <div>a430c589bcf6cf82</div>
+                      <div>{{ user.id }}</div>
                     </div>
                   </div>
                 </div>
@@ -300,7 +308,7 @@
                       <h3 class="dashboard-heading-small">Password</h3>
                     </div>
                     <div class="account-form w-form">
-                      <form id="account-password-form" name="wf-form-Account-Form-2" data-name="Account Form" method="post" class="account-form-div">
+                      <form action"#" id="account-password-form" name="wf-form-Account-Form-2" data-name="Account Form" method="post" class="account-form-div">
                         <div id="w-node-e5767b64-4a5b-2213-1a98-36099f2bd055-fd0192b4"><input type="password" class="account-input w-input" maxlength="256" name="account-current-password" data-name="account-current-password" placeholder="Current password" id="account-current-password"></div>
                         <div><input type="password" class="account-input w-input" maxlength="256" name="account-new-password" data-name="account-new-password" placeholder="New password" id="account-new-password"></div>
                         <div>

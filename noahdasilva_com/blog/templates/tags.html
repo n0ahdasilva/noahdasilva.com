@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% load static %} {% block seo %}
+{% extends 'base.html' %} {% load static %} {% load widget_tweaks %} {% block seo %}
 <title>Tags | Noah Da Silva</title>
 <meta name="description" content="What are you interested in? Dive into our library of resources by choosing a tag below."/>
 <meta property="og:type" content="website" />
@@ -40,21 +40,14 @@
 </div>
 <div class="default-section wf-section">
   <div class="default-section-content">
-    <form action="#" class="search-div w-form">
+    <form action="#search" class="search-div w-form">
       <img
         src="{% static 'blog/img/search-img.png' %}"
         loading="lazy"
         alt=""
-        class="search-icon"
-      /><input
-        type="search"
-        class="search-bar w-input"
-        maxlength="256"
-        name="query"
-        placeholder="Explore"
-        id="search"
-        required=""
-      /><input type="submit" value="Search" class="search-btn w-button" />
+        class="search-icon"/>
+      {% render_field my_filter.form.title class="search-bar w-input" id="search" max_length="128" placeholder="Search by title" %}
+      <input type="submit" value="Search" class="search-btn w-button" />
     </form>
   </div>
 </div>
