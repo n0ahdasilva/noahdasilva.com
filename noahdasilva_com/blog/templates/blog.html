@@ -1,5 +1,5 @@
 {% extends 'base.html' %} {% load static %} {% block seo %}
-<title>Blog - Noah Da Silva</title>
+<title>Blog | Noah Da Silva</title>
 <meta
   name="description"
   content="Welcome to the Information Galaxy. We offer tutorials, articles, and news on a wide range of topics."
@@ -58,7 +58,7 @@
         id="w-node-_8ca048d7-255b-f33d-b871-9cdacf9285b3-4280d04e"
         class="title-right"
       >
-        <a href="blog/tags.html" class="btn w-button">View all tags</a>
+        <a href="{% url 'tags' %}" class="btn w-button">View all tags</a>
       </div>
     </div>
     <div
@@ -109,7 +109,7 @@
     </div>
     <div class="w-layout-grid topics-grid">
       <div class="topic-col">
-        <a href="blog/tags/tag.html" class="topic-link w-inline-block">
+        <a href="{% url 'tag-detail' tag_list.1.slug %}" class="topic-link w-inline-block">
           <div class="w-layout-grid topic-div-short hue45">
             <img
               src="{% static 'blog/img/account-img.png' %}"
@@ -126,7 +126,7 @@
             </h3>
           </div>
         </a>
-        <a href="blog/tags/tag.html" class="topic-link w-inline-block">
+        <a href="{% url 'tag-detail' tag_list.2.slug %}" class="topic-link w-inline-block">
           <div class="w-layout-grid topic-div-tall hue315">
             <img
               src="{% static 'blog/img/account-img.png' %}"
@@ -145,7 +145,7 @@
         </a>
       </div>
       <div class="topic-col">
-        <a href="blog/tags/tag.html" class="topic-link w-inline-block">
+        <a href="{% url 'tag-detail' tag_list.3.slug %}" class="topic-link w-inline-block">
           <div class="w-layout-grid topic-div-tall">
             <img
               src="{% static 'blog/img/account-img.png' %}"
@@ -163,7 +163,7 @@
             </h3>
           </div>
         </a>
-        <a href="blog/tags/tag.html" class="topic-link w-inline-block">
+        <a href="{% url 'tag-detail' tag_list.4.slug %}" class="topic-link w-inline-block">
           <div class="w-layout-grid topic-div-short hue315">
             <img
               src="{% static 'blog/img/account-img.png' %}"
@@ -182,7 +182,7 @@
         </a>
       </div>
       <div class="topic-col">
-        <a href="blog/tags/tag.html" class="topic-link w-inline-block">
+        <a href="{% url 'tag-detail' tag_list.5.slug %}" class="topic-link w-inline-block">
           <div class="w-layout-grid topic-div-short">
             <img
               src="{% static 'blog/img/account-img.png' %}"
@@ -199,7 +199,7 @@
             </h3>
           </div>
         </a>
-        <a href="blog/tags/tag.html" class="topic-link w-inline-block">
+        <a href="{% url 'tag-detail' tag_list.6.slug %}" class="topic-link w-inline-block">
           <div class="w-layout-grid topic-div-tall hue45">
             <img
               src="{% static 'blog/img/account-img.png' %}"
@@ -218,7 +218,7 @@
         </a>
       </div>
       <div class="topic-col">
-        <a href="blog/tags/tag.html" class="topic-link w-inline-block">
+        <a href="{% url 'tag-detail' tag_list.7.slug %}" class="topic-link w-inline-block">
           <div class="w-layout-grid topic-div-tall hue315">
             <img
               src="{% static 'blog/img/account-img.png' %}"
@@ -235,7 +235,7 @@
             </h3>
           </div>
         </a>
-        <a href="blog/tags/tag.html" class="topic-link w-inline-block">
+        <a href="{% url 'tag-detail' tag_list.8.slug %}" class="topic-link w-inline-block">
           <div class="w-layout-grid topic-div-short">
             <img
               src="{% static 'blog/img/account-img.png' %}"
@@ -264,7 +264,7 @@
         <h3 class="h4-heading no-margin">
           Check out even more topics that may peak your interest.
         </h3>
-        <a href="blog/tags.html" class="btn w-button">View all tags</a>
+        <a href="{% url 'tags' %}" class="btn w-button">all tags</a>
       </div>
     </div>
   </div>

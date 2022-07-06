@@ -1,46 +1,34 @@
 {% extends 'base.html' %} {% load static %} {% block seo %}
-<title>Tags | Noah Da Silva</title>
-<meta name="description" content="What are you interested in? Dive into our library of resources by choosing a tag below."/>
+<title>{{ tag.name}} Tag | Noah Da Silva</title>
+<meta name="description" content="{{ tag.description }}" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Noah Da Silva" />
-<meta propety="og:title" content="Tags" />
-<meta propety="og:description" content="What are you interested in? Dive into our library of resources by choosing a tag below."/>
-<meta property="og:url" content="https://www.noahdasilva.com/blog/tags/" />
-<meta propety="og:image" content="{% static 'blog/img/IMG_0074-1250px.png' %}"/>
+<meta propety="og:title" content="{{ tag.name }} Tag" />
+<meta propety="og:description" content="{{ tag.description }}" />
+<meta
+  property="og:url"
+  content="https://www.noahdasilva.com/blog/tags/{{ tag.slug }}"
+/>
+<meta
+  propety="og:image"
+  content="{% static 'blog/img/IMG_0074-1250px.png' %}"
+/>
 {% endblock %} {% block content %}
 <div class="hero-section wf-section">
   <div class="default-section-content">
     <div class="w-layout-grid hero-title-grid no-margin">
-      <h1><span class="gradient-span fa900solid-span"></span> Tags</h1>
-      <h2
-        id="w-node-_436c44ce-9df1-9882-c4d4-b3ec2a7b2789-774ef4fc"
-        class="hero-paragraph no-margin"
-      >
-        <span class="gradient-span"
-          >What are you interested in? Dive into our library of resources by
-          choosing a tag below.</span
-        >
+      <h1>
+        <span class="gradient-span fa900solid-span">{{ tag.special }}</span> {{ tag.name }}
+      </h1>
+      <h2 class="hero-paragraph">
+        <span class="gradient-span">{{ tag.description }}</span>
       </h2>
     </div>
   </div>
 </div>
 <div class="default-section wf-section">
   <div class="default-section-content">
-    <div class="w-layout-grid tag-grid">
-      {% for tag in tag_list %}
-      <a href="{% url 'tag-detail' tag.slug %}" class="tag-link w-inline-block">
-        <div class="tag-block">
-          <div class="tag-purple"># </div>
-          <div class="tag">{{ tag.name }}</div>
-        </div>
-      </a>
-      {% endfor %}
-    </div>
-  </div>
-</div>
-<div class="default-section wf-section">
-  <div class="default-section-content">
-    <form action="#" class="search-div w-form">
+    <form action="/search" class="search-div w-form">
       <img
         src="{% static 'blog/img/search-img.png' %}"
         loading="lazy"
@@ -58,13 +46,12 @@
     </form>
   </div>
 </div>
-<div class="anti-hero-section wf-section">
+<div class="default-section wf-section">
   <div class="default-section-content">
-    <div
-      id="w-node-_595394b4-9006-2f7c-6bcc-3e12ba97ca85-774ef4fc"
-      class="w-layout-grid single-col-grid"
-    >
+    <div class="w-layout-grid single-col-grid">
       {% for post in post_list %}
+        {% for tag_name in post.get_tags %}
+          {% if tag.name == tag_name %}
       <a
         href="{% url 'blog-post' post.slug %}"
         class="blog-card w-inline-block"
@@ -96,10 +83,16 @@
           </div>
         </div>
       </a>
-      {% endfor %}
+            {% endif %}
+          {% endfor %}
+        {% endfor %}
     </div>
     <div class="pagination-div">
       <a href="#" class="btn w-button">Load more</a>
+    </div>
+    <div class="banner-content-div">
+      <h2 class="h4-heading">This place is a void!</h2>
+      <p>There are currently no posts matching this tag.</p>
     </div>
   </div>
 </div>

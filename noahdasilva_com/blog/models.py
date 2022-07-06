@@ -36,12 +36,19 @@ class Post(models.Model):
         return reverse('blog-post', kwargs={'slug': self.slug})
 
     def get_tags(self):
-        return self.tags.replace('[', '').replace(']', '').replace('\'', '').split(',')
+        return self.tags.replace('[', '').replace(']', '').replace('\'', '').split(', ')
+    
+    def get_tags_and_slugs(self):
+        names = self.tags.replace('[', '').replace(']', '').replace('\'', '').split(', ')
+        slugs = (slugify(name) for name in names)
+        return zip(names, slugs)
 
 
 class Tag(models.Model):
     name = models.CharField(max_length=255, unique=True)
     slug = models.SlugField(max_length=255, unique=True, null=True, blank=True)
+    special = models.CharField(max_length=2, default='#')
+    description = models.TextField(max_length=255, default='Tag description.')
 
     def __str__(self):
         return self.name

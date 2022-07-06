@@ -1,14 +1,11 @@
 {% extends 'base.html' %} {% load static %} {% block seo %}
-<title>{{ post.title }} - Noah Da Silva</title>
+<title>{{ post.title }} | Noah Da Silva</title>
 <meta name="description" content="{{ post.summary }}" />
 <meta property="og:type" content="article" />
 <meta property="og:site_name" content="Noah Da Silva" />
 <meta propety="og:title" content="{{ post.title }}" />
 <meta propety="og:description" content="{{ post.summary }}" />
-<meta
-  property="og:url"
-  content="https://www.noahdasilva.com/blog/{{ post.slug }}"
-/>
+<meta property="og:url" content="https://www.noahdasilva.com/blog/{{ post.slug }}"/>
 <meta propety="og:image" content="{{ post.image.url }}" />
 {% endblock %} {% block content %}
 <div class="default-section wf-section">
@@ -52,8 +49,12 @@
         id="w-node-be6f9a40-4a00-5f23-1d48-7a4fd7c6685e-bb83a922"
         class="tag-flex"
       >
-        {% for tag in post.get_tags %}
-        <h2 class="tag-div">#{{ tag }}</h2>
+        {% for name, slug in post.get_tags_and_slugs %}
+          {% with index=foorloop.counter0%}
+        <a href="{% url 'tags' %}{{ slug }}" class="blog-author-link-block w-inline-block">
+          <h2 class="tag-div">#{{ name }}</h2>
+        </a>
+          {% endwith %}
         {% endfor %}
       </div>
     </div>
