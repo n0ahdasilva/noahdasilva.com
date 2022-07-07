@@ -4,7 +4,7 @@ from .models import Post, Tag
 from .forms import PostForm
 from django.urls import reverse_lazy
 from .filters import PostFilter
-from django.http import HttpResponse
+
 
 class BlogPostView(DetailView):
     model = Post
@@ -16,20 +16,24 @@ class BlogPostView(DetailView):
         context['tag_list'] = Tag.objects.all()
         return context
 
+
 class AddPostView(CreateView):
     model = Post
     template_name = 'add_post.html'
     form_class = PostForm
+
 
 class EditPostView(UpdateView):
     model = Post
     template_name = 'edit_post.html'
     form_class = PostForm
 
+
 class DeletePostView(DeleteView):
     model = Post
     template_name = 'delete_post.html'
     success_url = reverse_lazy('home')
+
 
 class BlogView(ListView):
     model = Post
@@ -40,6 +44,7 @@ class BlogView(ListView):
         context['post_list'] = Post.objects.all().order_by('-created_on')
         context['tag_list'] = Tag.objects.all()
         return context
+
 
 class TagsView(ListView):
     model = Tag
@@ -55,6 +60,7 @@ class TagsView(ListView):
         context['tag_list'] = Tag.objects.all().order_by('name')
         context['my_filter'] = self.filter_by_title()
         return context
+
 
 class TagDetailView(DetailView):
     model = Tag

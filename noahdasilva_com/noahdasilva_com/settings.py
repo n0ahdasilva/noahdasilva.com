@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-up1=_o(bxc+mrf9@qwt9^w9@f=_&c_s=-s@vf$_rh-u2_#n8o-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
@@ -61,7 +61,11 @@ ROOT_URLCONF = 'noahdasilva_com.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'account/templates'),
+            os.path.join(BASE_DIR, 'blog/templates'),
+            os.path.join(BASE_DIR, 'main/templates'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -126,7 +130,7 @@ STATICFILES_DIRS = [
    os.path.join(BASE_DIR, 'main/static/'),
 ]
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
 
 

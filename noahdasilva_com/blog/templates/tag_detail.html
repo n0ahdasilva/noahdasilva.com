@@ -76,16 +76,19 @@
           </div>
         </div>
       </a>
-            {% endif %}
-          {% endfor %}
-        {% endfor %}
+    {% endif %}
+    {% endfor %}
+  {% endfor %}
     </div>
-    <div class="pagination-div">
-      <a href="#" class="btn w-button">Load more</a>
-    </div>
+    {% for post in post_list %}
+    {% empty %}
     <div class="banner-content-div">
-      <h2 class="h4-heading">This place is a void!</h2>
-      <p>There are currently no posts matching this tag.</p>
+        <h2 class="h4-heading">This place is a void!</h2>
+        <p>There are currently no posts matching this title.</p>
+    </div>
+    {% endfor %}
+    <div class="pagination-div">
+        <a href="#" class="btn w-button">Load more</a>
     </div>
   </div>
 </div>
