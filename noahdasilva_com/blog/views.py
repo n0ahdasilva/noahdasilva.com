@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
 from .models import Post, Tag
 from .forms import PostForm
-from django.urls import reverse_lazy
 from .filters import PostFilter
 
 

@@ -6,7 +6,7 @@ tag_list = Tag.objects.all().values_list('name', 'name')
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('title', 'author', 'author_plug', 'image', 'tags', 'summary', 'content', 'status',)
+        fields = ['title', 'author', 'author_plug', 'image', 'tags', 'summary', 'content', 'status',]
         widgets = {
             'title' : forms.TextInput(attrs={'maxlength': 128, 'placeholder': 'Blog title'}),
             'author' : forms.Select(attrs={'placeholder': 'Blog author'}),
