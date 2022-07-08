@@ -2,3 +2,5 @@ Django
 django-ckeditor
 Pillow
 django-widget-tweaks
+django-filter
+django-environ
