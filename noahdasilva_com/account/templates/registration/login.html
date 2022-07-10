@@ -8,8 +8,8 @@
         <form method="POST" action="#" class="auth-form">
           {% csrf_token %} {{ form.non_field_errors }}
           <div>
-            <label>Username</label>
-            {% render_field form.username type="username" class="input w-input" placeholder="Enter your username..." %}
+            <label>Email</label>
+            {% render_field form.username type="email" class="input w-input" placeholder="Enter your email..." %}
             {{ form.username.errors }}
           </div>
           <div>

@@ -1,4 +1,7 @@
-{% extends 'base.html' %} {% load static %} {% block seo %}
+{% extends 'base.html' %}
+{% load static %}
+
+{% block seo %}
 <title>{{ post.title }} | Noah Da Silva</title>
 <meta name="description" content="{{ post.summary }}" />
 <meta property="og:type" content="article" />
@@ -7,7 +10,9 @@
 <meta propety="og:description" content="{{ post.summary }}" />
 <meta property="og:url" content="https://www.noahdasilva.com/blog/{{ post.slug }}"/>
 <meta propety="og:image" content="{{ post.image.url }}" />
-{% endblock %} {% block content %}
+{% endblock %} 
+
+{% block content %}
 <div class="default-section wf-section">
   <div class="w-layout-grid grid-blog-post">
     <div
@@ -42,7 +47,7 @@
       >
         <p class="web-title-gray">By </p>
         <p class="web-title-gradient">
-          {{ post.author.first_name }} {{ post.author.last_name }}
+          {{ post.author }}
         </p>
       </a>
       <div
@@ -205,6 +210,7 @@
       <h2>Check out other posts just like this one.</h2>
     </div>
     <div class="w-layout-grid dynamic-grid">
+      {% if post_list.0 %}
       <a href="{% url 'blog-post' post_list.0.slug %}" class="blog-card-square w-inline-block" style="background-image: url({{ post_list.0.image.url }});">
           <div class="blog-card-div">
               <div class="tag-flex">
@@ -216,10 +222,12 @@
                   {% endfor %}
               </div>
               <h3 class="card-heading centered">{{ post_list.0.title }}</h3>
-              <div class="hashtag">{{ post_list.1.created_on|date:"F d, Y" }}</div>
+              <div class="hashtag">{{ post_list.0.created_on|date:"F d, Y" }}</div>
           </div>
           <div class="gradient-overlay"></div>
       </a>
+      {% endif %}
+      {% if post_list.1 %}
       <a href="{% url 'blog-post' post_list.1.slug %}" class="blog-card-square w-inline-block" style="background-image: url({{ post_list.1.image.url }});">
         <div class="blog-card-div">
             <div class="tag-flex">
@@ -235,36 +243,41 @@
         </div>
         <div class="gradient-overlay"></div>
     </a>
-      <a href="{% url 'blog-post' post_list.2.slug %}" class="blog-card-square w-inline-block" style="background-image: url({{ post_list.2.image.url }});">
-          <div class="blog-card-div">
-              <div class="tag-flex">
-                  {% for tag in post_list.2.get_tags %}
-                  <div class="tag-block">
-                      <div class="hashtag">#</div>
-                      <div class="hashtag">{{ tag }}</div>
-                  </div>
-                  {% endfor %}
-              </div>
-              <h3 class="card-heading centered">{{ post_list.2.title }}</h3>
-              <div class="hashtag">{{ post_list.2.created_on|date:"F d, Y" }}</div>
-          </div>
-          <div class="gradient-overlay"></div>
-      </a>
-      <a href="{% url 'blog-post' post_list.3.slug %}" class="blog-card-square w-inline-block" style="background-image: url({{ post_list.3.image.url }});">
-          <div class="blog-card-div">
-              <div class="tag-flex">
-                  {% for tag in post_list.3.get_tags %}
-                  <div class="tag-block">
-                      <div class="hashtag">#</div>
-                      <div class="hashtag">{{ tag }}</div>
-                  </div>
-                  {% endfor %}
-              </div>
-              <h3 class="card-heading centered">{{ post_list.3.title }}</h3>
-              <div class="hashtag">{{ post_list.3.created_on|date:"F d, Y" }}</div>
-          </div>
-          <div class="gradient-overlay"></div>
-      </a>
+    {% endif %}
+    {% if post_list.2 %}
+    <a href="{% url 'blog-post' post_list.2.slug %}" class="blog-card-square w-inline-block" style="background-image: url({{ post_list.2.image.url }});">
+        <div class="blog-card-div">
+            <div class="tag-flex">
+                {% for tag in post_list.2.get_tags %}
+                <div class="tag-block">
+                    <div class="hashtag">#</div>
+                    <div class="hashtag">{{ tag }}</div>
+                </div>
+                {% endfor %}
+            </div>
+            <h3 class="card-heading centered">{{ post_list.2.title }}</h3>
+            <div class="hashtag">{{ post_list.2.created_on|date:"F d, Y" }}</div>
+        </div>
+        <div class="gradient-overlay"></div>
+    </a>
+    {% endif %}
+    {% if post_list.3 %}
+    <a href="{% url 'blog-post' post_list.3.slug %}" class="blog-card-square w-inline-block" style="background-image: url({{ post_list.3.image.url }});">
+        <div class="blog-card-div">
+            <div class="tag-flex">
+                {% for tag in post_list.3.get_tags %}
+                <div class="tag-block">
+                    <div class="hashtag">#</div>
+                    <div class="hashtag">{{ tag }}</div>
+                </div>
+                {% endfor %}
+            </div>
+            <h3 class="card-heading centered">{{ post_list.3.title }}</h3>
+            <div class="hashtag">{{ post_list.3.created_on|date:"F d, Y" }}</div>
+        </div>
+        <div class="gradient-overlay"></div>
+    </a>
+    {% endif %}
   </div>
   <div class="pagination-div short-top-margin">
       <a href="{% url 'tags' %}" class="btn w-button">Explore all topics</a>

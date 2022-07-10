@@ -19,13 +19,8 @@
           </div>
           <div>
             <label>Password</label>
-            {% render_field form.password1 type="password" class="input w-input" placeholder="Enter a strong password..." %}
-            {{ form.password1.errors }}
-          </div>
-          <div>
-            <label>Confirm Password</label>
-            {% render_field form.password2 type="password" class="input w-input" placeholder="Confirm your password..." %}
-            {{ form.password2.errors }}
+            {% render_field form.password type="password" class="input w-input" placeholder="Enter a strong password..." %}
+            {{ form.password.errors }}
           </div>
           <button class="submit-btn w-button">Sign up</button>    
           <div class="auth-form-redirect-div">

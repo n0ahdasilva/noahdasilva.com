@@ -1,9 +1,9 @@
 from django.db import models
-from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
 from django.utils.text import slugify
 from datetime import datetime, date
 from django.urls import reverse
+from account.models import User
 
 
 STATUS = (
@@ -12,10 +12,10 @@ STATUS = (
 )
 
 class Tag(models.Model):
-    name = models.CharField(max_length=255, unique=True)
-    slug = models.SlugField(max_length=255, unique=True, null=True, blank=True)
+    name = models.CharField(max_length=64, unique=True)
+    slug = models.SlugField(max_length=64, unique=True, null=True, blank=True)
     special = models.CharField(max_length=2, default='#')
-    description = models.TextField(max_length=255, default='Tag description.')
+    description = models.TextField(max_length=512, default='Tag description.')
 
     class Meta:
         ordering = ['name']
@@ -35,10 +35,10 @@ class Post(models.Model):
     title = models.CharField(max_length=128, unique=True)
     slug = models.SlugField(max_length=128, unique=True, null=True, blank=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    author_plug = models.URLField(max_length=255, default='https://linktr.ee/ndasilva')
+    author_plug = models.URLField(max_length=128, default='https://linktr.ee/ndasilva')
     image = models.ImageField(null=True, blank=True, upload_to='blog_images/')
     tags = models.CharField(max_length=255, default='blog')
-    summary = models.TextField(max_length=300)
+    summary = models.TextField(max_length=512)
     content = RichTextField(blank=True, null=True)
     updated_on = models.DateTimeField(auto_now= True, blank=True)
     created_on = models.DateTimeField(auto_now_add=True, blank=True)

@@ -60,12 +60,13 @@
             <h2>Our latest posts</h2>
         </div>
         <div id="w-node-_74d6fc1a-0e68-1a3c-e3da-0f13ea13f9c8-4c83a91e" class="w-layout-grid single-col-grid">
+            {% if post_list.0 %}
             <a href="{% url 'blog-post' post_list.0.slug %}" class="blog-card w-inline-block">
                 <div class="blog-card-left" style="background-image: url({{ post_list.0.image.url }});"></div>
                 <div class="blog-card-right">
                     <div class="top-wrapper">
                         <div class="tag-flex start-justify">
-                            {% for tag in post_list.0.tags.all %}
+                            {% for tag in post_list.0.get_tags %}
                             <div class="tag-block">
                                 <div class="hashtag-purple">#</div>
                                 <div class="hashtag">{{ tag }}</div>
@@ -79,12 +80,14 @@
                     <div class="arrow-btn-txt">Read more <span class="fa900solid-span"></span></div>
                 </div>
             </a>
+            {% endif %}
         </div>
     </div>
 </div>
 <div class="default-section-light-purple wf-section">
     <div class="default-section-content">
         <div class="w-layout-grid dynamic-grid">
+            {% if post_list.1 %}
             <a href="{% url 'blog-post' post_list.1.slug %}" class="blog-card-square w-inline-block" style="background-image: url({{ post_list.1.image.url }});">
                 <div class="blog-card-div">
                     <div class="tag-flex">
@@ -100,6 +103,8 @@
                 </div>
                 <div class="gradient-overlay"></div>
             </a>
+            {% endif %}
+            {% if post_list.2 %}
             <a href="{% url 'blog-post' post_list.2.slug %}" class="blog-card-square w-inline-block" style="background-image: url({{ post_list.2.image.url }});">
                 <div class="blog-card-div">
                     <div class="tag-flex">
@@ -115,6 +120,8 @@
                 </div>
                 <div class="gradient-overlay"></div>
             </a>
+            {% endif %}
+            {% if post_list.3 %}
             <a href="{% url 'blog-post' post_list.3.slug %}" class="blog-card-square w-inline-block" style="background-image: url({{ post_list.3.image.url }});">
                 <div class="blog-card-div">
                     <div class="tag-flex">
@@ -130,6 +137,8 @@
                 </div>
                 <div class="gradient-overlay"></div>
             </a>
+            {% endif %}
+            {% if post_list.4 %}
             <a href="{% url 'blog-post' post_list.4.slug %}" class="blog-card-square w-inline-block" style="background-image: url({{ post_list.4.image.url }});">
                 <div class="blog-card-div">
                     <div class="tag-flex">
@@ -145,6 +154,7 @@
                 </div>
                 <div class="gradient-overlay"></div>
             </a>
+            {% endif %}
         </div>
         <div class="pagination-div short-top-margin">
             <a href="{% url 'blog' %}" class="btn w-button">View popular topics</a>
