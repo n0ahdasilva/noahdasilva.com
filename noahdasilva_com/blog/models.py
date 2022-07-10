@@ -11,6 +11,25 @@ STATUS = (
     (1,"Publish")
 )
 
+class Tag(models.Model):
+    name = models.CharField(max_length=255, unique=True)
+    slug = models.SlugField(max_length=255, unique=True, null=True, blank=True)
+    special = models.CharField(max_length=2, default='#')
+    description = models.TextField(max_length=255, default='Tag description.')
+
+    class Meta:
+        ordering = ['name']
+  
+    def __str__(self):
+        return self.name
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Tag, self).save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('tag', kwargs={'slug': self.slug})
+
 
 class Post(models.Model):
     title = models.CharField(max_length=128, unique=True)
@@ -24,6 +43,9 @@ class Post(models.Model):
     updated_on = models.DateTimeField(auto_now= True, blank=True)
     created_on = models.DateTimeField(auto_now_add=True, blank=True)
     status = models.IntegerField(choices=STATUS, default=0)
+
+    class Meta:
+        ordering = ['-created_on']
 
     def __str__(self):
         return str(self.updated_on) + ' | ' + self.title
@@ -42,20 +64,3 @@ class Post(models.Model):
         names = self.tags.replace('[', '').replace(']', '').replace('\'', '').split(', ')
         slugs = (slugify(name) for name in names)
         return zip(names, slugs)
-
-
-class Tag(models.Model):
-    name = models.CharField(max_length=255, unique=True)
-    slug = models.SlugField(max_length=255, unique=True, null=True, blank=True)
-    special = models.CharField(max_length=2, default='#')
-    description = models.TextField(max_length=255, default='Tag description.')
-
-    def __str__(self):
-        return self.name
-
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
-        super(Tag, self).save(*args, **kwargs)
-
-    def get_absolute_url(self):
-        return reverse('tag', kwargs={'slug': self.slug})

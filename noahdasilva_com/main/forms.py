@@ -1,8 +1,7 @@
-import re
 from django import forms
 
 
-SUBJECT = [
+SUBJECT = [ # (value, display_text),
     ('', 'Select one...'),
     ('General Inquiry', 'General Inquiry'), 
     ('Service Inquiry', 'Service Inquiry'), 

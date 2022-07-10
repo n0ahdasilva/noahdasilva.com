@@ -7,9 +7,6 @@ from blog.models import Post
 from .forms import ContactForm
 
 
-#def home(request):
-#    return render(request, 'home.html', {})
-
 class HomeView(ListView):
     model = Post
     template_name = 'home.html'

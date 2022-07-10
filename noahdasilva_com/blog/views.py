@@ -12,7 +12,7 @@ class BlogPostView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(BlogPostView, self).get_context_data(**kwargs)
-        context['post_list'] = Post.objects.all().order_by('-created_on')
+        context['post_list'] = Post.objects.all()
         context['tag_list'] = Tag.objects.all()
         return context
 
@@ -41,7 +41,7 @@ class BlogView(ListView):
     
     def get_context_data(self, **kwargs):
         context = super(BlogView, self).get_context_data(**kwargs)
-        context['post_list'] = Post.objects.all().order_by('-created_on')
+        context['post_list'] = Post.objects.all()
         context['tag_list'] = Tag.objects.all()
         return context
 
@@ -56,8 +56,8 @@ class TagsView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(TagsView, self).get_context_data(**kwargs)
-        context['post_list'] = self.filter_by_title().qs.order_by('-created_on')
-        context['tag_list'] = Tag.objects.all().order_by('name')
+        context['post_list'] = self.filter_by_title().qs
+        context['tag_list'] = Tag.objects.all()
         context['my_filter'] = self.filter_by_title()
         return context
 
@@ -72,7 +72,7 @@ class TagDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(TagDetailView, self).get_context_data(**kwargs)
-        context['post_list'] = self.filter_by_title().qs.order_by('-created_on')
-        context['tag_list'] = Tag.objects.all().order_by('name')
+        context['post_list'] = self.filter_by_title().qs
+        context['tag_list'] = Tag.objects.all()
         context['my_filter'] = self.filter_by_title()
         return context

@@ -65,7 +65,7 @@
                 <div class="blog-card-right">
                     <div class="top-wrapper">
                         <div class="tag-flex start-justify">
-                            {% for tag in post_list.0.get_tags %}
+                            {% for tag in post_list.0.tags.all %}
                             <div class="tag-block">
                                 <div class="hashtag-purple">#</div>
                                 <div class="hashtag">{{ tag }}</div>

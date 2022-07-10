@@ -4,7 +4,6 @@ from .views import HomeView, about_view, contact_view
 
 
 urlpatterns = [
-    #path('', views.home, name="home"),
     path('', HomeView.as_view(), name="home"),
     path('about', views.about_view, name="about"),
     path('contact', views.contact_view, name="contact"),
