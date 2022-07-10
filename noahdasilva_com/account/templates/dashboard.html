@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% load widget_tweaks %} {% block content %}
+{% extends 'base.html' %} {% load widget_tweaks %} {% load static %} {% block content %}
 
   <div class="default-section no-padding wf-section">
     <div class="dashboard-wrapper">
@@ -62,13 +62,15 @@
             <div class="dashboard-tab-content">
               <h2 class="h4-heading">My Profile</h2>
               <div class="dashboard-row">
+                {% if not user %}
                 <div class="dashboard-info-box full-width">
-                  <div class="dashboard-box-padding horizontal-flex"><img sizes="96px" width="100" srcset="images/IMG_0074-1250px-p-500.png 500w, images/IMG_0074-1250px-p-800.png 800w, images/IMG_0074-1250px-p-1080.png 1080w, images/IMG_0074-1250px.png 1250w" src="images/IMG_0074-1250px.png" alt="" class="dashboard-img profile">
+                  <div class="dashboard-box-padding horizontal-flex"><img sizes="96px" width="100" src="{% static 'blog/img/IMG_0074-1250px.png' %}" alt="" class="dashboard-img profile">
                     <div>
                       <button class="dashboard-heading-small gray">Change Avatar</button>
                     </div>
                   </div>
                 </div>
+                {% endif %}
                 <div class="dashboard-info-box full-width">
                   <div class="dashboard-box-padding horizontal-flex">
                     <div>
@@ -83,12 +85,6 @@
                           <button class="dashboard-heading-small gray">Update</button>
                         </div>
                       </form>
-                      <div class="w-form-done">
-                        <div>Thank you! Your submission has been received!</div>
-                      </div>
-                      <div class="w-form-fail">
-                        <div>Oops! Something went wrong while submitting the form.</div>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -101,17 +97,12 @@
                       <form action"#" id="account-name-form" name="wf-form-Account-Form-2" data-name="Account Form" method="post" class="account-form-div">
                         {% csrf_token %} 
                         <div id="w-node-c9c26216-c24c-aeac-b6ac-5fea8b1cc640-fd0192b4">
-                          <input type="text" class="account-input w-input" maxlength="256" name="account-name" data-name="account-name" placeholder="Tony Stark" id="account-name"></div>
+                          <input type="text" class="account-input w-input" maxlength="256" name="account-name" data-name="account-name" placeholder="Tony Stark" id="account-name">
+                        </div>
                         <div>
                           <button class="dashboard-heading-small gray">Update</button>
                         </div>
                       </form>
-                      <div class="w-form-done">
-                        <div>Thank you! Your submission has been received!</div>
-                      </div>
-                      <div class="w-form-fail">
-                        <div>Oops! Something went wrong while submitting the form.</div>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -129,33 +120,6 @@
                           <button class="dashboard-heading-small gray">Update</button>
                         </div>
                       </form>
-                      <div class="w-form-done">
-                        <div>Thank you! Your submission has been received!</div>
-                      </div>
-                      <div class="w-form-fail">
-                        <div>Oops! Something went wrong while submitting the form.</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="dashboard-box-padding horizontal-flex">
-                    <div>
-                      <h3 class="dashboard-heading-small">Mobile</h3>
-                    </div>
-                    <div class="account-form w-form">
-                      <form action"#" id="account-phone-form" name="wf-form-Account-Form-2" data-name="Account Form" method="post" class="account-form-div">
-                        {% csrf_token %}
-                        <div id="w-node-_4cc443e1-8c5c-af16-de8f-353fced0a5d8-fd0192b4">
-                          <input type="tel" class="account-input w-input" maxlength="256" name="account-phone" data-name="account-phone" placeholder="+1 (123) 456-7890" id="account-phone"></div>
-                        <div>
-                          <button class="dashboard-heading-small gray">Update</button>
-                        </div>
-                      </form>
-                      <div class="w-form-done">
-                        <div>Thank you! Your submission has been received!</div>
-                      </div>
-                      <div class="w-form-fail">
-                        <div>Oops! Something went wrong while submitting the form.</div>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -314,12 +278,6 @@
                           <a href="#" class="dashboard-heading-small gray">Update</a>
                         </div>
                       </form>
-                      <div class="w-form-done">
-                        <div>Thank you! Your submission has been received!</div>
-                      </div>
-                      <div class="w-form-fail">
-                        <div>Oops! Something went wrong while submitting the form.</div>
-                      </div>
                     </div>
                   </div>
                 </div>

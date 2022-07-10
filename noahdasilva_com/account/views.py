@@ -1,13 +1,13 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
-from django.views.generic import TemplateView, FormView
+from django.views.generic import FormView, TemplateView
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import FormView
 from django.contrib import messages
 from .forms import SignUpForm, LoginForm
+from .models import User
 
 
 class SignUpView(FormView):
@@ -47,6 +47,7 @@ class LoginView(FormView):
 
 
 class DashboardView(LoginRequiredMixin, TemplateView):
+    model = User
     template_name = 'dashboard.html'
 
 

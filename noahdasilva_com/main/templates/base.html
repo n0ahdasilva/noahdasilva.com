@@ -67,8 +67,13 @@
                             loading="lazy" alt="" class="nav-menu-icon small"></a>
                     {% if user.is_authenticated %}
                     <a href="{% url 'dashboard'%}" id="w-node-_073a6cad-f6aa-4cb3-d13c-226c4e688502-4e6884ef"
-                        class="nav-link-block w-inline-block"><img src="{% static 'blog/img/account-img.png' %}"
-                            loading="lazy" alt="" class="nav-menu-icon small"></a>
+                        class="nav-link-block w-inline-block" style="text-decoration: none;">
+                        {% if user %}
+                        <span class="gradient-span">{{ user.username }}</span>
+                        {% else %}
+                        <img src="{% static 'blog/img/account-img.png' %}" loading="lazy" alt="" class="nav-menu-icon small">
+                        {% endif %}                    
+                    </a>
                     {% else %}
                     <a href="{% url 'login'%}" id="w-node-_073a6cad-f6aa-4cb3-d13c-226c4e688502-4e6884ef"
                     class="nav-link-block w-inline-block"><img src="{% static 'blog/img/account-img.png' %}"

@@ -31,9 +31,9 @@ class CustomUserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_('email'), unique=True, default='')
-    first_name = models.CharField(_('first name'), max_length=64, null=True, blank=True)
-    last_name = models.CharField(_('last name'), max_length=64, null=True, blank=True)
+    date_joined = models.DateTimeField(_('date joined'), auto_now_add=True)
     username = models.CharField(_('username'), max_length=32, unique=True)
+    full_name = models.CharField(_('full name'), max_length=64, null=True, blank=True)
     is_superadmin = models.BooleanField(_('is_superadmin'), default=False)
     is_active = models.BooleanField(_('is_active'), default=True)
     is_staff = models.BooleanField(default=False)
@@ -49,11 +49,3 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.email
 
-
-class UserProfile(models.Model):
-    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
-    bio = models.TextField()
-    profile_pic = models.ImageField(null=True, blank=True, upload_to='user_profile_images/')
-    instagram = models.URLField(max_length=255, null=True, blank=True)
-    twitter = models.URLField(max_length=255, null=True, blank=True)
-    linkedin = models.URLField(max_length=255, null=True, blank=True)
