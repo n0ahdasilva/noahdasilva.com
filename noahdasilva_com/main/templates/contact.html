@@ -18,15 +18,27 @@
   <div class="default-section-content">
     <div class="form-wrapper">
       <div class="contact-form-card">
+        {% if from_email %}
+        <h1 class="h3-heading">Your message has been sent.</h1>
+        <div class="w-form">
+          <div class="contact-form">
+            <div id="w-node-da7f182b-a4d0-381b-3c4d-0e2b75615def-9383a921">
+              <p class="hero-paragraph">We will get back to you shortly.</p>
+            </div>
+            <div id="w-node-da7f182b-a4d0-381b-3c4d-0e2b75615def-9383a921">
+              <a href="{% url 'home' %}" class="btn w-button">Back to home</a>
+            </div>
+          </div>
+        </div>
+        {% else %}
         <h1 class="h3-heading">Contact form</h1>
         <div class="w-form">
           <form
-            id="email-form"
             name="email-form"
             data-name="Email Form"
             method="post"
             class="contact-form"
-            action="#">
+            action="{% url 'contact' %}">
           {% csrf_token %} {{ form.non_field_errors }}
             <div id="w-node-_92f09ec5-7e34-2292-6911-ac82a81f1d73-9383a921">
               <label for="Contact-Name">Your Name <span class="text-color-purple">*</span></label>
@@ -62,6 +74,7 @@
             <button id="w-node-_92f09ec5-7e34-2292-6911-ac82a81f1d8b-9383a921" class="submit-btn w-button">Send message</button>
           </form>
         </div>
+        {% endif %}
       </div>
     </div>
   </div>
