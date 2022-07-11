@@ -14,7 +14,7 @@ STATUS = (
 class Tag(models.Model):
     name = models.CharField(max_length=64, unique=True)
     slug = models.SlugField(max_length=64, unique=True, null=True, blank=True)
-    special = models.CharField(max_length=2, default='#')
+    special = models.CharField(max_length=1, default='#')
     description = models.TextField(max_length=512, default='Tag description.')
 
     class Meta:

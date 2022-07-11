@@ -1,4 +1,8 @@
-{% extends 'base.html' %} {% load static %} {% load widget_tweaks %} {% block seo %}
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block seo %}
 <title>Tags | Noah Da Silva</title>
 <meta name="description" content="What are you interested in? Dive into our library of resources by choosing a tag below."/>
 <meta property="og:type" content="website" />
@@ -7,7 +11,9 @@
 <meta propety="og:description" content="What are you interested in? Dive into our library of resources by choosing a tag below."/>
 <meta property="og:url" content="https://www.noahdasilva.com/blog/tags/" />
 <meta propety="og:image" content="{% static 'blog/img/IMG_0074-1250px.png' %}"/>
-{% endblock %} {% block content %}
+{% endblock %}
+
+{% block content %}
 <div class="hero-section wf-section">
   <div class="default-section-content">
     <div class="w-layout-grid hero-title-grid no-margin">
@@ -46,13 +52,14 @@
         loading="lazy"
         alt=""
         class="search-icon"/>
-      {% render_field my_filter.form.title class="search-bar w-input" id="search" max_length="128" placeholder="Search by title" %}
+      {% render_field title_filter.form.title class="search-bar w-input" id="search" max_length="128" placeholder="Search by title" %}
       <input type="submit" value="Search" class="search-btn w-button" />
     </form>
   </div>
 </div>
 <div class="anti-hero-section wf-section">
   <div class="default-section-content">
+    {% if post_list %}
     <div
       id="w-node-_595394b4-9006-2f7c-6bcc-3e12ba97ca85-774ef4fc"
       class="w-layout-grid single-col-grid"
@@ -91,16 +98,15 @@
       </a>
       {% endfor %}
     </div>
-    {% for post in post_list %}
-    {% empty %}
-    <div class="banner-content-div">
-        <h2 class="h4-heading">This place is a void!</h2>
-        <p>There are currently no posts matching this title.</p>
-    </div>
-    {% endfor %}
     <div class="pagination-div">
       <a href="#" class="btn w-button">Load more</a>
     </div>
+    {% else %}
+    <div class="banner-content-div">
+      <h2 class="h4-heading">This place is a void!</h2>
+      <p>There are currently no posts matching this title.</p>
+    </div>
+    {% endif %}
   </div>
 </div>
 {% endblock %}

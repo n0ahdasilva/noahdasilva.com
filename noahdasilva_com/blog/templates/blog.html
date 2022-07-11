@@ -1,22 +1,18 @@
-{% extends 'base.html' %} {% load static %} {% block seo %}
+{% extends 'base.html' %}
+{% load static %}
+
+{% block seo %}
 <title>Blog | Noah Da Silva</title>
-<meta
-  name="description"
-  content="Welcome to the Information Galaxy. We offer tutorials, articles, and news on a wide range of topics."
-/>
+<meta name="description" content="Welcome to the Information Galaxy. We offer tutorials, articles, and news on a wide range of topics."/>
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Noah Da Silva" />
 <meta propety="og:title" content="Blog" />
-<meta
-  propety="og:description"
-  content="Welcome to the Information Galaxy. We offer tutorials, articles, and news on a wide range of topics."
-/>
+<meta propety="og:description" content="Welcome to the Information Galaxy. We offer tutorials, articles, and news on a wide range of topics."/>
 <meta property="og:url" content="https://www.noahdasilva.com/blog/" />
-<meta
-  propety="og:image"
-  content="{% static 'blog/img/IMG_0074-1250px.png' %}"
-/>
-{% endblock %} {% block content %}
+<meta propety="og:image" content="{% static 'blog/img/IMG_0074-1250px.png' %}"/>
+{% endblock %}
+
+{% block content %}
 <div class="hero-section wf-section">
   <div class="default-section-content">
     <div class="w-layout-grid hero-title-grid">
@@ -63,12 +59,9 @@
     </div>
     <div
       id="w-node-_89e22a60-6db5-7215-133d-091e96de9134-4280d04e"
-      class="w-layout-grid single-col-grid"
-    >
-      <a
-        href="{% url 'blog-post' post_list.0.slug %}"
-        class="blog-card w-inline-block"
-      >
+      class="w-layout-grid single-col-grid">
+      {% if post_list.0 %}
+      <a href="{% url 'blog-post' post_list.0.slug %}" class="blog-card w-inline-block">
         <div
           class="blog-card-left"
           style="background-image: url({{ post_list.0.image.url }});"
@@ -96,6 +89,7 @@
           </div>
         </div>
       </a>
+      {% endif %}
     </div>
   </div>
 </div>
@@ -109,37 +103,31 @@
     </div>
     <div class="w-layout-grid topics-grid">
       <div class="topic-col">
+        {% with n="1" %}
         <a href="{% url 'tag-detail' tag_list.1.slug %}" class="topic-link w-inline-block">
           <div class="w-layout-grid topic-div-short hue45">
-            <img
-              src="{% static 'blog/img/account-img.png' %}"
-              loading="lazy"
-              id="w-node-_10b6ca44-f128-3665-c075-6c06e011f18d-4280d04e"
-              alt=""
-              class="topic-icon"
-            />
+            <div id="w-node-_10b6ca44-f128-3665-c075-6c06e011f18d-4280d04e" class="topic-icon">
+              <span class="fa900solid-span" style="font-size: 2rem;">{{ tag_list.1.special }}</span>
+            </div>
             <h3
               id="w-node-_7e0434aa-2d13-374e-9e6b-efbf680490be-4280d04e"
               class="h5-heading"
             >
-              Security
+              {{ tag_list.1.name }}
             </h3>
           </div>
         </a>
+        {% endwith %}
         <a href="{% url 'tag-detail' tag_list.2.slug %}" class="topic-link w-inline-block">
           <div class="w-layout-grid topic-div-tall hue315">
-            <img
-              src="{% static 'blog/img/account-img.png' %}"
-              loading="lazy"
-              id="w-node-_27b6864b-2664-6f92-9779-ff811fba48c3-4280d04e"
-              alt=""
-              class="topic-icon"
-            />
+            <div id="w-node-_10b6ca44-f128-3665-c075-6c06e011f18d-4280d04e" class="topic-icon">
+              <span class="fa900solid-span" style="font-size: 2rem;">{{ tag_list.2.special }}</span>
+            </div>
             <h3
               id="w-node-f0c680e1-d1fd-cc7c-2d50-64e7f478fff8-4280d04e"
               class="h5-heading"
             >
-              Web3
+            {{ tag_list.2.name }}
             </h3>
           </div>
         </a>
@@ -147,36 +135,27 @@
       <div class="topic-col">
         <a href="{% url 'tag-detail' tag_list.3.slug %}" class="topic-link w-inline-block">
           <div class="w-layout-grid topic-div-tall">
-            <img
-              src="{% static 'blog/img/account-img.png' %}"
-              loading="lazy"
-              id="w-node-_509a222e-7f17-6cd8-bf6d-43392d002dd9-4280d04e"
-              sizes="48px"
-              alt=""
-              class="topic-icon"
-            />
+            <div id="w-node-_10b6ca44-f128-3665-c075-6c06e011f18d-4280d04e" class="topic-icon">
+              <span class="fa900solid-span" style="font-size: 2rem;">{{ tag_list.3.special }}</span>
+            </div>
             <h3
               id="w-node-_3b806504-33c5-9c38-7e96-7c4a9f838ba5-4280d04e"
               class="h5-heading"
             >
-              Articles
+            {{ tag_list.3.name }}
             </h3>
           </div>
         </a>
         <a href="{% url 'tag-detail' tag_list.4.slug %}" class="topic-link w-inline-block">
           <div class="w-layout-grid topic-div-short hue315">
-            <img
-              src="{% static 'blog/img/account-img.png' %}"
-              loading="lazy"
-              id="w-node-_509a222e-7f17-6cd8-bf6d-43392d002dd5-4280d04e"
-              alt=""
-              class="topic-icon"
-            />
+            <div id="w-node-_10b6ca44-f128-3665-c075-6c06e011f18d-4280d04e" class="topic-icon">
+              <span class="fa900solid-span" style="font-size: 2rem;">{{ tag_list.4.special }}</span>
+            </div>
             <h3
               id="w-node-_5fa38e5f-245a-8f81-d3ca-14d3737075ae-4280d04e"
               class="h5-heading"
             >
-              Design
+            {{ tag_list.4.name }}
             </h3>
           </div>
         </a>
@@ -184,35 +163,27 @@
       <div class="topic-col">
         <a href="{% url 'tag-detail' tag_list.5.slug %}" class="topic-link w-inline-block">
           <div class="w-layout-grid topic-div-short">
-            <img
-              src="{% static 'blog/img/account-img.png' %}"
-              loading="lazy"
-              id="w-node-_30b661d9-04f1-7e19-7503-1b91bee30864-4280d04e"
-              alt=""
-              class="topic-icon"
-            />
+            <div id="w-node-_10b6ca44-f128-3665-c075-6c06e011f18d-4280d04e" class="topic-icon">
+              <span class="fa900solid-span" style="font-size: 2rem;">{{ tag_list.5.special }}</span>
+            </div>
             <h3
               id="w-node-_9343c46b-43e3-c143-896a-77a19f29dfef-4280d04e"
               class="h5-heading"
             >
-              Networking
+            {{ tag_list.5.name }}
             </h3>
           </div>
         </a>
         <a href="{% url 'tag-detail' tag_list.6.slug %}" class="topic-link w-inline-block">
           <div class="w-layout-grid topic-div-tall hue45">
-            <img
-              src="{% static 'blog/img/account-img.png' %}"
-              loading="lazy"
-              id="w-node-_30b661d9-04f1-7e19-7503-1b91bee30868-4280d04e"
-              alt=""
-              class="topic-icon"
-            />
+            <div id="w-node-_10b6ca44-f128-3665-c075-6c06e011f18d-4280d04e" class="topic-icon">
+              <span class="fa900solid-span" style="font-size: 2rem;">{{ tag_list.6.special }}</span>
+            </div>
             <h3
               id="w-node-_0688155b-d1df-7ff1-c4e1-e803ba07d302-4280d04e"
               class="h5-heading"
             >
-              Software
+            {{ tag_list.6.name }}
             </h3>
           </div>
         </a>
@@ -220,31 +191,22 @@
       <div class="topic-col">
         <a href="{% url 'tag-detail' tag_list.7.slug %}" class="topic-link w-inline-block">
           <div class="w-layout-grid topic-div-tall hue315">
-            <img
-              src="{% static 'blog/img/account-img.png' %}"
-              loading="lazy"
-              id="w-node-_6ab0f3e9-0324-d265-2ce4-fa4dd87dce88-4280d04e"
-              alt=""
-              class="topic-icon"
-            />
+            <div id="w-node-_10b6ca44-f128-3665-c075-6c06e011f18d-4280d04e" class="topic-icon">
+              <span class="fa900solid-span" style="font-size: 2rem;">{{ tag_list.7.special }}</span>
+            </div>
             <h3
               id="w-node-_6687eb29-4a62-e3b9-dc0d-544e6bed7982-4280d04e"
               class="h5-heading"
             >
-              News
+            {{ tag_list.7.name }}
             </h3>
           </div>
         </a>
         <a href="{% url 'tag-detail' tag_list.8.slug %}" class="topic-link w-inline-block">
           <div class="w-layout-grid topic-div-short">
-            <img
-              src="{% static 'blog/img/account-img.png' %}"
-              loading="lazy"
-              id="w-node-_6ab0f3e9-0324-d265-2ce4-fa4dd87dce84-4280d04e"
-              sizes="48px"
-              alt=""
-              class="topic-icon"
-            />
+            <div id="w-node-_10b6ca44-f128-3665-c075-6c06e011f18d-4280d04e" class="topic-icon">
+              <span class="fa900solid-span" style="font-size: 2rem;">{{ tag_list.8.special }}</span>
+            </div>
             <h3
               id="w-node-_45ae0213-42ed-960e-9143-28556713062b-4280d04e"
               class="h5-heading"
@@ -276,6 +238,7 @@
       <h2>Here are some of our suggestions</h2>
     </div>
     <div class="w-layout-grid dynamic-grid">
+      {% if post_list.1 %}
       <a
         href="{% url 'blog-post' post_list.1.slug %}"
         class="blog-card-square w-inline-block"
@@ -295,6 +258,8 @@
         </div>
         <div class="gradient-overlay"></div>
       </a>
+      {% endif %}
+      {% if post_list.2 %}
       <a
         href="{% url 'blog-post' post_list.2.slug %}"
         class="blog-card-square w-inline-block"
@@ -314,6 +279,8 @@
         </div>
         <div class="gradient-overlay"></div>
       </a>
+      {% endif %}
+      {% if post_list.3 %}
       <a
         href="{% url 'blog-post' post_list.3.slug %}"
         class="blog-card-square w-inline-block"
@@ -333,6 +300,8 @@
         </div>
         <div class="gradient-overlay"></div>
       </a>
+      {% endif %}
+      {% if post_list.4 %}
       <a
         href="{% url 'blog-post' post_list.4.slug %}"
         class="blog-card-square w-inline-block"
@@ -352,6 +321,7 @@
         </div>
         <div class="gradient-overlay"></div>
       </a>
+      {% endif %}
     </div>
   </div>
 </div>

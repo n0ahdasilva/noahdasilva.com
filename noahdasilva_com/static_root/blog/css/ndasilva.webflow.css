@@ -2579,7 +2579,7 @@ a {
 }
 
 .fa900solid-span {
-  font-family: 'Fa solid 900', sans-serif;
+  font-family: 'Fa solid 900','Fa brands 400','Fa 400','Fa v4compatibility',sans-serif;
 }
 
 .search-div {
@@ -4921,7 +4921,7 @@ a {
 @font-face {
   font-family: 'Fa solid 900';
   src: url('../fonts/fa-solid-900.ttf') format('truetype');
-  font-weight: 400;
+  font-weight: 900;
   font-style: normal;
   font-display: swap;
 }

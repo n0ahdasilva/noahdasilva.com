@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .models import Post, Tag
 from .forms import PostForm
@@ -51,14 +51,14 @@ class TagsView(ListView):
     template_name = 'tags.html'
 
     def filter_by_title(self):
-        my_filter = PostFilter(self.request.GET, queryset=Post.objects.all())
-        return my_filter
+        title_filter = PostFilter(self.request.GET, queryset=Post.objects.all())
+        return title_filter
 
     def get_context_data(self, **kwargs):
         context = super(TagsView, self).get_context_data(**kwargs)
         context['post_list'] = self.filter_by_title().qs
         context['tag_list'] = Tag.objects.all()
-        context['my_filter'] = self.filter_by_title()
+        context['title_filter'] = self.filter_by_title()
         return context
 
 
@@ -67,12 +67,11 @@ class TagDetailView(DetailView):
     template_name = 'tag_detail.html'
 
     def filter_by_title(self):
-        my_filter = PostFilter(self.request.GET, queryset=Post.objects.all())
-        return my_filter
+        title_filter = PostFilter(self.request.GET, queryset=Post.objects.filter(tags__icontains=self.object))
+        return title_filter
 
     def get_context_data(self, **kwargs):
         context = super(TagDetailView, self).get_context_data(**kwargs)
         context['post_list'] = self.filter_by_title().qs
-        context['tag_list'] = Tag.objects.all()
-        context['my_filter'] = self.filter_by_title()
+        context['title_filter'] = self.filter_by_title()
         return context

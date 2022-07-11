@@ -1,4 +1,8 @@
-{% extends 'base.html' %} {% load static %} {% load widget_tweaks %} {% block seo %}
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block seo %}
 <title>{{ tag.name}} Tag | Noah Da Silva</title>
 <meta name="description" content="{{ tag.description }}" />
 <meta property="og:type" content="website" />
@@ -13,7 +17,9 @@
   propety="og:image"
   content="{% static 'blog/img/IMG_0074-1250px.png' %}"
 />
-{% endblock %} {% block content %}
+{% endblock %}
+
+{% block content %}
 <div class="hero-section wf-section">
   <div class="default-section-content">
     <div class="w-layout-grid hero-title-grid no-margin">
@@ -23,6 +29,7 @@
       <h2 class="hero-paragraph">
         <span class="gradient-span">{{ tag.description }}</span>
       </h2>
+      <a href="{% url 'tags' %}" class="btn w-button">Browse all tags</a>
     </div>
   </div>
 </div>
@@ -34,17 +41,16 @@
         loading="lazy"
         alt=""
         class="search-icon"/>
-      {% render_field my_filter.form.title class="search-bar w-input" id="search" max_length="128" placeholder="Search by title" %}
+      {% render_field title_filter.form.title class="search-bar w-input" id="search" max_length="128" placeholder="Search by title" %}
       <input type="submit" value="Search" class="search-btn w-button" />
     </form>
   </div>
 </div>
-<div class="default-section wf-section">
+<div class="anti-hero-section wf-section">
   <div class="default-section-content">
+    {% if post_list %}
     <div class="w-layout-grid single-col-grid">
       {% for post in post_list %}
-        {% for tag_name in post.get_tags %}
-          {% if tag.name == tag_name %}
       <a
         href="{% url 'blog-post' post.slug %}"
         class="blog-card w-inline-block"
@@ -76,20 +82,17 @@
           </div>
         </div>
       </a>
-    {% endif %}
-    {% endfor %}
-  {% endfor %}
+      {% endfor %}
     </div>
-    {% for post in post_list %}
-    {% empty %}
-    <div class="banner-content-div">
-        <h2 class="h4-heading">This place is a void!</h2>
-        <p>There are currently no posts matching this title.</p>
-    </div>
-    {% endfor %}
     <div class="pagination-div">
-        <a href="#" class="btn w-button">Load more</a>
+      <a href="#" class="btn w-button">Load more</a>
     </div>
+    {% else %}
+    <div class="banner-content-div">
+      <h2 class="h4-heading">This place is a void!</h2>
+      <p>There are currently no posts matching this title.</p>
+    </div>
+    {% endif %}
   </div>
 </div>
 {% endblock %}
