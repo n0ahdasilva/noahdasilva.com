@@ -17,7 +17,7 @@
             <div>Profile</div>
           </a>
           <a data-w-tab="Security" class="navigation-item w-inline-block w-tab-link">
-            <div class="dashboard-nav-icon"></div>
+            <div class="dashboard-nav-icon"></div>
             <div>Security</div>
           </a>
           <a data-w-tab="Log out" class="navigation-item w-inline-block w-tab-link">
@@ -55,7 +55,7 @@
                   <div class="dashboard-box-padding">
                     <div class="colourful-icon yellow"></div>
                     <h2 class="dashboard-heading">{{ user.date_joined|date:"F d, Y"  }}</h2>
-                    <div>Date joined <span class="unfocused-text-span">(YYYY-MM-DD)</span></div>
+                    <div>Date joined</div>
                   </div>
                 </div>
                 <div class="dashboard-info-box third mobile-full-box">
@@ -68,7 +68,7 @@
               </div>
             </div>
             <div class="dashboard-tab-content">
-              <h2 class="h4-heading">My Profile</h2>
+              <h2 class="h4-heading">My Information</h2>
               <div class="dashboard-row">
                 {% if not user %}
                 <div class="dashboard-info-box full-width">
@@ -243,13 +243,13 @@
                   <div class="dashboard-box-padding">
                     <div class="colourful-icon purple"></div>
                     <h3 ms-data="launch" class="dashboard-heading-date">{{ user.last_login|date:"F d, Y, G:H" }}</h3>
-                    <div>Last login <span class="unfocused-text-span">(YYYY-MM-DD)</span></div>
+                    <div>Last login</div>
                   </div>
                 </div>
               </div>
             </div>
             <div class="dashboard-tab-content">
-              <h2 class="h4-heading">My Information</h2>
+              <h2 class="h4-heading">My Account</h2>
               <div class="dashboard-row">
                 <div class="dashboard-info-box full-width">
                   <div class="dashboard-box-padding horizontal-flex">
