@@ -19,7 +19,7 @@
     <div class="auth-form-card-invisible">
       <h1 class="h4-heading">Sign up</h1>
       <div class="auth-form w-form">
-        <form method="post" action="#" class="auth-form">
+        <form method="post" action="{% url 'sign-up' %}" class="auth-form">
           {% csrf_token %} {{ form.non_field_errors }}
           <div>
             <label>Username</label>

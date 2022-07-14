@@ -19,7 +19,7 @@
     <div class="auth-form-card-invisible">
       <h1 class="h4-heading">Sign in</h1>
       <div class="auth-form w-form">
-        <form method="POST" action="#" class="auth-form">
+        <form method="POST" action="{% url 'login' %}" class="auth-form">
           {% csrf_token %} {{ form.non_field_errors }}
           <div>
             <label>Email</label>

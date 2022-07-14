@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block seo %}
+<title>{{ project.name }} | Porfolio | Noah Da Silva</title>
+<meta name="description" content="{{ project.description }}" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Noah Da Silva" />
+<meta propety="og:title" content="{{ project.name }}" />
+<meta propety="og:description" content="{{ project.description }}" />
+<meta property="og:url" content="https://www.noahdasilva.com/portfolio/{{ project.slug }}"/>
+<meta propety="og:image" content="{{ project.image.url }}" />
+{% endblock %} 
+
+{% block content %}
+<div class="default-section wf-section">
+  <div class="w-layout-grid grid-blog-post">
+    <div id="w-node-cf5b8a5e-04cf-ac28-38c5-921f144ff226-fb19939c" class="img-blog-post-wrap">
+      <a href={{ project.url }} target="_blank">
+        <img sizes="92vw" loading="lazy" src="{{ project.image.url }}" alt="" class="img-blog-post">
+      </a>
+    </div>
+    <div class="w-layout-grid grid-title-blog">
+      <p id="w-node-cf5b8a5e-04cf-ac28-38c5-921f144ff229-fb19939c" class="web-title-gradient">{{ project.category }}</p>
+      <h1 class="blog-heading">{{ project.name }}</h1>
+      <div id="w-node-cf5b8a5e-04cf-ac28-38c5-921f144ff22d-fb19939c" class="title-line-spacer"></div>
+      <p class="title-blog-summary">{{ project.description }}</p>
+      <a href="{{ project.url }}" target="_blank" class="blog-author-link-block w-inline-block">
+        <p class="web-title-gray">Go to </p>
+        <p class="web-title-gradient">{{ project.name }}</p>
+      </a>
+      {% if project.tags %}
+      <div id="w-node-be6f9a40-4a00-5f23-1d48-7a4fd7c6685e-fb19939c" class="tag-flex">
+        {% for tag in project.get_tags %}
+        <h2 class="tag-div">{{ tag }}</h2>
+        {% endfor %}
+      </div>
+      {% endif %}
+    {% if user.is_authenticated %}
+      {% if user.is_staff == True %}
+    <div style="width: 100%;">
+      <div class="pagination-div short-top-margin">
+        <a href="{% url 'edit-project' project.slug %}" class="btn w-button">Edit project</a>
+      </div>
+      <div class="pagination-div short-top-margin">
+        <a href="{% url 'delete-project' project.slug %}" class="btn w-button">Delete post</a>
+      </div>
+    </div>
+      {% endif %}
+    {% endif %}
+    </div>
+  </div>
+</div>
+<div class="anti-hero-section-light-purple wf-section">
+  <div class="default-section-content">
+    <div class="banner-content-div">
+      <h2 class="h4-heading">Ready to make a move</h2>
+      <p>A website tailored to you</p>
+      <a href="{% url 'contact' %}" class="btn-white w-button">Let&#x27;s talk</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

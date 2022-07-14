@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-up1=_o(bxc+mrf9@qwt9^w9@f=_&c_s=-s@vf$_rh-u2_#n8o-'
+SECRET_KEY = str(env('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -160,9 +160,8 @@ LOGOUT_REDIRECT_URL = 'home'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = env('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASS')
-
+EMAIL_HOST_USER = str(env('EMAIL_HOST_USER'))
+EMAIL_HOST_PASSWORD = str(env('EMAIL_HOST_PASSWORD'))
 
 # Custom user model
 AUTH_USER_MODEL = 'account.User'

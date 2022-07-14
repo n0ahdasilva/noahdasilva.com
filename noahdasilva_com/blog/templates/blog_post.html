@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block seo %}
-<title>{{ post.title }} | Noah Da Silva</title>
+<title>{{ post.title }} | Blog | Noah Da Silva</title>
 <meta name="description" content="{{ post.summary }}" />
 <meta property="og:type" content="article" />
 <meta property="og:site_name" content="Noah Da Silva" />
@@ -82,7 +82,7 @@
     </div>
     <div class="blog-post-body w-richtext">{{ post.content|safe }}</div>
     {% if user.is_authenticated %}
-      {% if user.id == post.author.id %}
+      {% if user.is_staff == True %}
     <div class="pagination-div short-top-margin">
       <a href="{% url 'edit-post' post.slug %}" class="btn w-button">Edit post</a>
     </div>

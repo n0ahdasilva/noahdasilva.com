@@ -32,7 +32,7 @@ class CustomUserManager(BaseUserManager):
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_('email'), unique=True, default='')
     date_joined = models.DateTimeField(_('date joined'), auto_now_add=True)
-    username = models.CharField(_('username'), max_length=32, unique=True)
+    username = models.CharField(_('username'), max_length=24, unique=True)
     full_name = models.CharField(_('full name'), max_length=64, null=True, blank=True)
     is_superadmin = models.BooleanField(_('is_superadmin'), default=False)
     is_active = models.BooleanField(_('is_active'), default=True)

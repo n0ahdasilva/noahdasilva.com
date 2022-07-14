@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="hero-section wf-section">
+  <div class="default-section-content">
+    <div class="w-layout-grid hero-title-grid">
+      <h1>Portfolio</h1>
+      <p class="web-title-gradient">Explore and find inspiration for your website.<a href="https://www.noahdasilva.com/portfolio/graphstax"><span class="gradient-span"><br></span></a>
+      </p>
+    </div>
+    <div class="w-layout-grid dynamic-grid">
+      {% for project in project_list %}
+      <a href="{% url 'project' project.slug %}" class="nav-link-block-games w-inline-block">
+        <div class="icon-square"><img src="{{ project.image.url }}" sizes="60px" alt="" class="nav-img"></div>
+        <div class="nav-content-wrap">
+          <div class="menu-title">{{ project.name }}</div>
+          <div class="nav-link-details">Explore the details</div>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+<div class="anti-hero-section-light-purple wf-section">
+  <div class="default-section-content">
+    <div class="banner-content-div">
+      <h2 class="h4-heading">Ready to make a move</h2>
+      <p>A website tailored to you</p>
+      <a href="{% url 'contact' %}" class="btn-white w-button">Let&#x27;s talk</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

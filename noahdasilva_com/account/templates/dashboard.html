@@ -133,6 +133,7 @@
                 </div>
               </div>
             </div>
+            {% if user.is_staff %}
             <div class="dashboard-tab-content">
               <h2 class="h4-heading">Intergrations</h2>
               <div class="dashboard-row">
@@ -174,6 +175,7 @@
                 </a>
               </div>
             </div>
+            {% endif %}
           </div>
           <div data-w-tab="Security" class="default-section w-tab-pane">
             <div class="dashboard-tab-content">

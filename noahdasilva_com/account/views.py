@@ -6,7 +6,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import FormView
 from django.contrib import messages
-from .forms import SignUpForm, LoginForm, NewPasswordForm
+from .forms import SignUpForm, LoginForm
 from .models import User
 
 
@@ -41,8 +41,7 @@ class LoginView(FormView):
             return HttpResponseRedirect(self.success_url)
 
         else:
-            messages.add_message(self.request, messages.INFO, 'Wrong credentials\
-                                please try again')
+            messages.add_message(self.request, messages.INFO, 'Wrong credentials please try again')
             return HttpResponseRedirect(reverse_lazy('login'))
 
 

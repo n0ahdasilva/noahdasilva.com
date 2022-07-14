@@ -1,0 +1,32 @@
+{% extends 'base.html' %} 
+{% load widget_tweaks %} 
+
+{% block seo %}
+<meta name=”robots” content=”noindex”/>
+<title>Delete Project | Noah Da Silva</title>
+{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  {% if user.is_staff == True %}
+<div class="auth-section wf-section">
+  <div class="form-wrapper">
+    <div class="auth-form-card-invisible">
+      <h1 class="h3-heading">Delete project...</h1>
+      <div class="w-form">
+        <form class="auth-form" action="#" method="POST">
+          {% csrf_token %}
+          <div>
+            <p class="hero-paragraph">
+              Are you sure you want to delete the <b>{{ project.name }}</b> project?
+            </p>
+            <button class="submit-btn w-button">Delete project</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+  {% endif %}
+{% endif %}
+{% endblock %}
