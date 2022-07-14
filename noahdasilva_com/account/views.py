@@ -12,7 +12,7 @@ from .models import User
 
 class SignUpView(FormView):
     form_class = SignUpForm
-    template_name = 'registration/sign-up.html'
+    template_name = 'registration/sign_up.html'
     success_url = reverse_lazy('dashboard')
 
     def form_valid(self, form):
@@ -27,8 +27,8 @@ class SignUpView(FormView):
 
 class LoginView(FormView):
     form_class = LoginForm
-    success_url = reverse_lazy('dashboard')
     template_name = 'registration/login.html'
+    success_url = reverse_lazy('dashboard')
 
     def form_valid(self, form):
         credentials = form.cleaned_data

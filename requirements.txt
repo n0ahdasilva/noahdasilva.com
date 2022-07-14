@@ -3,4 +3,4 @@ django-ckeditor
 Pillow
 django-widget-tweaks
 django-filter
-django-environ
+python-dotenv

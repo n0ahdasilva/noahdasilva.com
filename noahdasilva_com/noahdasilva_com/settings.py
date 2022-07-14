@@ -12,22 +12,23 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os.path
-import environ
-
-# Iniitialize environment variables
-env = environ.Env()
-environ.Env.read_env()
+from dotenv import load_dotenv
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+# Load environment variables from .env file
+load_dotenv()
+ENV_PATH = os.path.join(BASE_DIR, '.env')
+load_dotenv(dotenv_path=ENV_PATH)
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = str(env('SECRET_KEY'))
+SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -153,15 +154,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Auth settings
 LOGIN_REDIRECT_URL = 'dashboard'
 LOGIN_URL = 'login'
-LOGOUT_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'login'
 
 
 # Send mail
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = str(env('EMAIL_HOST_USER'))
-EMAIL_HOST_PASSWORD = str(env('EMAIL_HOST_PASSWORD'))
+EMAIL_HOST_USER = str(os.getenv('EMAIL_HOST_USER'))
+EMAIL_HOST_PASSWORD = str(os.getenv('EMAIL_HOST_PASSWORD'))
 
 # Custom user model
 AUTH_USER_MODEL = 'account.User'
