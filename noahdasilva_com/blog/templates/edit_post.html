@@ -44,7 +44,7 @@
           <div>
             {{ form.tags.label_tag }}
             {{ form.tags|add_class:"input form-message w-input" }}
-            {{ form.imtagsage.errors }}
+            {{ form.tags.errors }}
           </div>
           <div>
             {{ form.summary.label_tag }}
@@ -55,11 +55,6 @@
             {{ form.content.label_tag }}
             {{ form.content|add_class:"input form-message w-input" }}
             {{ form.content.errors }}
-          </div>
-          <div>
-            {{ form.status.label_tag }}
-            {{ form.status|add_class:"input form-selection w-input" }}
-            {{ form.status.errors }}
           </div>
           <div>
             <button class="submit-btn w-button">Update</button>

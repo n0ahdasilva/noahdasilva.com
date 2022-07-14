@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %} 
+
+{% block seo %}
+<meta name=”robots” content=”noindex”/>
+<title>Add Tag | Noah Da Silva</title>
+{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  {% if user.is_staff == True %}
+<div class="default-section wf-section">
+  <div class="default-section-content">
+    <div class="form-wrapper">
+      <h1 class="h3-heading">Add tag...</h1>
+      <div class="w-form">
+        <form
+          class="auth-form"
+          action="#"
+          method="POST"
+          enctype="multipart/form-data"
+        >
+          {% csrf_token %} {{ form.media }} {{ form.non_field_errors }}
+          <div>
+            {{ form.name.label_tag }}
+            {{ form.name|add_class:"input w-input" }}
+            {{ form.name.errors }}
+          </div>
+          <div>
+            {{ form.special.label_tag }}
+            {{ form.special|add_class:"input w-input" }}
+            {{ form.special.errors }}
+          </div>
+          <div>
+            {{ form.description.label_tag }}
+            {{ form.description|add_class:"input form-message w-input" }}
+            {{ form.description.errors }}
+          </div>
+          <div>
+            <button class="submit-btn w-button">Create tag</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+  {% endif %}
+{% endif %}
+{% endblock %}

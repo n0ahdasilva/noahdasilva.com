@@ -28,7 +28,7 @@ class Tag(models.Model):
         super(Tag, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse('tag', kwargs={'slug': self.slug})
+        return reverse('tag-detail', kwargs={'slug': self.slug})
 
 
 class Post(models.Model):
@@ -42,7 +42,7 @@ class Post(models.Model):
     content = RichTextField(blank=True, null=True)
     updated_on = models.DateTimeField(auto_now= True, blank=True)
     created_on = models.DateTimeField(auto_now_add=True, blank=True)
-    status = models.IntegerField(choices=STATUS, default=0)
+    #status = models.IntegerField(choices=STATUS, default=0)
 
     class Meta:
         ordering = ['-created_on']

@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .models import Post, Tag
-from .forms import PostForm
+from .forms import PostForm, TagForm
 from .filters import PostFilter
 
 
@@ -46,6 +46,39 @@ class BlogView(ListView):
         return context
 
 
+class TagDetailView(DetailView):
+    model = Tag
+    template_name = 'tag_detail.html'
+
+    def filter_by_title(self):
+        title_filter = PostFilter(self.request.GET, queryset=Post.objects.filter(tags__icontains=self.object))
+        return title_filter
+
+    def get_context_data(self, **kwargs):
+        context = super(TagDetailView, self).get_context_data(**kwargs)
+        context['post_list'] = self.filter_by_title().qs
+        context['title_filter'] = self.filter_by_title()
+        return context
+
+
+class AddTagView(CreateView):
+    model = Tag
+    template_name = 'add_tag.html'
+    form_class = TagForm
+
+
+class EditTagView(UpdateView):
+    model = Tag
+    template_name = 'edit_tag.html'
+    form_class = TagForm
+
+
+class DeleteTagView(DeleteView):
+    model = Tag
+    template_name = 'delete_tag.html'
+    success_url = reverse_lazy('home')
+
+
 class TagsView(ListView):
     model = Tag
     template_name = 'tags.html'
@@ -58,20 +91,5 @@ class TagsView(ListView):
         context = super(TagsView, self).get_context_data(**kwargs)
         context['post_list'] = self.filter_by_title().qs
         context['tag_list'] = Tag.objects.all()
-        context['title_filter'] = self.filter_by_title()
-        return context
-
-
-class TagDetailView(DetailView):
-    model = Tag
-    template_name = 'tag_detail.html'
-
-    def filter_by_title(self):
-        title_filter = PostFilter(self.request.GET, queryset=Post.objects.filter(tags__icontains=self.object))
-        return title_filter
-
-    def get_context_data(self, **kwargs):
-        context = super(TagDetailView, self).get_context_data(**kwargs)
-        context['post_list'] = self.filter_by_title().qs
         context['title_filter'] = self.filter_by_title()
         return context
