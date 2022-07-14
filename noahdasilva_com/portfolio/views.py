@@ -11,6 +11,7 @@ class ProjectView(DetailView):
     model = Project
     template_name = 'project.html'
 
+
 @method_decorator([login_required, 
     permission_required("blog.add_project")], name='dispatch')
 class AddProjectView(CreateView):
