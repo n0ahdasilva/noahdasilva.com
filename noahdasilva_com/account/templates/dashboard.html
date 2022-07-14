@@ -28,7 +28,11 @@
         <div class="dashboard-tabs-wrapper w-tab-content">
           <div data-w-tab="Profile" class="default-section w-tab-pane w--tab-active">
             <div class="dashboard-tab-content">
+              {% if user.full_name %}
+              <h1 class="h3-heading">Welcome back, <span class="gradient-span">{{ user.full_name }}</span>!</h1>
+              {% else %}
               <h1 class="h3-heading">Welcome back, <span class="gradient-span">{{ user.username }}</span>!</h1>
+              {% endif %}
               <div class="dashboard-row">
                 <div class="dashboard-info-box third">
                   <div class="dashboard-box-padding">
@@ -133,49 +137,74 @@
                 </div>
               </div>
             </div>
-            {% if user.is_staff %}
             <div class="dashboard-tab-content">
-              <h2 class="h4-heading">Intergrations</h2>
+              <h2 class="h4-heading">Applications</h2>
               <div class="dashboard-row">
-                <a href="#" class="dashboard-info-box link-box w-inline-block">
-                  <div class="dashboard-box-padding horizontal-flex"><img src="images/5cbcc29efad96cf6f89a0d61_Webflow-round.svg" width="100" alt="Webflow logo" class="dashboard-img circle">
+                {% if user.is_staff %}
+                <a href="{% url 'add-post' %}" class="dashboard-info-box link-box w-inline-block">
+                {% else %}
+                <a href="{% url 'contact' %}" class="dashboard-info-box link-box w-inline-block">
+                {% endif %}
+                  <div class="dashboard-box-padding horizontal-flex">
+                    <div class="dashboard-img">
+                      <span class="fa900solid-span gradient-span" style="font-size: 2rem;"></span>
+                    </div>
                     <div>
-                      <h3 class="dashboard-heading-small">Webflow</h3>
-                      <div class="dashboard-heading-small green">Connected</div>
-                      <div class="email-text-block">Tony Stark</div>
+                      <h3 class="dashboard-heading-small">Write post</h3>
+                      {% if user.is_staff %}
+                      <div class="dashboard-heading-small green">Available</div>
+                      <div class="email-text-block">As <span class="gradient-span">{{ user.email }}</span></div>
+                      {% else %}
+                      <div class="dashboard-heading-small red">Unavailable</div>
+                      <div class="email-text-block">Requires permissions</div>
+                      {% endif %}
                     </div>
                   </div>
                 </a>
-                <a href="#" class="dashboard-info-box link-box w-inline-block">
-                  <div class="dashboard-box-padding horizontal-flex"><img src="images/google-analytics-3.svg" width="100" alt="Google Analytics logo" class="dashboard-img">
+                {% if user.is_staff %}
+                <a href="{% url 'add-tag' %}" class="dashboard-info-box link-box w-inline-block">
+                {% else %}
+                <a href="{% url 'contact' %}" class="dashboard-info-box link-box w-inline-block">
+                {% endif %}
+                  <div class="dashboard-box-padding horizontal-flex">
+                    <div class="dashboard-img">
+                      <span class="fa900solid-span gradient-span" style="font-size: 2rem;"></span>
+                    </div>
                     <div>
-                      <h3 class="dashboard-heading-small">Analytics</h3>
-                      <div class="dashboard-heading-small gray">Connect</div>
-                      <div class="email-text-block">tstark@gmail.com</div>
+                      <h3 class="dashboard-heading-small">Create tag</h3>
+                      {% if user.is_staff %}
+                      <div class="dashboard-heading-small green">Available</div>
+                      <div class="email-text-block">As <span class="gradient-span">{{ user.email }}</span></div>
+                      {% else %}
+                      <div class="dashboard-heading-small red">Unavailable</div>
+                      <div class="email-text-block">Requires permissions</div>
+                      {% endif %}
                     </div>
                   </div>
                 </a>
-                <a href="#" class="dashboard-info-box link-box w-inline-block">
-                  <div class="dashboard-box-padding horizontal-flex"><img sizes="(max-width: 479px) 40px, (max-width: 991px) 4vw, 3vw" width="100" srcset="images/Twitter-p-500.png 500w, images/Twitter.png 1350w" src="images/Twitter.png" alt="Twitter logo" class="dashboard-img">
-                    <div>
-                      <h3 class="dashboard-heading-small">Twitter</h3>
-                      <div class="dashboard-heading-small red">Disconnected</div>
-                      <div class="email-text-block">@IronMan</div>
+                {% if user.is_staff %}
+                <a href="{% url 'add-project' %}" class="dashboard-info-box link-box w-inline-block">
+                {% else %}
+                <a href="{% url 'contact' %}" class="dashboard-info-box link-box w-inline-block">
+                {% endif %}
+                  <div class="dashboard-box-padding horizontal-flex">
+                    <div class="dashboard-img">
+                      <span class="fa900solid-span gradient-span" style="font-size: 2rem;"></span>
                     </div>
-                  </div>
-                </a>
-                <a href="#" class="dashboard-info-box link-box w-inline-block">
-                  <div class="dashboard-box-padding horizontal-flex"><img sizes="(max-width: 479px) 40px, (max-width: 991px) 4vw, 3vw" width="100" srcset="images/google-p-500.png 500w, images/google-p-800.png 800w, images/google-p-1080.png 1080w, images/google-p-1600.png 1600w, images/google-p-2000.png 2000w, images/google.png 2400w" src="images/google.png" alt="Google logo" class="dashboard-img">
                     <div>
-                      <h3 class="dashboard-heading-small">Google</h3>
-                      <div class="dashboard-heading-small green">Connected</div>
-                      <div class="email-text-block">tstark@gmail.com</div>
+                      <h3 class="dashboard-heading-small">Add to portfolio</h3>
+                      {% if user.is_staff %}
+                      <div class="dashboard-heading-small green">Available</div>
+                      <div class="email-text-block">As <span class="gradient-span">{{ user.email }}</span></div>
+                      {% else %}
+                      <div class="dashboard-heading-small red">Unavailable</div>
+                      <div class="email-text-block">Requires permissions</div>
+                      {% endif %}
                     </div>
                   </div>
                 </a>
               </div>
             </div>
-            {% endif %}
           </div>
           <div data-w-tab="Security" class="default-section w-tab-pane">
             <div class="dashboard-tab-content">
@@ -281,17 +310,7 @@
                       <h3 class="dashboard-heading-small">Password</h3>
                     </div>
                     <div class="account-form w-form">
-                      <form action"#" id="account-password-form" method="post" class="account-form-div">
-                        <div id="w-node-e5767b64-4a5b-2213-1a98-36099f2bd055-fd0192b4">
-                          <input type="password" class="account-input w-input" maxlength="256" name="account-current-password" data-name="account-current-password" placeholder="Current password" id="account-current-password">
-                        </div>
-                        <div>
-                          <input type="password" class="account-input w-input" maxlength="256" name="account-new-password" data-name="account-new-password" placeholder="New password" id="account-new-password">
-                        </div>
-                        <div>
-                          <a href="#" class="dashboard-heading-small gray">Update</a>
-                        </div>
-                      </form>
+                      <a href="{% url 'password_change' %}" class="dashboard-heading-small gray">Update</a>
                     </div>
                   </div>
                 </div>

@@ -38,7 +38,10 @@ class LoginView(FormView):
 
         if user is not None:
             login(self.request, user)
-            return HttpResponseRedirect(self.success_url)
+            if 'next' in self.request.POST:
+                return HttpResponseRedirect(self.request.POST['next'])
+            else:
+                return HttpResponseRedirect(self.success_url)
 
         else:
             messages.add_message(self.request, messages.INFO, 'Wrong credentials please try again')

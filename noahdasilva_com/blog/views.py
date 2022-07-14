@@ -4,6 +4,8 @@ from django.urls import reverse_lazy
 from .models import Post, Tag
 from .forms import PostForm, TagForm
 from .filters import PostFilter
+from django.contrib.auth.decorators import login_required, permission_required
+from django.utils.decorators import method_decorator
 
 
 class BlogPostView(DetailView):
@@ -17,18 +19,24 @@ class BlogPostView(DetailView):
         return context
 
 
+@method_decorator([login_required, 
+    permission_required("blog.add_post")], name='dispatch')
 class AddPostView(CreateView):
     model = Post
     template_name = 'add_post.html'
     form_class = PostForm
 
 
+@method_decorator([login_required, 
+    permission_required("blog.change_post")], name='dispatch')
 class EditPostView(UpdateView):
     model = Post
     template_name = 'edit_post.html'
     form_class = PostForm
 
 
+@method_decorator([login_required, 
+    permission_required("blog.delete_post")], name='dispatch')
 class DeletePostView(DeleteView):
     model = Post
     template_name = 'delete_post.html'
@@ -61,18 +69,24 @@ class TagDetailView(DetailView):
         return context
 
 
+@method_decorator([login_required, 
+    permission_required("blog.add_tag")], name='dispatch')
 class AddTagView(CreateView):
     model = Tag
     template_name = 'add_tag.html'
     form_class = TagForm
 
 
+@method_decorator([login_required, 
+    permission_required("blog.change_tag")], name='dispatch')
 class EditTagView(UpdateView):
     model = Tag
     template_name = 'edit_tag.html'
     form_class = TagForm
 
 
+@method_decorator([login_required, 
+    permission_required("blog.delete_tag")], name='dispatch')
 class DeleteTagView(DeleteView):
     model = Tag
     template_name = 'delete_tag.html'

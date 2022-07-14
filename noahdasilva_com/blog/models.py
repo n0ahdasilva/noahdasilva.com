@@ -34,7 +34,7 @@ class Tag(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=128, unique=True)
     slug = models.SlugField(max_length=128, unique=True, null=True, blank=True)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, default='18')
     author_plug = models.URLField(max_length=128, default='https://linktr.ee/ndasilva')
     image = models.ImageField(null=True, blank=True, upload_to='blog_images/')
     tags = models.CharField(max_length=255, default='blog')
