@@ -71,7 +71,8 @@
                 </div>
               </div>
             </div>
-            <div class="dashboard-tab-content">
+            <form action"{% url 'dashboard' %}" method="post" class="dashboard-tab-content">
+              {% csrf_token %} {{ form.non_field_errors }}
               <h2 class="h4-heading">My Information</h2>
               <div class="dashboard-row">
                 {% if not user %}
@@ -89,14 +90,15 @@
                       <h3 class="dashboard-heading-small">Username</h3>
                     </div>
                     <div class="account-form w-form">
-                      <form action"#" id="account-username-form" name="wf-form-Account-Form" data-name="Account Form" method="post" class="account-form-div">
-                        {% csrf_token %} 
+                      <div class="account-form-div">
                         <div id="w-node-_6c96194b-262c-23cf-81db-5c4df3519fc9-fd0192b4">
-                          <input type="text" class="account-input w-input" maxlength="256" name="account-username" data-name="account-username" placeholder="tonystark" id="account-username"></div>
+                          {% render_field form.username type="text" class="account-input w-input" placeholder="Enter new username..." %}
+                          {{ form.username.errors }}
+                        </div>
                         <div>
                           <button class="dashboard-heading-small gray">Update</button>
                         </div>
-                      </form>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -106,15 +108,15 @@
                       <h3 class="dashboard-heading-small">Name</h3>
                     </div>
                     <div class="account-form w-form">
-                      <form action"#" id="account-name-form" name="wf-form-Account-Form-2" data-name="Account Form" method="post" class="account-form-div">
-                        {% csrf_token %} 
-                        <div id="w-node-c9c26216-c24c-aeac-b6ac-5fea8b1cc640-fd0192b4">
-                          <input type="text" class="account-input w-input" maxlength="256" name="account-name" data-name="account-name" placeholder="Tony Stark" id="account-name">
+                      <div class="account-form-div">
+                        <div id="w-node-_6c96194b-262c-23cf-81db-5c4df3519fc9-fd0192b4">
+                          {% render_field form.full_name type="text" class="account-input w-input" placeholder="Enter your full name..." %}
+                          {{ form.full_name.errors }}
                         </div>
                         <div>
                           <button class="dashboard-heading-small gray">Update</button>
                         </div>
-                      </form>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -124,19 +126,20 @@
                       <h3 class="dashboard-heading-small">Email</h3>
                     </div>
                     <div class="account-form w-form">
-                      <form action"#" id="account-email-form" name="wf-form-Account-Form-2" data-name="Account Form" method="post" class="account-form-div">
-                        {% csrf_token %} 
-                        <div id="w-node-_42c6b1e2-7125-6e35-ef86-9f5ee616eb8f-fd0192b4">
-                          <input type="email" class="account-input w-input" maxlength="256" name="account-email" data-name="account-email" placeholder="tstark@starkindustries.com" id="account-email"></div>
+                      <div class="account-form-div">
+                        <div id="w-node-_6c96194b-262c-23cf-81db-5c4df3519fc9-fd0192b4">
+                          {% render_field form.email type="text" class="account-input w-input" placeholder="Enter new email address..."%}
+                          {{ form.email.errors }}
+                        </div>
                         <div>
                           <button class="dashboard-heading-small gray">Update</button>
                         </div>
-                      </form>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </form>
             <div class="dashboard-tab-content">
               <h2 class="h4-heading">Applications</h2>
               <div class="dashboard-row">

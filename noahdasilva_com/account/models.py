@@ -2,7 +2,8 @@ from django.db import models
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
 from django.utils.translation import gettext_lazy as _
-
+from django.urls import reverse
+#from django.contrib.auth.hashers import make_password
 
 class CustomUserManager(BaseUserManager):
     use_in_migration = True
@@ -55,3 +56,5 @@ class User(AbstractBaseUser, PermissionsMixin):
         else:
             return self.username
 
+    def get_absolute_url(self):
+        return reverse('dashboard')

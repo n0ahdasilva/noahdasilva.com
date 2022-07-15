@@ -1,26 +1,24 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpRequest, HttpResponseRedirect
 from django.shortcuts import render, redirect
-from django.views.generic import FormView, TemplateView
+from django.views.generic import FormView, UpdateView
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic.edit import FormView
 from django.contrib import messages
-from .forms import SignUpForm, LoginForm
+from .forms import SignUpForm, LoginForm, UserUpdateForm
 from .models import User
 
 
 class SignUpView(FormView):
     form_class = SignUpForm
     template_name = 'registration/sign_up.html'
-    success_url = reverse_lazy('dashboard')
 
     def form_valid(self, form):
         user = form.save(commit=False)
         user.save()
         login(self.request, user)
         if user is not None:
-            return HttpResponseRedirect(self.success_url)
+            return HttpResponseRedirect('/dashboard')
 
         return super().form_valid(form)
 
@@ -28,7 +26,7 @@ class SignUpView(FormView):
 class LoginView(FormView):
     form_class = LoginForm
     template_name = 'registration/login.html'
-    success_url = reverse_lazy('dashboard')
+    success_url = reverse_lazy('/dashboard')
 
     def form_valid(self, form):
         credentials = form.cleaned_data
@@ -48,9 +46,17 @@ class LoginView(FormView):
             return HttpResponseRedirect(reverse_lazy('login'))
 
 
-class DashboardView(LoginRequiredMixin, TemplateView):
+class DashboardView(LoginRequiredMixin, UpdateView):
+    form_class = UserUpdateForm
     model = User
     template_name = 'dashboard.html'
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
+
+    def get_object(self):
+        return self.request.user
 
 
 def Logout(request):

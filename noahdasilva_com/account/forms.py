@@ -13,3 +13,9 @@ class SignUpForm(forms.ModelForm):
 class LoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(max_length=255, widget=forms.PasswordInput)
+
+
+class UserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = get_user_model()
+        fields = ['username', 'full_name', 'email',]
