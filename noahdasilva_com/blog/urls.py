@@ -14,4 +14,5 @@ urlpatterns = [
     path('add-tag/', views.AddTagView.as_view(), name="add-tag"),
     path('tags/<slug:slug>/edit', views.EditTagView.as_view(), name="edit-tag"),
     path('tags/<slug:slug>/remove', views.DeleteTagView.as_view(), name="delete-tag"),
+    path('like/<int:pk>', views.like_view, name="like_post"),
 ]

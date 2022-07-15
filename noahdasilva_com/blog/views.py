@@ -1,11 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.urls import reverse_lazy
-from .models import Post, Tag
+from django.urls import reverse_lazy, reverse
+from .models import Post, Tag, Comment, Like
 from .forms import PostForm, TagForm
 from .filters import PostFilter
 from django.contrib.auth.decorators import login_required, permission_required
 from django.utils.decorators import method_decorator
+from django.http import HttpResponseRedirect
 
 
 class BlogPostView(DetailView):
@@ -107,3 +108,30 @@ class TagsView(ListView):
         context['tag_list'] = Tag.objects.all()
         context['title_filter'] = self.filter_by_title()
         return context
+
+
+def like_view(request, pk):
+    user = request.user
+    if request.method == 'POST':
+        post_id = request.POST.get('post_id')
+        post_obj = Post.objects.get(id=post_id)
+
+        if user in post_obj.likes.all():
+            post_obj.likes.remove(user)
+        else:
+            post_obj.likes.add(user)
+        
+        like, created = Like.objects.get_or_create(user=user, post_id=post_id)
+
+        if not created:
+            if like.value == 'Like':
+                like.value = 'Unlike'
+            else:
+                like.value = 'Like'
+        else:
+            like.value = 'Like'
+            
+            post_obj.save()
+            like.save()
+    
+    return HttpResponseRedirect(reverse('blog-post', kwargs={'slug': post_obj.slug}))

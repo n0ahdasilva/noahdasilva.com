@@ -58,3 +58,23 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def get_absolute_url(self):
         return reverse('dashboard')
+    
+    def get_total_posts_likes(self):
+        likes = self.like_set.all()
+        total_likes = 0
+        for like in likes:
+            if like.value == 'Like':
+                total_likes += 1
+        return total_likes
+    
+    def get_total_posts_comments(self):
+        return self.comment_set.all().count()
+
+    def get_total_posts_written(self):
+        return self.post_author.all().count()
+    
+    def get_profile_score(self):
+        score = self.get_total_posts_likes() * 10
+        score += self.get_total_posts_comments() * 25
+        score += self.get_total_posts_written() * 50
+        return score

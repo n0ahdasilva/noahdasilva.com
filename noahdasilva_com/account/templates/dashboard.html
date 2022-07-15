@@ -37,21 +37,21 @@
                 <div class="dashboard-info-box third">
                   <div class="dashboard-box-padding">
                     <div class="colourful-icon"></div>
-                    <h2 class="dashboard-heading">12,500</h2>
+                    <h2 class="dashboard-heading">{{ user.get_profile_score }}</h2>
                     <div>Points</div>
                   </div>
                 </div>
                 <div class="dashboard-info-box third">
                   <div class="dashboard-box-padding">
                     <div class="colourful-icon green"></div>
-                    <h2 class="dashboard-heading"><span ms-data="spend">54</span></h2>
+                    <h2 class="dashboard-heading"><span ms-data="spend">{{ user.get_total_posts_comments }}</span></h2>
                     <div>Total comments</div>
                   </div>
                 </div>
                 <div class="dashboard-info-box third mobile-full-box">
                   <div class="dashboard-box-padding">
                     <div class="colourful-icon red"></div>
-                    <h2 ms-data="launch" class="dashboard-heading">237</h2>
+                    <h2 ms-data="launch" class="dashboard-heading">{{ user.get_total_posts_likes }}</h2>
                     <div>Total likes</div>
                   </div>
                 </div>
@@ -65,7 +65,7 @@
                 <div class="dashboard-info-box third mobile-full-box">
                   <div class="dashboard-box-padding">
                     <div class="colourful-icon purple"></div>
-                    <h2 ms-data="launch" class="dashboard-heading">5</h2>
+                    <h2 ms-data="launch" class="dashboard-heading">{{ user.get_total_posts_written }}</h2>
                     <div>Post written</div>
                   </div>
                 </div>

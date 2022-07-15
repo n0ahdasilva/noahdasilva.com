@@ -34,7 +34,7 @@ class Tag(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=128, unique=True)
     slug = models.SlugField(max_length=128, unique=True, null=True, blank=True)
-    author = models.ForeignKey(User, on_delete=models.CASCADE, default='18')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='post_author')
     author_plug = models.URLField(max_length=128, default='https://linktr.ee/ndasilva')
     image = models.ImageField(null=True, blank=True, upload_to='blog_images/')
     tags = models.CharField(max_length=255, default='blog')
@@ -43,6 +43,7 @@ class Post(models.Model):
     updated_on = models.DateTimeField(auto_now= True, blank=True)
     created_on = models.DateTimeField(auto_now_add=True, blank=True)
     #status = models.IntegerField(choices=STATUS, default=0)
+    likes = models.ManyToManyField(User, blank=True, related_name='post_likes')
 
     class Meta:
         ordering = ['-created_on']
@@ -64,3 +65,36 @@ class Post(models.Model):
         names = self.tags.replace('[', '').replace(']', '').replace('\'', '').split(', ')
         slugs = (slugify(name) for name in names)
         return zip(names, slugs)
+    
+    def get_total_likes(self):
+        return self.likes.count()
+
+    def get_total_comments(self):
+        return self.comment_set.all().count()
+
+
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    body = models.TextField(max_length=512)
+    updated_on = models.DateTimeField(auto_now= True, blank=True)
+    created_on = models.DateTimeField(auto_now_add=True, blank=True)
+
+    def __str__(self):
+        return str(self.pk)
+
+
+LIKE_CHOICES = (
+    ('Dislike', 'Dislike'),
+    ('Like', 'Like')
+)
+
+class Like(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    value = models.CharField(choices=LIKE_CHOICES, max_length=8)
+    updated_on = models.DateTimeField(auto_now= True, blank=True)
+    created_on = models.DateTimeField(auto_now_add=True, blank=True)
+
+    def __str__(self):
+        return str(self.user + '|' + self.post + '|' + self.value)

@@ -95,17 +95,34 @@
     {% endif %}
   </div>
   <div class="section-container-post-body w-container">
-    <div class="post-like-div">
-      <h2 class="h6-heading">Was this helpful?</h2>
-      <div class="like-btn-div">
-        <a href="#" class="btn large-text w-button"
-          ><span class="fa900solid-span"></span></a
-        >
-        <a href="#" class="btn large-text w-button"
-          ><span class="fa900solid-span"></span></a
-        >
+    <form action={% url 'like_post' post.pk %} method="POST" class="post-like-div">
+      {% csrf_token %}
+      <div>
+        <h2 class="h6-heading">Was this helpful?</h2>
+        <p class="comment-paragraph">
+          {{ post.get_total_likes }} others liked this post.
+        </p>
       </div>
-    </div>
+      {% if user.is_authenticated %}
+      <div class="like-btn-div">
+        {% if user not in post.likes.all %}
+        <button type="submit" name="post_id" value="{{ post.id }}" class="btn large-text w-button">
+          <span class="fa900solid-span"></span>
+        </button>
+        {% else %}
+        <button type="submit" name="post_id" value="{{ post.id }}" class="btn large-text w-button">
+          <span class="fa900solid-span"></span>
+        </button>
+        {% endif %}
+      </div>
+      {% else %}
+      <div class="like-btn-div">
+        <a href="{% url 'login' %}?next={% url 'blog-post' post.slug %}" %} class="btn large-text w-button">
+          <span class="fa900solid-span"></span>
+        </a>
+      </div>
+      {% endif %}
+    </form>
     <h2 class="h5-heading">3 Comments</h2>
     <div class="w-form">
       <form class="comment-form" action="#" method="post">
