@@ -13,6 +13,23 @@ class SignUpView(FormView):
     form_class = SignUpForm
     template_name = 'registration/sign_up.html'
 
+    # NOTE: This is a hack to get the form to hash the passwords.
+    # Not sure if this is the best way to do this.
+    def form_valid(self, request):
+        data = self.request.POST
+        username = data['username']
+        email = data['email']
+        password = data['password']
+        
+        user = User.objects.create_user(email=email, password=password, username=username)
+        user.save()
+
+        login(self.request, user)
+        if user is not None:
+            return HttpResponseRedirect('/dashboard')
+
+        return super().form_valid()
+'''
     def form_valid(self, form):
         user = form.save(commit=False)
         user.save()
@@ -21,6 +38,7 @@ class SignUpView(FormView):
             return HttpResponseRedirect('/dashboard')
 
         return super().form_valid(form)
+'''
 
 
 class LoginView(FormView):
