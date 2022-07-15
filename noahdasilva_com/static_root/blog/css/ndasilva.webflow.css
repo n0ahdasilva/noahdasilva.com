@@ -2866,6 +2866,43 @@ a {
   filter: invert(100%);
 }
 
+.delete-btn {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: .75rem;
+  margin-bottom: 1rem;
+  padding: 0.25rem 1rem;
+  border-radius: 20px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: #b099ff;
+  background-image: linear-gradient(135deg, #6e44ff, #b099ff);
+  -webkit-transition: all 400ms ease;
+  transition: all 400ms ease;
+  color: #fff;
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.delete-btn:hover {
+  box-shadow: 0 6px 12px -2px rgba(145, 101, 247, 0.6);
+  -webkit-transform: translate(0px, -2px);
+  -ms-transform: translate(0px, -2px);
+  transform: translate(0px, -2px);
+}
+
 @media screen and (max-width: 991px) {
   .navbar {
     padding-top: 1rem;

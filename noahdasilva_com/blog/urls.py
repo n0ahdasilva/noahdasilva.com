@@ -15,4 +15,6 @@ urlpatterns = [
     path('tags/<slug:slug>/edit', views.EditTagView.as_view(), name="edit-tag"),
     path('tags/<slug:slug>/remove', views.DeleteTagView.as_view(), name="delete-tag"),
     path('like/<int:pk>', views.like_view, name="like_post"),
+    path('comment/<int:pk>', views.comment_view, name="comment_post"),
+    path('comment/remove/<int:pk>', views.remove_comment_view, name="remove_comment_post"),
 ]

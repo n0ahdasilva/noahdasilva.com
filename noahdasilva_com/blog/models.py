@@ -49,7 +49,7 @@ class Post(models.Model):
         ordering = ['-created_on']
 
     def __str__(self):
-        return str(self.updated_on) + ' | ' + self.title
+        return str(self.updated_on.strftime("%Y-%m-%d")) + ' | ' + self.title
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
@@ -69,24 +69,23 @@ class Post(models.Model):
     def get_total_likes(self):
         return self.likes.count()
 
-    def get_total_comments(self):
-        return self.comment_set.all().count()
-
 
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     body = models.TextField(max_length=512)
-    updated_on = models.DateTimeField(auto_now= True, blank=True)
     created_on = models.DateTimeField(auto_now_add=True, blank=True)
-
+    
+    class Meta:
+        ordering = ['-created_on']
+  
     def __str__(self):
-        return str(self.pk)
+        return str(self.user.pk) + ' | ' + str(self.user) + ' | ' + str(self.body) + ' | ' + str(self.post)
 
 
 LIKE_CHOICES = (
+    ('Like', 'Like'),
     ('Dislike', 'Dislike'),
-    ('Like', 'Like')
 )
 
 class Like(models.Model):
@@ -97,4 +96,4 @@ class Like(models.Model):
     created_on = models.DateTimeField(auto_now_add=True, blank=True)
 
     def __str__(self):
-        return str(self.user + '|' + self.post + '|' + self.value)
+        return str(self.user.pk) + ' | ' + str(self.user) + ' | ' + self.value + ' | ' + str(self.post)

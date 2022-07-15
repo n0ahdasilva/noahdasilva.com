@@ -47,7 +47,11 @@
       >
         <p class="web-title-gray">By </p>
         <p class="web-title-gradient">
-          {{ post.author }}
+          {% if post.author.full_name %}
+            {{ post.author.full_name }}
+          {% else %}
+            {{ post.author.username }}
+          {% endif %}
         </p>
       </a>
       <div
@@ -100,123 +104,84 @@
       <div>
         <h2 class="h6-heading">Was this helpful?</h2>
         <p class="comment-paragraph">
-          {{ post.get_total_likes }} others liked this post.
+          {{ post.get_total_likes }} users liked this post.
         </p>
       </div>
       {% if user.is_authenticated %}
       <div class="like-btn-div">
         {% if user not in post.likes.all %}
-        <button type="submit" name="post_id" value="{{ post.id }}" class="btn large-text w-button">
+        <button type="submit" name="post_id" value="{{ post.pk }}" class="btn large-text w-button">
           <span class="fa900solid-span"></span>
         </button>
         {% else %}
-        <button type="submit" name="post_id" value="{{ post.id }}" class="btn large-text w-button">
+        <button type="submit" name="post_id" value="{{ post.pk }}" class="btn large-text w-button">
           <span class="fa900solid-span"></span>
         </button>
         {% endif %}
       </div>
       {% else %}
       <div class="like-btn-div">
-        <a href="{% url 'login' %}?next={% url 'blog-post' post.slug %}" %} class="btn large-text w-button">
+        <a href="{% url 'login' %}?next={% url 'blog-post' post.slug %}" class="btn large-text w-button">
           <span class="fa900solid-span"></span>
         </a>
       </div>
       {% endif %}
     </form>
-    <h2 class="h5-heading">3 Comments</h2>
+    <h2 class="h5-heading">{{ total_comments }} Comments</h2>
     <div class="w-form">
-      <form class="comment-form" action="#" method="post">
+      <form action="{% url 'comment_post' post.pk %}" method="POST" class="comment-form" >
+        {% csrf_token %} {{ form.non_field_errors }}
         <div id="w-node-cbc712d9-4784-f4ef-e32c-b56909c41c6d-bb83a922">
-          <label for="user-comment">Leave a reply</label
-          ><textarea
-            id="user-comment"
-            name="user-comment"
-            maxlength="5000"
-            data-name="user-comment"
+          <label>Leave a reply</label>
+          <textarea
+            id="user_comment"
+            name="user_comment"
+            maxlength="512"
             placeholder="Add a comment."
-            class="input form-comment w-input"
-          ></textarea>
+            class="input form-comment w-input"></textarea>
         </div>
-        <input
-          type="submit"
-          value="Post"
-          data-wait="Please wait..."
-          id="w-node-cbc712d9-4784-f4ef-e32c-b56909c41c71-bb83a922"
-          class="submit-btn w-button"
-        />
+        {% if user.is_authenticated %}
+        <button type="submit" name="post_id" value="{{ post.pk }}" class="submit-btn w-button" id="w-node-cbc712d9-4784-f4ef-e32c-b56909c41c71-bb83a922">
+          Post
+        </button>
+        {% else %}
+        <a href="{% url 'login' %}?next={% url 'blog-post' post.slug %}" class="submit-btn w-button" id="w-node-cbc712d9-4784-f4ef-e32c-b56909c41c71-bb83a922">
+          Post
+        </a>
+        {% endif %}
       </form>
-      <div class="w-form-done">
-        <div>Comment added to post!</div>
-      </div>
-      <div class="w-form-fail">
-        <div>Oops! Something went wrong while submitting the form.</div>
-      </div>
     </div>
     <div class="w-layout-grid post-comment-grid">
+      {% if comment_list %}
+        {% for comment in comment_list %}
       <div
         id="w-node-_84580d0e-8897-2cfb-16c8-62b9016e70d4-bb83a922"
-        class="post-comment-div"
-      >
+        class="post-comment-div">
         <div class="user-comment-div">
-          <p class="web-title-gradient">Tony Stark</p>
+          <p class="web-title-gradient">{{ comment.user.username }}</p>
           <div
             id="w-node-_8b2cdc24-2a4f-15eb-81cd-7c2b6a80c219-bb83a922"
-            class="blog-line-spacer"
-          ></div>
-          <p
-            id="w-node-_8b2cdc24-2a4f-15eb-81cd-7c2b6a80c21a-bb83a922"
-            class="web-title-gray"
-          >
-            April 5, 2022
+            class="blog-line-spacer">
+          </div>
+          <p id="w-node-_8b2cdc24-2a4f-15eb-81cd-7c2b6a80c21a-bb83a922" class="web-title-gray">
+            {{ comment.created_on }}
           </p>
+          {% if user.is_authenticated %}
+            {% if user == comment.user or user.is_staff %}
+          <form action="{% url 'remove_comment_post' comment.pk %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="post_id" value="{{ post.pk }}">
+            <button href="" class="delete-btn">Delete</button>
+          </form>
+            {% endif %}
+          {% endif %}
         </div>
         <p class="comment-paragraph">
-          This was amazing. Can&#x27;t wait to build my next suit!
+          {{ comment.body|safe}}
         </p>
       </div>
-      <div
-        id="w-node-_96416862-3cf5-bbfc-2002-23ff58d46279-bb83a922"
-        class="post-comment-div"
-      >
-        <div class="user-comment-div">
-          <p class="web-title-gradient">Noah Da Silva</p>
-          <div
-            id="w-node-_96416862-3cf5-bbfc-2002-23ff58d4627d-bb83a922"
-            class="blog-line-spacer"
-          ></div>
-          <p
-            id="w-node-_96416862-3cf5-bbfc-2002-23ff58d4627e-bb83a922"
-            class="web-title-gray"
-          >
-            April 12, 2022
-          </p>
-        </div>
-        <p class="comment-paragraph">
-          Good post. Would of prefered more detailed explainations on each
-          threat. Maybe make in-depth posts for each one?
-        </p>
-      </div>
-      <div
-        id="w-node-_48d3bd08-337d-985a-f780-52280467f8bd-bb83a922"
-        class="post-comment-div"
-      >
-        <div class="user-comment-div">
-          <p class="web-title-gradient">user2022</p>
-          <div
-            id="w-node-_48d3bd08-337d-985a-f780-52280467f8c1-bb83a922"
-            class="blog-line-spacer"
-          ></div>
-          <p
-            id="w-node-_48d3bd08-337d-985a-f780-52280467f8c2-bb83a922"
-            class="web-title-gray"
-          >
-            June 14, 2022
-          </p>
-        </div>
-        <p class="comment-paragraph">
-          Hmm, never thought my browser would be so vulnerable to attacks.
-        </p>
-      </div>
+        {% endfor %}
+      {% endif %}
     </div>
   </div>
 </div>

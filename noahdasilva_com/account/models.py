@@ -51,10 +51,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name_plural = _('users')
 
     def __str__(self):
-        if self.full_name:
-            return self.full_name
-        else:
-            return self.username
+        return self.username
 
     def get_absolute_url(self):
         return reverse('dashboard')

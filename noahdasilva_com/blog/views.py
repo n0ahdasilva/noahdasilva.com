@@ -17,6 +17,8 @@ class BlogPostView(DetailView):
         context = super(BlogPostView, self).get_context_data(**kwargs)
         context['post_list'] = Post.objects.all()
         context['tag_list'] = Tag.objects.all()
+        context['comment_list'] = Comment.objects.filter(post=self.object)
+        context['total_comments'] = Comment.objects.filter(post=self.object).count()
         return context
 
 
@@ -110,6 +112,7 @@ class TagsView(ListView):
         return context
 
 
+@login_required
 def like_view(request, pk):
     user = request.user
     if request.method == 'POST':
@@ -130,8 +133,35 @@ def like_view(request, pk):
                 like.value = 'Like'
         else:
             like.value = 'Like'
+
+        post_obj.save()
+        like.save()
             
-            post_obj.save()
-            like.save()
     
+    return HttpResponseRedirect(reverse('blog-post', kwargs={'slug': post_obj.slug}))
+
+
+@login_required
+def comment_view(request, pk):
+    user = request.user
+    if request.method == 'POST':
+        post_id = request.POST.get('post_id')
+        user_comment = request.POST.get('user_comment')
+        post_obj = Post.objects.get(id=post_id)
+
+        comment = Comment.objects.create(user=user, post=post_obj, body=user_comment)
+
+        post_obj.save()
+        comment.save()
+            
+    return HttpResponseRedirect(reverse('blog-post', kwargs={'slug': post_obj.slug}))
+
+
+@login_required
+def remove_comment_view(request, pk):
+    if request.method == 'POST':
+        post_id = request.POST.get('post_id')
+        post_obj = Post.objects.get(id=post_id)
+        Comment.objects.filter(id=pk).delete()
+          
     return HttpResponseRedirect(reverse('blog-post', kwargs={'slug': post_obj.slug}))
