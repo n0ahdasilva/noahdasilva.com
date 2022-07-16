@@ -13,6 +13,11 @@ class SignUpView(FormView):
     form_class = SignUpForm
     template_name = 'registration/sign_up.html'
 
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect('dashboard')
+        return super(SignUpView, self).dispatch(request, *args, **kwargs)
+
     # NOTE: This is a hack to get the form to hash the passwords.
     # Not sure if this is the best way to do this.
     def form_valid(self, request):

@@ -15,7 +15,7 @@
 />
 <meta
   propety="og:image"
-  content="{% static 'blog/img/IMG_0074-1250px.png' %}"
+  content="{% static 'main/img/IMG_0074-1250px.png' %}"
 />
 {% endblock %}
 
@@ -37,7 +37,7 @@
   <div class="default-section-content">
     <form action="#search" class="search-div w-form">
       <img
-        src="{% static 'blog/img/search-img.png' %}"
+        src="{% static 'main/img/search-img.png' %}"
         loading="lazy"
         alt=""
         class="search-icon"/>
@@ -96,7 +96,7 @@
       {% if post_page.has_previous %}
 
       <a class="btn w-button"
-        href="?page={{ post_page.previous_page_number }}{% if request.GET.title %}&amp;title={{ request.GET.title }}{% endif %}">
+        href="?page={{ post_page.previous_page_number }}{% if request.GET.title %}&amp;title={{ request.GET.title }}{% endif %}#search">
         Previous
       </a>
 
@@ -104,7 +104,7 @@
       {% if post_page.has_next %}
 
       <a class="btn w-button"
-      href="?page={{ post_page.next_page_number }}{% if request.GET.title %}&amp;title={{ request.GET.title }}{% endif %}">
+      href="?page={{ post_page.next_page_number }}{% if request.GET.title %}&amp;title={{ request.GET.title }}{% endif %}#search">
         Next
       </a>
 
