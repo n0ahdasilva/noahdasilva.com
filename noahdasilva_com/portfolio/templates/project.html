@@ -39,10 +39,10 @@
     {% if user.is_authenticated %}
       {% if user.is_staff == True %}
     <div style="width: 100%;">
-      <div class="pagination-div short-top-margin">
+      <div class="wide-btn-div short-top-margin">
         <a href="{% url 'edit-project' project.slug %}" class="btn w-button">Edit project</a>
       </div>
-      <div class="pagination-div short-top-margin">
+      <div class="wide-btn-div short-top-margin">
         <a href="{% url 'delete-project' project.slug %}" class="btn w-button">Delete post</a>
       </div>
     </div>

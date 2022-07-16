@@ -48,26 +48,31 @@
 </div>
 <div class="anti-hero-section wf-section">
   <div class="default-section-content">
-    {% if post_list %}
-    <div class="w-layout-grid single-col-grid">
-      {% for post in post_list %}
-      <a
-        href="{% url 'blog-post' post.slug %}"
-        class="blog-card w-inline-block"
-      >
-        <div
+
+    {% if post_page %}
+
+    <div class="w-layout-grid single-col-grid" id="w-node-_595394b4-9006-2f7c-6bcc-3e12ba97ca85-774ef4fc"> 
+      
+      {% for post in post_page.object_list %}
+
+      <a href="{% url 'blog-post' post.slug %}" class="blog-card w-inline-block">
+        <div 
           class="blog-card-left"
-          style="background-image: url({{ post.image.url }});"
-        ></div>
+          style="background-image: url({{ post.image.url }});">
+        </div>
         <div class="blog-card-right">
           <div class="top-wrapper">
             <div class="tag-flex start-justify">
+              
               {% for tag in post.get_tags %}
+              
               <div class="tag-block">
                 <div class="hashtag-purple">#</div>
                 <div class="hashtag">{{ tag }}</div>
               </div>
+
               {% endfor %}
+
             </div>
             <div class="hashtag-purple">
               {{ post.created_on|date:"F d, Y" }}
@@ -82,17 +87,45 @@
           </div>
         </div>
       </a>
+
       {% endfor %}
+
     </div>
-    <div class="pagination-div">
-      <a href="#" class="btn w-button">Load more</a>
+    <div class="w-layout-grid double-btn-pagination">
+
+      {% if post_page.has_previous %}
+
+      <a class="btn w-button"
+        href="?page={{ post_page.previous_page_number }}{% if request.GET.title %}&amp;title={{ request.GET.title }}{% endif %}">
+        Previous
+      </a>
+
+      {% endif %}
+      {% if post_page.has_next %}
+
+      <a class="btn w-button"
+      href="?page={{ post_page.next_page_number }}{% if request.GET.title %}&amp;title={{ request.GET.title }}{% endif %}">
+        Next
+      </a>
+
+      {% endif %}
+      {% if not post_page.has_next and post_page.has_next %}
+
+      <a class="btn w-button" href="{% url 'tags' %}">Explore other tags and titles</a>
+
+      {% endif %}
+
     </div>
+    
     {% else %}
+
     <div class="banner-content-div">
       <h2 class="h4-heading">This place is a void!</h2>
-      <p>There are currently no posts in this category.</p>
+      <p>There are currently no posts published on the site.</p>
     </div>
+
     {% endif %}
+
   </div>
 </div>
 {% endblock %}

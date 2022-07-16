@@ -69,7 +69,7 @@
                     <a href="{% url 'dashboard'%}" id="w-node-_073a6cad-f6aa-4cb3-d13c-226c4e688502-4e6884ef"
                         class="nav-link-block w-inline-block" style="text-decoration: none;">
                         {% if user %}
-                        <span class="gradient-span">{{ user.username }}</span>
+                        <span class="gradient-span fa900solid">@{{ user.username.0 }}{{ user.username.1 }}{{ user.username.2 }}{{ user.username.3 }}...</span>
                         {% else %}
                         <img src="{% static 'blog/img/account-img.png' %}" loading="lazy" alt="" class="nav-menu-icon small">
                         {% endif %}                    
@@ -115,7 +115,7 @@
                             class="brand-logo-img">
                         <div>noah</div>
                     </a>
-                    <p class="contact-email-footer">hello@noahdasilva.com</p>
+                    <p class="contact-email-footer">noahdasilva.com</p>
                     <a href="{% url 'contact' %}" class="btn w-button">Get in touch</a>
                 </div>
                 <div class="footer-link-column">
@@ -169,6 +169,7 @@
         crossorigin="anonymous"></script>
     <script src="{% static 'blog/js/webflow.js' %}" type="text/javascript"></script>
     <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
+    {% block scripts %}
+    {% endblock %}
 </body>
-
 </html>

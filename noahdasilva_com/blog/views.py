@@ -1,3 +1,4 @@
+import imp
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy, reverse
@@ -7,6 +8,7 @@ from .filters import PostFilter
 from django.contrib.auth.decorators import login_required, permission_required
 from django.utils.decorators import method_decorator
 from django.http import HttpResponseRedirect
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 class BlogPostView(DetailView):
@@ -60,6 +62,7 @@ class BlogView(ListView):
 class TagDetailView(DetailView):
     model = Tag
     template_name = 'tag_detail.html'
+    paginate_by = 6
 
     def filter_by_title(self):
         title_filter = PostFilter(self.request.GET, queryset=Post.objects.filter(tags__icontains=self.object))
@@ -67,8 +70,14 @@ class TagDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(TagDetailView, self).get_context_data(**kwargs)
-        context['post_list'] = self.filter_by_title().qs
+        context['tag_list'] = Tag.objects.all()
         context['title_filter'] = self.filter_by_title()
+
+        book_paginator = Paginator(self.filter_by_title().qs, self.paginate_by)
+        page_num = self.request.GET.get('page')
+        page = book_paginator.get_page(page_num)
+
+        context['post_page'] = page
         return context
 
 
@@ -97,18 +106,24 @@ class DeleteTagView(DeleteView):
 
 
 class TagsView(ListView):
-    model = Tag
+    model = Post
     template_name = 'tags.html'
+    paginate_by = 6
 
     def filter_by_title(self):
         title_filter = PostFilter(self.request.GET, queryset=Post.objects.all())
         return title_filter
-
+    
     def get_context_data(self, **kwargs):
         context = super(TagsView, self).get_context_data(**kwargs)
-        context['post_list'] = self.filter_by_title().qs
         context['tag_list'] = Tag.objects.all()
         context['title_filter'] = self.filter_by_title()
+
+        book_paginator = Paginator(self.filter_by_title().qs, self.paginate_by)
+        page_num = self.request.GET.get('page')
+        page = book_paginator.get_page(page_num)
+
+        context['post_page'] = page
         return context
 
 
