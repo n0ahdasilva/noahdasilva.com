@@ -10,7 +10,10 @@
       </p>
     </div>
     <div class="w-layout-grid dynamic-grid">
+
+    {% if project_list %}
       {% for project in project_list %}
+
       <a href="{% url 'project' project.slug %}" class="nav-link-block-games w-inline-block">
         <div class="icon-square"><img src="{{ project.image.url }}" sizes="60px" alt="" class="nav-img"></div>
         <div class="nav-content-wrap">
@@ -18,7 +21,20 @@
           <div class="nav-link-details">Explore the details</div>
         </div>
       </a>
+
       {% endfor %}
+    {% else %}
+
+    <a href="{% url 'home' %}" class="nav-link-block-games w-inline-block">
+      <div class="icon-square"><img src="{% static 'main/img/placeholder-3x4-p-500.jpeg'%}" sizes="60px" alt="" class="nav-img"></div>
+      <div class="nav-content-wrap">
+        <div class="menu-title">No projects</div>
+        <div class="nav-link-details">Go back to homepage.</div>
+      </div>
+    </a>
+
+    {% endif %}
+
     </div>
   </div>
 </div>

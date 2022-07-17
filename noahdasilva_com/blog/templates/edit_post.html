@@ -7,8 +7,10 @@
 {% endblock %}
 
 {% block content %}
+
 {% if user.is_authenticated %}
   {% if user.is_staff == True %}
+
 <div class="default-section wf-section">
   <div class="default-section-content">
     <div class="form-wrapper">
@@ -64,6 +66,8 @@
     </div>
   </div>
 </div>
+
   {% endif %}
 {% endif %}
+
 {% endblock %}

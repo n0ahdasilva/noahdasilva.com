@@ -7,8 +7,10 @@
 {% endblock %}
 
 {% block content %}
+
 {% if user.is_authenticated %}
   {% if user.is_staff == True %}
+
 <div class="default-section wf-section">
   <div class="default-section-content">
     <div class="form-wrapper">
@@ -18,8 +20,7 @@
           class="auth-form"
           action="#"
           method="POST"
-          enctype="multipart/form-data"
-        >
+          enctype="multipart/form-data">
           {% csrf_token %} {{ form.media }} {{ form.non_field_errors }}
           <div>
             {{ form.name.label_tag }}
@@ -59,6 +60,8 @@
     </div>
   </div>
 </div>
+
   {% endif %}
 {% endif %}
+
 {% endblock %}

@@ -28,11 +28,17 @@
         <div class="dashboard-tabs-wrapper w-tab-content">
           <div data-w-tab="Profile" class="default-section w-tab-pane w--tab-active">
             <div class="dashboard-tab-content">
+
               {% if user.full_name %}
+
               <h1 class="h3-heading">Welcome back, <span class="gradient-span">{{ user.full_name }}</span>!</h1>
+              
               {% else %}
+
               <h1 class="h3-heading">Welcome back, <span class="gradient-span">{{ user.username }}</span>!</h1>
+              
               {% endif %}
+
               <div class="dashboard-row">
                 <div class="dashboard-info-box third">
                   <div class="dashboard-box-padding">
@@ -75,7 +81,9 @@
               {% csrf_token %} {{ form.non_field_errors }}
               <h2 class="h4-heading">My Information</h2>
               <div class="dashboard-row">
+                
                 {% if not user %}
+
                 <div class="dashboard-info-box full-width">
                   <div class="dashboard-box-padding horizontal-flex"><img sizes="96px" width="100" src="{% static 'main/img/IMG_0074-1250px.png' %}" alt="" class="dashboard-img profile">
                     <div>
@@ -83,7 +91,9 @@
                     </div>
                   </div>
                 </div>
+
                 {% endif %}
+
                 <div class="dashboard-info-box full-width">
                   <div class="dashboard-box-padding horizontal-flex">
                     <div>
@@ -143,66 +153,101 @@
             <div class="dashboard-tab-content">
               <h2 class="h4-heading">Applications</h2>
               <div class="dashboard-row">
+
                 {% if user.is_staff %}
+
                 <a href="{% url 'add-post' %}" class="dashboard-info-box link-box w-inline-block">
+                
                 {% else %}
+
                 <a href="{% url 'contact' %}" class="dashboard-info-box link-box w-inline-block">
+                
                 {% endif %}
+
                   <div class="dashboard-box-padding horizontal-flex">
                     <div class="dashboard-img">
                       <span class="fa900solid-span gradient-span" style="font-size: 2rem;"></span>
                     </div>
                     <div>
                       <h3 class="dashboard-heading-small">Write post</h3>
+
                       {% if user.is_staff %}
+
                       <div class="dashboard-heading-small green">Available</div>
                       <div class="email-text-block">As <span class="gradient-span">{{ user.email }}</span></div>
+                      
                       {% else %}
+
                       <div class="dashboard-heading-small red">Unavailable</div>
                       <div class="email-text-block">Requires permissions</div>
+                      
                       {% endif %}
+
                     </div>
                   </div>
                 </a>
                 {% if user.is_staff %}
+
                 <a href="{% url 'add-tag' %}" class="dashboard-info-box link-box w-inline-block">
+                
                 {% else %}
+
                 <a href="{% url 'contact' %}" class="dashboard-info-box link-box w-inline-block">
+                
                 {% endif %}
+
                   <div class="dashboard-box-padding horizontal-flex">
                     <div class="dashboard-img">
                       <span class="fa900solid-span gradient-span" style="font-size: 2rem;"></span>
                     </div>
                     <div>
                       <h3 class="dashboard-heading-small">Create tag</h3>
+
                       {% if user.is_staff %}
+
                       <div class="dashboard-heading-small green">Available</div>
                       <div class="email-text-block">As <span class="gradient-span">{{ user.email }}</span></div>
+                      
                       {% else %}
+
                       <div class="dashboard-heading-small red">Unavailable</div>
                       <div class="email-text-block">Requires permissions</div>
+                      
                       {% endif %}
+
                     </div>
                   </div>
                 </a>
+
                 {% if user.is_staff %}
+
                 <a href="{% url 'add-project' %}" class="dashboard-info-box link-box w-inline-block">
+                
                 {% else %}
+
                 <a href="{% url 'contact' %}" class="dashboard-info-box link-box w-inline-block">
+                
                 {% endif %}
+
                   <div class="dashboard-box-padding horizontal-flex">
                     <div class="dashboard-img">
                       <span class="fa900solid-span gradient-span" style="font-size: 2rem;"></span>
                     </div>
                     <div>
                       <h3 class="dashboard-heading-small">Add to portfolio</h3>
+                      
                       {% if user.is_staff %}
+
                       <div class="dashboard-heading-small green">Available</div>
                       <div class="email-text-block">As <span class="gradient-span">{{ user.email }}</span></div>
+                      
                       {% else %}
+                      
                       <div class="dashboard-heading-small red">Unavailable</div>
                       <div class="email-text-block">Requires permissions</div>
+                      
                       {% endif %}
+                      
                     </div>
                   </div>
                 </a>

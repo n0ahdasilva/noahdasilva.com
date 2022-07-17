@@ -65,20 +65,32 @@
                     <a href="{% url 'tags' %}" id="w-node-_073a6cad-f6aa-4cb3-d13c-226c4e688500-4e6884ef"
                         class="nav-link-block w-inline-block"><img src="{% static 'main/img/search-img.png' %}"
                             loading="lazy" alt="" class="nav-menu-icon small"></a>
+                    
                     {% if user.is_authenticated %}
+
                     <a href="{% url 'dashboard'%}" id="w-node-_073a6cad-f6aa-4cb3-d13c-226c4e688502-4e6884ef"
                         class="nav-link-block w-inline-block" style="text-decoration: none;">
+                        
                         {% if user %}
+
                         <span class="gradient-span fa900solid">@{{ user.username.0 }}{{ user.username.1 }}{{ user.username.2 }}{{ user.username.3 }}...</span>
+
                         {% else %}
+
                         <img src="{% static 'main/img/account-img.png' %}" loading="lazy" alt="" class="nav-menu-icon small">
-                        {% endif %}                    
+                        
+                        {% endif %}    
+
                     </a>
+
                     {% else %}
+
                     <a href="{% url 'login'%}" id="w-node-_073a6cad-f6aa-4cb3-d13c-226c4e688502-4e6884ef"
                     class="nav-link-block w-inline-block"><img src="{% static 'main/img/account-img.png' %}"
                         loading="lazy" alt="" class="nav-menu-icon small"></a>
+                    
                     {% endif %}
+
                 </div>
             </div>
             <nav role="navigation" class="mobile-nav w-nav-menu">
@@ -86,8 +98,18 @@
                 <a href="{% url 'about' %}" class="mobile-nav-link w-nav-link">About</a>
                 <a href="{% url 'blog' %}" class="mobile-nav-link w-nav-link">Blog</a>
                 <a href="{% url 'portfolio' %}" class="mobile-nav-link w-nav-link">Portfolio</a>
+                
+                {% if user.is_authenticated %}
+                
+                <a href="{% url 'dashboard' %}" class="nav-btn w-button">My Account</a>                
+                
+                {% else %}
+                
                 <a href="{% url 'sign-up' %}" class="nav-btn w-button">Create Account</a>
                 <a href="{% url 'login' %}" class="nav-btn w-button">Log in</a>
+               
+                {% endif %}
+
             </nav>
         </div>
     </div>
@@ -132,11 +154,17 @@
                 </div>
                 <div class="footer-link-column">
                     <div class="footer-header">Account</div>
+                    
                     {% if user.is_authenticated %}
+
                     <a href="{% url 'dashboard'%}" class="footer-link">Profile</a>
+                    
                     {% else %}
+
                     <a href="{% url 'login'%}" class="footer-link">Profile</a>
+                    
                     {% endif %}
+                    
                     <a href="{% url 'sign-up'%}" class="footer-link">Sign up</a>
                     <a href="{% url 'login'%}" class="footer-link">Sign in</a>
                 </div>
@@ -151,7 +179,8 @@
                             class="footer-link-block w-inline-block"><img
                                 src="{% static 'main/img/instagram-fill.svg' %}" loading="lazy" alt="Instagram logo"
                                 class="nav-menu-icon small"></a>
-                        <a href="https://www.linkedin.com/in/n0ahdasilva/" class="footer-link-block w-inline-block"><img
+                        <a href="https://www.linkedin.com/in/n0ahdasilva/" target="_blank"
+                            class="footer-link-block w-inline-block"><img
                                 src="{% static 'main/img/linkedin-box-fill.svg' %}" loading="lazy" alt="LinkedIn logo"
                                 class="nav-menu-icon small"></a>
                     </div>

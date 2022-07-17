@@ -29,15 +29,19 @@
         <p class="web-title-gray">Go to </p>
         <p class="web-title-gradient">{{ project.name }}</p>
       </a>
+
       {% if project.tags %}
+
       <div id="w-node-be6f9a40-4a00-5f23-1d48-7a4fd7c6685e-fb19939c" class="tag-flex">
         {% for tag in project.get_tags %}
         <h2 class="tag-div">{{ tag }}</h2>
         {% endfor %}
       </div>
+
       {% endif %}
     {% if user.is_authenticated %}
       {% if user.is_staff == True %}
+
     <div style="width: 100%;">
       <div class="wide-btn-div short-top-margin">
         <a href="{% url 'edit-project' project.slug %}" class="btn w-button">Edit project</a>
@@ -46,8 +50,10 @@
         <a href="{% url 'delete-project' project.slug %}" class="btn w-button">Delete post</a>
       </div>
     </div>
+
       {% endif %}
     {% endif %}
+    
     </div>
   </div>
 </div>

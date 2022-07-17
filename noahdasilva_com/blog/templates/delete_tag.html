@@ -7,8 +7,10 @@
 {% endblock %}
 
 {% block content %}
+
 {% if user.is_authenticated %}
   {% if user.is_staff == True %}
+
 <div class="auth-section wf-section">
   <div class="form-wrapper">
     <div class="auth-form-card-invisible">
@@ -27,6 +29,8 @@
     </div>
   </div>
 </div>
+
   {% endif %}
 {% endif %}
+
 {% endblock %}

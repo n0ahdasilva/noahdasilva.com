@@ -31,22 +31,24 @@
             {% render_field form.password type="password" class="input w-input" placeholder="Enter your password..." %}
             {{ form.password.errors }}
           </div>
+
           {% if request.GET.next %}
+
             <input type="hidden" name="next" value="{{ request.GET.next }}">
+          
           {% endif %}
+          
           <button class="submit-btn w-button">Sign in</button>
           <div class="auth-form-redirect-div">
             <a
               href="{% url 'sign-up' %}"
-              class="auth-redirect-link w-inline-block"
-            >
+              class="auth-redirect-link w-inline-block">
               <div>Don&#x27;t have an account?</div>
               <div><span class="gradient-span">Create one</span></div>
             </a>
             <a
               href="{% url 'password_reset' %}"
-              class="auth-redirect-link w-inline-block"
-            >
+              class="auth-redirect-link w-inline-block">
               <div><span class="gradient-span">Forgot password?</span></div>
             </a>
           </div>
