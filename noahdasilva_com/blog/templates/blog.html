@@ -226,9 +226,12 @@
       <p class="web-title-gradient">Not finding what you are looking for?</p>
       <h2>Here are some of our suggestions</h2>
     </div>
+
+    {% if post_list.1 %}
+
     <div class="w-layout-grid dynamic-grid">
 
-      {% for post in post_list|slice:"1:4" %}
+      {% for post in post_list|slice:"1:5" %}
 
       <a href="{% url 'blog-post' post_list.1.slug %}"
         class="blog-card-square w-inline-block"
@@ -255,6 +258,15 @@
       {% endfor %}
 
     </div>
+
+    {% else %}
+
+    <div class="banner-content-div">
+      <h2 class="h4-heading">This place is a void!</h2>
+      <p>There are currently no other posts published on the site.</p>
+    </div>
+
+    {% endif %}
   </div>
 </div>
 {% endblock %}

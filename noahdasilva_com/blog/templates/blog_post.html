@@ -224,9 +224,12 @@
       <p class="web-title">Finished reading?</p>
       <h2>Check out other posts just like this one.</h2>
     </div>
+
+    {% if post_list.0 %}
+
     <div class="w-layout-grid dynamic-grid">
 
-      {% for post in post_list|slice:"0:3" %}
+      {% for post in post_list|slice:"0:4" %}
 
       <a href="{% url 'blog-post' post_list.1.slug %}"
         class="blog-card-square w-inline-block"
@@ -253,6 +256,16 @@
       {% endfor %}
 
     </div>
+
+    {% else %}
+
+    <div class="banner-content-div">
+      <h2 class="h4-heading">This place is a void!</h2>
+      <p>There are currently no posts published on the site.</p>
+    </div>
+
+    {% endif %}
+
     <div class="wide-btn-div short-top-margin">
         <a href="{% url 'tags' %}" class="btn w-button">Explore all topics</a>
     </div>

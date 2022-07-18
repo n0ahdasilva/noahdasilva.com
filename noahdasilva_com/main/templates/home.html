@@ -94,9 +94,12 @@
 </div>
 <div class="default-section-light-purple wf-section">
     <div class="default-section-content">
+
+        {% if post_list.1 %}
+
         <div class="w-layout-grid dynamic-grid">
 
-            {% for post in post_list|slice:"1:4" %}
+            {% for post in post_list|slice:"1:5" %}
       
             <a href="{% url 'blog-post' post_list.1.slug %}"
               class="blog-card-square w-inline-block"
@@ -123,6 +126,16 @@
             {% endfor %}
       
           </div>
+
+        {% else %}
+
+        <div class="banner-content-div">
+            <h2 class="h4-heading">This place is a void!</h2>
+            <p>There are currently no other posts published on the site.</p>
+        </div>
+
+        {% endif %}
+
         <div class="wide-btn-div short-top-margin">
             <a href="{% url 'blog' %}" class="btn w-button">View popular topics</a>
         </div>
