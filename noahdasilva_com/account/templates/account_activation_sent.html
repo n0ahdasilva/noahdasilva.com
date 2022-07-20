@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block seo %}
+<meta name=”robots” content=”noindex”/>
+<title>Sign up | Noah Da Silva</title>
+{% endblock %}
+
+{% block content %}
+<div class="auth-section wf-section">
+  <div class="form-wrapper">
+    <div class="auth-form-card-invisible">
+      <h1 class="h4-heading">Verify email</h1>
+      <p>Please confirm your email address to complete the registration, by following the link sent to your email.</p>
+      <a href="{% url 'login' %}" class="btn w-button">Log in</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

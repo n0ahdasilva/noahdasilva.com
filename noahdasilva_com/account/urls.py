@@ -5,9 +5,11 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('sign-up/', views.SignUpView.as_view(success_url=reverse_lazy('login')), name="sign-up"),
-    path('dashboard/', views.DashboardView.as_view(), name="dashboard"),
     path('login/', views.LoginView.as_view(), name="login"),
-    path('logout/', views.Logout, name="logout"),
+    path('logout/', views.logout_view, name="logout"),
+    path('account-activation-sent/', views.AccountActivationSentView.as_view(), name="account_activation_sent"),
+    path('email_verification/<uidb64>/<token>/', views.email_verification, name="email_verification"),
+    path('dashboard/', views.DashboardView.as_view(), name="dashboard"),
     path('forgot/password-reset/', auth_views.PasswordResetView.as_view(
         template_name="password_reset.html"), name="password_reset"),
     path('forgot/password-reset/done/', auth_views.PasswordResetDoneView.as_view(
