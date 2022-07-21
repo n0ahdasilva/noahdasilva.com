@@ -42,6 +42,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(_('is_active'), default=True)
     is_staff = models.BooleanField(default=False)
     previous_login = models.DateTimeField(null=True, blank=True)
+    failed_login_attempts = models.IntegerField(default=0)
+    previous_failed_login_attempts = models.IntegerField(default=0)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
