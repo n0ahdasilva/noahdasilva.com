@@ -4,6 +4,7 @@ from django.views.generic import FormView, UpdateView, TemplateView
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
@@ -65,32 +66,6 @@ class SignUpView(FormView):
         return super().form_valid()
 
 
-class AccountActivationSentView(TemplateView):
-    template_name = 'account_activation_sent.html'
-
-    def dispatch(self, request, *args, **kwargs):
-        if request.user.is_authenticated:
-            return redirect(reverse_lazy('dashboard'))
-        return super(AccountActivationSentView, self).dispatch(request, *args, **kwargs)
-
-
-def email_verification(request, uidb64, token):
-    User = get_user_model()
-    
-    try:
-        uid = force_str(urlsafe_base64_decode(uidb64))
-        user = User.objects.get(pk=uid)
-    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
-        user = None
-
-    if user is not None and account_activation_token.check_token(user, token):
-        user.is_active = True
-        user.save()
-        return redirect(reverse_lazy('login'))
-    else:
-        return HttpResponse('Activation link is invalid!')
-
-
 class LoginView(FormView):
     form_class = LoginForm
     template_name = 'login.html'
@@ -118,6 +93,37 @@ class LoginView(FormView):
             return HttpResponseRedirect(reverse_lazy('login'))
 
 
+def logout_view(request):
+    logout(request)
+    return redirect(reverse_lazy('dashboard'))
+
+
+class AccountActivationSentView(TemplateView):
+    template_name = 'account_activation_sent.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect(reverse_lazy('dashboard'))
+        return super(AccountActivationSentView, self).dispatch(request, *args, **kwargs)
+
+
+def email_verification_view(request, uidb64, token):
+    User = get_user_model()
+    
+    try:
+        uid = force_str(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+
+    if user is not None and account_activation_token.check_token(user, token):
+        user.is_active = True
+        user.save()
+        return redirect(reverse_lazy('login'))
+    else:
+        return HttpResponse('Activation link is invalid!')
+
+
 class DashboardView(LoginRequiredMixin, UpdateView):
     form_class = UserUpdateForm
     model = User
@@ -131,6 +137,14 @@ class DashboardView(LoginRequiredMixin, UpdateView):
         return self.request.user
 
 
-def logout_view(request):
-    logout(request)
-    return redirect(reverse_lazy('dashboard'))
+class DeleteAccountView(LoginRequiredMixin, TemplateView):
+    template_name = 'delete_account.html'
+
+
+@login_required
+def delete_account_done_view(request):
+    if request.method == 'POST':
+        user = request.user
+        user.delete()
+        logout(request)
+    return redirect(reverse_lazy('login'))

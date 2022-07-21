@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block seo %}
+<meta name=”robots” content=”noindex”/>
+<title>Delete account | Noah Da Silva</title>
+{% endblock %}
+
+{% block content %}
+<div class="auth-section wf-section">
+  <div class="form-wrapper">
+    <div class="auth-form-card-invisible">
+      <h1 class="h4-heading">Deleting your account</h1>
+      <p>Deleting an account is permanent and cannot be recovered. Do you wish to proceed?</p>
+      <div class="auth-form w-form">
+        <form method="post" action="{% url 'delete_account_done' %}" class="auth-form">
+            {% csrf_token %} {{ form.non_field_errors }}
+            <button class="submit-btn w-button">Delete permanently</button>  
+        </forn>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

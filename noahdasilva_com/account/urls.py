@@ -4,12 +4,14 @@ from django.urls import reverse_lazy
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-    path('sign-up/', views.SignUpView.as_view(success_url=reverse_lazy('login')), name="sign-up"),
+    path('sign-up/', views.SignUpView.as_view(success_url=reverse_lazy('login')), name="sign_up"),
     path('login/', views.LoginView.as_view(), name="login"),
     path('logout/', views.logout_view, name="logout"),
     path('account-activation-sent/', views.AccountActivationSentView.as_view(), name="account_activation_sent"),
-    path('email_verification/<uidb64>/<token>/', views.email_verification, name="email_verification"),
+    path('email_verification/<uidb64>/<token>/', views.email_verification_view, name="email_verification"),
     path('dashboard/', views.DashboardView.as_view(), name="dashboard"),
+    path('delete-account/', views.DeleteAccountView.as_view(), name="delete_account"),
+    path('delete-account-done/', views.delete_account_done_view, name="delete_account_done"),
     path('forgot/password-reset/', auth_views.PasswordResetView.as_view(
         template_name="password_reset.html"), name="password_reset"),
     path('forgot/password-reset/done/', auth_views.PasswordResetDoneView.as_view(
