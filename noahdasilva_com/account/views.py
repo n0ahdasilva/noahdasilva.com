@@ -1,18 +1,17 @@
 from django.http import HttpRequest, HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic import FormView, UpdateView, TemplateView
+from django.contrib.auth.views import PasswordResetView
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
-import socket
 from .tokens import account_activation_token
 from .forms import SignUpForm, LoginForm, UserUpdateForm
 from .models import User
@@ -22,8 +21,8 @@ from .models import User
 
 
 def send_verification_email(request, user):
-    current_site = socket.gethostname()
-    subject = 'Activate Your MySite Account'
+    current_site = request.META.get('HTTP_HOST')
+    subject = 'Activate account on ' + current_site
     message = render_to_string('account_activation_email.html', {
         'user': user,
         'domain': current_site,
@@ -60,7 +59,7 @@ class SignUpView(FormView):
         user.save()
 
         if not user.is_active:
-            send_verification_email(request, user)
+            send_verification_email(self.request, user)
             return HttpResponseRedirect(reverse_lazy('account_activation_sent'))
 
         return super().form_valid()
@@ -148,3 +147,9 @@ def delete_account_done_view(request):
         user.delete()
         logout(request)
     return redirect(reverse_lazy('login'))
+
+
+class ResetPasswordView(PasswordResetView):
+    template_name = 'password_reset.html'
+    email_template_name = 'password_reset_email.html'
+    success_url = reverse_lazy('password_reset_done')
