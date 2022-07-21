@@ -3,7 +3,9 @@ from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse
-#from django.contrib.auth.hashers import make_password
+from django.contrib.auth.signals import user_logged_in, user_logged_out, user_login_failed
+from django.dispatch import receiver
+
 
 class CustomUserManager(BaseUserManager):
     use_in_migration = True
@@ -75,3 +77,37 @@ class User(AbstractBaseUser, PermissionsMixin):
         score += self.get_total_posts_comments() * 25
         score += self.get_total_posts_written() * 50
         return score
+
+
+class AuditEntry(models.Model):
+    action = models.CharField(max_length=64)
+    ip = models.GenericIPAddressField(null=True)
+    username = models.CharField(max_length=256, null=True)
+
+    class Meta:
+        verbose_name = _('Audit Entry')
+        verbose_name_plural = _('Audit Entries')
+
+    def __unicode__(self):
+        return '{0} - {1} - {2}'.format(self.action, self.username, self.ip)
+
+    def __str__(self):
+        return '{0} - {1} - {2}'.format(self.action, self.username, self.ip)
+
+
+@receiver(user_logged_in)
+def user_logged_in_callback(sender, request, user, **kwargs):  
+    ip = request.META.get('REMOTE_ADDR')
+    AuditEntry.objects.create(action='user_logged_in', ip=ip, username=user.username)
+
+
+@receiver(user_logged_out)
+def user_logged_out_callback(sender, request, user, **kwargs):  
+    ip = request.META.get('REMOTE_ADDR')
+    AuditEntry.objects.create(action='user_logged_out', ip=ip, username=user.username)
+
+
+@receiver(user_login_failed)
+def user_login_failed_callback(sender, request, credentials, **kwargs):
+    ip = request.META.get('REMOTE_ADDR')
+    AuditEntry.objects.create(action='user_login_failed', ip=ip, username=credentials.get('username', None))
