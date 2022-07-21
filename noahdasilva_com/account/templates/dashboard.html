@@ -274,29 +274,33 @@
                           <div class="progress-icon">
                             <div>2</div>
                           </div>
-                          <div>Verified Email</div>
+                          <div>Verified account</div>
                         </div>
                         <div class="progress-text-column">
                           <div class="progress-icon">
                             <div>3</div>
                           </div>
-                          <div>Email 2FA</div>
-                        </div>
-                        <div class="progress-text-column">
-                          <div class="progress-icon">
-                            <div>4</div>
-                          </div>
-                          <div>App 2FA</div>
-                        </div>
-                        <div class="progress-text-column">
-                          <div class="progress-icon">
-                            <div>5</div>
-                          </div>
-                          <div>Recovery Code</div>
+                          <div>Full name</div>
                         </div>
                       </div>
                       <div class="progress-bar-wrap">
-                        <div class="progress-bar"></div>
+
+                      {% if user %}
+
+                        <div class="progress-bar" style="width: 33%"></div>
+                        
+                        {% if user.is_active %}
+
+                        <div class="progress-bar" style="width: 66%"></div>
+                          
+                          {% if user.full_name %}
+
+                          <div class="progress-bar" style="width: 100%"></div>
+
+                          {% endif %}
+                        {% endif %}
+                      {% endif %}
+                          
                       </div>
                     </div>
                   </div>
