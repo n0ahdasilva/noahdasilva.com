@@ -321,7 +321,7 @@
                 <div class="dashboard-info-box third mobile-full-box">
                   <div class="dashboard-box-padding">
                     <div class="colourful-icon purple"></div>
-                    <h3 ms-data="launch" class="dashboard-heading-date">{{ user.last_login|date:"F d, Y, G:H" }}</h3>
+                    <h3 ms-data="launch" class="dashboard-heading-date">{{ user.last_login|date:"F d, Y, H:i" }}</h3>
                     <div>Last login</div>
                   </div>
                 </div>
@@ -346,9 +346,17 @@
                       <h3 class="dashboard-heading-small">Email</h3>
                     </div>
                     <div>
-                      <a href="#" class="dashboard-heading-small gray">Verify</a>
-                      <div class="dashboard-heading-small red">Not Verified</div>
+
+                    {% if user.is_active %}
+
                       <div class="dashboard-heading-small green">Verified</div>
+
+                    {% else %}
+
+                      <div class="dashboard-heading-small red">Not Verified</div>
+
+                    {% endif %}
+
                     </div>
                   </div>
                 </div>

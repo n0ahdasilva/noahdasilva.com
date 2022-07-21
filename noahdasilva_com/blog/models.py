@@ -40,7 +40,7 @@ class Post(models.Model):
     tags = models.CharField(max_length=255, default='blog')
     summary = models.TextField(max_length=512)
     content = RichTextField(blank=True, null=True)
-    updated_on = models.DateTimeField(auto_now= True, blank=True)
+    updated_on = models.DateTimeField(auto_now=True, blank=True)
     created_on = models.DateTimeField(auto_now_add=True, blank=True)
     #status = models.IntegerField(choices=STATUS, default=0)
     likes = models.ManyToManyField(User, blank=True, related_name='post_likes')

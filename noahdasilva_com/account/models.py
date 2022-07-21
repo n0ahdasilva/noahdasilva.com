@@ -3,8 +3,6 @@ from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse
-from django.contrib.auth.signals import user_logged_in, user_logged_out, user_login_failed
-from django.dispatch import receiver
 
 
 class CustomUserManager(BaseUserManager):
@@ -43,6 +41,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_superadmin = models.BooleanField(_('is_superadmin'), default=False)
     is_active = models.BooleanField(_('is_active'), default=True)
     is_staff = models.BooleanField(default=False)
+    previous_login = models.DateTimeField(null=True, blank=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
@@ -83,6 +82,7 @@ class AuditEntry(models.Model):
     action = models.CharField(max_length=64)
     ip = models.GenericIPAddressField(null=True)
     username = models.CharField(max_length=256, null=True)
+    time = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         verbose_name = _('Audit Entry')
@@ -93,21 +93,3 @@ class AuditEntry(models.Model):
 
     def __str__(self):
         return '{0} - {1} - {2}'.format(self.action, self.username, self.ip)
-
-
-@receiver(user_logged_in)
-def user_logged_in_callback(sender, request, user, **kwargs):  
-    ip = request.META.get('REMOTE_ADDR')
-    AuditEntry.objects.create(action='user_logged_in', ip=ip, username=user.username)
-
-
-@receiver(user_logged_out)
-def user_logged_out_callback(sender, request, user, **kwargs):  
-    ip = request.META.get('REMOTE_ADDR')
-    AuditEntry.objects.create(action='user_logged_out', ip=ip, username=user.username)
-
-
-@receiver(user_login_failed)
-def user_login_failed_callback(sender, request, credentials, **kwargs):
-    ip = request.META.get('REMOTE_ADDR')
-    AuditEntry.objects.create(action='user_login_failed', ip=ip, username=credentials.get('username', None))
