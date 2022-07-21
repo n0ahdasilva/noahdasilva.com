@@ -8,6 +8,8 @@
 {% endblock %}
 
 {% block content %}
+  {% if user.is_authenticated %}
+
   <div class="default-section no-padding wf-section">
     <div class="dashboard-wrapper">
       <div data-duration-in="300" data-duration-out="100" data-current="Profile" data-easing="ease" class="dashboard-tabs w-tabs">
@@ -307,16 +309,29 @@
                 <div class="dashboard-info-box third">
                   <div class="dashboard-box-padding">
                     <div class="colourful-icon red"></div>
-                    <h3 class="dashboard-heading">-</h3>
+                    <h3 class="dashboard-heading">{{ user.previous_failed_login_attempts }}</h3>
                     <div>Failed login attempts <span class="unfocused-text-span">(since last login)</span></div>
                   </div>
                 </div>
                 <div class="dashboard-info-box third">
                   <div class="dashboard-box-padding">
-                    <div class="colourful-icon yellow"></div>
-                    <h3 class="dashboard-heading">Secured<span ms-data="spend"></span></h3>
+
+                  {% if user.previous_failed_login_attempts >= 5 %}
+                  
+                  <div class="colourful-icon yellow"></div>
+                    <h3 class="dashboard-heading">At risk<span ms-data="spend"></span></h3>
                     <div>Account status</div>
                   </div>
+
+                  {% else %}
+
+                  <div class="colourful-icon yellow"></div>
+                    <h3 class="dashboard-heading">Secure<span ms-data="spend"></span></h3>
+                    <div>Account status</div>
+                  </div>
+                                      
+                  {% endif %}
+
                 </div>
                 <div class="dashboard-info-box third mobile-full-box">
                   <div class="dashboard-box-padding">
@@ -437,4 +452,6 @@
       </div>
     </div>
   </div>
+
+  {% endif %}
 {% endblock %}
