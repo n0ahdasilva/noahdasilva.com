@@ -28,15 +28,21 @@ load_dotenv(dotenv_path=ENV_PATH)
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = str(os.getenv('SECRET_KEY', 'get_random_secret_key()'))
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DJANGO_DEBUG', 'False') == 'True'
+PRODUCTION = os.getenv('PRODUCTION', 'False') == 'True'
+
+# NOTE: SETTINGS FOR PRODUCTION ENVIRONMENT
+if PRODUCTION:
+
+    # SECURITY WARNING: keep the secret key used in production secret!
+    SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
 
-# Production settings
-if DEBUG is False:
+    # SECURITY WARNING: don't run with debug turned on in production!
+    DEBUG = False
+
+
+    # Production settings
     SECURE_SSL_REDIRECT = True
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
@@ -45,7 +51,41 @@ if DEBUG is False:
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+    ALLOWED_HOSTS = ['$HOST']
+
+
+    # Database
+    # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': 'var/www/db/db.sqlite3',
+        }
+    }
+
+else:
+
+    # SECURITY WARNING: keep the secret key used in production secret!
+    SECRET_KEY = str(get_random_secret_key())
+
+
+    # SECURITY WARNING: don't run with debug turned on in production!
+    DEBUG = True
+
+
+    ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+
+
+    # Database
+    # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 
 # Application definition
@@ -99,17 +139,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'noahdasilva_com.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
 
 # Password validation
