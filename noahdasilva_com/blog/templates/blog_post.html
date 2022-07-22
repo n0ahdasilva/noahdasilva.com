@@ -231,7 +231,7 @@
 
       {% for post in post_list|slice:"0:4" %}
 
-      <a href="{% url 'blog-post' post_list.1.slug %}"
+      <a href="{% url 'blog-post' post.slug %}"
         class="blog-card-square w-inline-block"
         style="background-image: url({{ post.image.url }});">
         <div class="blog-card-div">

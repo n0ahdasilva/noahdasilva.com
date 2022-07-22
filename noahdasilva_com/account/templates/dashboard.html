@@ -52,14 +52,14 @@
                 <div class="dashboard-info-box third">
                   <div class="dashboard-box-padding">
                     <div class="colourful-icon green"></div>
-                    <h2 class="dashboard-heading"><span ms-data="spend">{{ user.get_total_posts_comments }}</span></h2>
+                    <h2 class="dashboard-heading">{{ user.get_total_posts_comments }}</h2>
                     <div>Total comments</div>
                   </div>
                 </div>
                 <div class="dashboard-info-box third mobile-full-box">
                   <div class="dashboard-box-padding">
                     <div class="colourful-icon red"></div>
-                    <h2 ms-data="launch" class="dashboard-heading">{{ user.get_total_posts_likes }}</h2>
+                    <h2 class="dashboard-heading">{{ user.get_total_posts_likes }}</h2>
                     <div>Total likes</div>
                   </div>
                 </div>
@@ -73,7 +73,7 @@
                 <div class="dashboard-info-box third mobile-full-box">
                   <div class="dashboard-box-padding">
                     <div class="colourful-icon purple"></div>
-                    <h2 ms-data="launch" class="dashboard-heading">{{ user.get_total_posts_written }}</h2>
+                    <h2 class="dashboard-heading">{{ user.get_total_posts_written }}</h2>
                     <div>Post written</div>
                   </div>
                 </div>
@@ -253,6 +253,25 @@
                     </div>
                   </div>
                 </a>
+
+                {% if user.is_superuser %}
+
+                <a href="{% url 'admin:index' %}" class="dashboard-info-box link-box w-inline-block">
+
+                  <div class="dashboard-box-padding horizontal-flex">
+                    <div class="dashboard-img">
+                      <span class="fa900solid-span gradient-span" style="font-size: 2rem;"></span>
+                    </div>
+                    <div>
+                      <h3 class="dashboard-heading-small">Admin panel</h3>
+                      <div class="dashboard-heading-small yellow">Manage</div>
+                      <div class="email-text-block">View models and database entries</div>
+                    </div>
+                  </div>
+                </a>
+
+                {% endif %}
+
               </div>
             </div>
           </div>
@@ -327,14 +346,14 @@
                   {% if user.previous_failed_login_attempts >= 5 %}
                   
                   <div class="colourful-icon yellow"></div>
-                    <h3 class="dashboard-heading">At risk<span ms-data="spend"></span></h3>
+                    <h3 class="dashboard-heading">At risk</h3>
                     <div>Account status</div>
                   </div>
 
                   {% else %}
 
                   <div class="colourful-icon yellow"></div>
-                    <h3 class="dashboard-heading">Secure<span ms-data="spend"></span></h3>
+                    <h3 class="dashboard-heading">Secure</h3>
                     <div>Account status</div>
                   </div>
                                       
@@ -344,7 +363,17 @@
                 <div class="dashboard-info-box third mobile-full-box">
                   <div class="dashboard-box-padding">
                     <div class="colourful-icon purple"></div>
-                    <h3 ms-data="launch" class="dashboard-heading-date">{{ user.previous_login|date:"F d, Y, H:i" }}</h3>
+
+                    {% if user.previous_login %}
+
+                    <h3 class="dashboard-heading-date">{{ user.previous_login|date:"F d, Y, H:i" }}</h3>
+
+                    {% else %}
+
+                    <h3 class="dashboard-heading">None</h3>
+                    
+                    {% endif %}
+
                     <div>Last login</div>
                   </div>
                 </div>
@@ -393,6 +422,9 @@
                     </div>
                   </div>
                 </div>
+
+                {% if not user %}
+
                 <div class="dashboard-info-box full-width">
                   <div class="dashboard-box-padding horizontal-flex">
                     <div>
@@ -425,6 +457,9 @@
                     </div>
                   </div>
                 </div>
+
+                {% endif %}
+
               </div>
             </div>
             <div class="dashboard-tab-content">

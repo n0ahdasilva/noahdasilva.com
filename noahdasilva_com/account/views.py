@@ -29,7 +29,7 @@ def send_verification_email(request, user):
         'uid': urlsafe_base64_encode(force_bytes(user.pk)),
         'token': account_activation_token.make_token(user),
     })
-    send_mail(subject, message, 'noah@noahdasilva.com', [user.email])
+    send_mail(subject, message, 'noreply@noahdasilva.com', [user.email])
 
 
 def redirect_to_dashboard(request):
