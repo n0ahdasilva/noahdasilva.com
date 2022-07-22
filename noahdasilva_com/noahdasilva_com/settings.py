@@ -25,9 +25,6 @@ load_dotenv()
 ENV_PATH = os.path.join(BASE_DIR, '.env')
 load_dotenv(dotenv_path=ENV_PATH)
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
-
 
 PRODUCTION = os.getenv('PRODUCTION', 'False') == 'True'
 
@@ -35,7 +32,7 @@ PRODUCTION = os.getenv('PRODUCTION', 'False') == 'True'
 if PRODUCTION:
 
     # SECURITY WARNING: keep the secret key used in production secret!
-    SECRET_KEY = str(os.getenv('SECRET_KEY'))
+    SECRET_KEY = os.getenv('SECRET_KEY')
 
 
     # SECURITY WARNING: don't run with debug turned on in production!
@@ -51,7 +48,7 @@ if PRODUCTION:
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
 
-    ALLOWED_HOSTS = ['$HOST']
+    ALLOWED_HOSTS = ['www.noahdasilva.com', 'noahdasilva.com', 'localhost']
 
 
     # Database
@@ -59,15 +56,20 @@ if PRODUCTION:
 
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': 'var/www/db/db.sqlite3',
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'noahdasilva_com',
+            'USER': os.getenv("DB_USER"),
+            'PASSWORD': os.getenv('DB_PASSWORD'),
+            'HOST': 'localhost',
+            'PORT': '',
         }
     }
 
+# NOTE: SETTINGS FOR DEVELOPMENT ENVIRONMENT
 else:
 
     # SECURITY WARNING: keep the secret key used in production secret!
-    SECRET_KEY = str(get_random_secret_key())
+    SECRET_KEY = get_random_secret_key()
 
 
     # SECURITY WARNING: don't run with debug turned on in production!
@@ -185,6 +187,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
