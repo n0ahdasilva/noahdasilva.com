@@ -1,4 +1,4 @@
-django-venv
+django-venv/
 env/
 .DS_Store
 .env
