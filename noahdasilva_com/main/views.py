@@ -46,6 +46,14 @@ def contact_view(request):
     return render(request, 'contact.html', {'form': form})
 
 
+def terms_and_conditions_view(request):
+    return render(request, 'terms_and_conditions.html', {})
+
+
+def privacy_policy_view(request):
+    return render(request, 'privacy_policy.html', {})
+
+
 def error_404(request, exception):
         data = {}
         return render(request,'404.html', data, status=404)
