@@ -22,21 +22,22 @@
           method="POST"
           enctype="multipart/form-data"
         >
-          {% csrf_token %} {{ form.media }} {{ form.non_field_errors }}
+          {% csrf_token %} {{ form.media }}
+          <span style="font-size: 14px;">{{ form.non_field_errors }}</span>
           <div>
             {{ form.name.label_tag }}
             {{ form.name|add_class:"input w-input" }}
-            {{ form.name.errors }}
+            <span style="font-size: 14px;">{{ form.name.errors }}</span>
           </div>
           <div>
             {{ form.special.label_tag }}
             {{ form.special|add_class:"input w-input" }}
-            {{ form.special.errors }}
+            <span style="font-size: 14px;">{{ form.special.errors }}</span>
           </div>
           <div>
             {{ form.description.label_tag }}
             {{ form.description|add_class:"input form-message w-input" }}
-            {{ form.description.errors }}
+            <span style="font-size: 14px;">{{ form.description.errors }}</span>
           </div>
           <div>
             <button class="submit-btn w-button">Update</button>

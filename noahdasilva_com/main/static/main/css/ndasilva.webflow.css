@@ -1693,7 +1693,6 @@ a {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  padding-top: 1rem;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -webkit-flex-direction: column;
@@ -1768,8 +1767,7 @@ a {
   display: -ms-flexbox;
   display: flex;
   min-height: 90vh;
-  padding-right: 4%;
-  padding-left: 4%;
+  padding: 4%;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
   -ms-flex-pack: center;

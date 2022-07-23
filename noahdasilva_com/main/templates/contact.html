@@ -43,36 +43,37 @@
             method="post"
             class="contact-form"
             action="{% url 'contact' %}">
-          {% csrf_token %} {{ form.non_field_errors }}
+          {% csrf_token %}
+          <span style="font-size: 14px;">{{ form.non_field_errors }}</span>
             <div id="w-node-_92f09ec5-7e34-2292-6911-ac82a81f1d73-9383a921">
               <label for="Contact-Name">Your Name <span class="text-color-purple">*</span></label>
               {% render_field form.name type="text" class="input w-input" placeholder="Enter your name..." %}
-              {{ form.name.errors }}
+              <span style="font-size: 14px;">{{ form.name.errors }}</span>
             </div>
             <div id="w-node-_92f09ec5-7e34-2292-6911-ac82a81f1d77-9383a921">
               <label for="Contact-Email">Email Address <span class="text-color-purple">*</span></label>
               {% render_field form.email type="email" class="input w-input" placeholder="Enter your email..." %}
-              {{ form.email.errors }}
+              <span style="font-size: 14px;">{{ form.email.errors }}</span>
             </div>
             <div id="w-node-fb1b6738-34b3-98dd-d69a-6204ae5fa12d-9383a921">
               <label for="Contact-Company">Company</label>
               {% render_field form.company type="text" class="input w-input" placeholder="Enter company name..." %}
-              {{ form.company.errors }}
+              <span style="font-size: 14px;">{{ form.company.errors }}</span>
             </div>
             <div id="w-node-c349e396-5177-8d0a-efff-6d2b125bc931-9383a921">
               <label for="Contact-Phone">Phone Number</label>
               {% render_field form.phone type="tel" class="input w-input" placeholder="Enter your phone number..." %}
-              {{ form.phone.errors }}
+              <span style="font-size: 14px;">{{ form.phone.errors }}</span>
             </div>
             <div id="w-node-da7f182b-a4d0-381b-3c4d-0e2b75615def-9383a921">
               <label for="Contact-Subject">Subject <span class="text-color-purple">*</span></label>
               {% render_field form.subject class="input form-select w-input" placeholder="Enter your phone number..." %}
-              {{ form.subject.errors }}
+              <span style="font-size: 14px;">{{ form.subject.errors }}</span>
             </div>
             <div id="w-node-_92f09ec5-7e34-2292-6911-ac82a81f1d87-9383a921">
               <label for="Contact-Message">Message</label>
               {% render_field form.message type="textarea" class="input form-message w-input" placeholder="How can we help you?" %}
-              {{ form.message.errors }}
+              <span style="font-size: 14px;">{{ form.message.errors }}</span>
             </div>
             <button id="w-node-_92f09ec5-7e34-2292-6911-ac82a81f1d8b-9383a921" class="submit-btn w-button">Send message</button>
           </form>

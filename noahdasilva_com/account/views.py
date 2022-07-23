@@ -1,7 +1,7 @@
 from django.http import HttpRequest, HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic import FormView, UpdateView, TemplateView
-from django.contrib.auth.views import PasswordResetView
+from django.contrib.auth.views import PasswordResetView 
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -32,10 +32,6 @@ def send_verification_email(request, user):
     send_mail(subject, message, 'noreply@noahdasilva.com', [user.email])
 
 
-def redirect_to_dashboard(request):
-    return redirect(reverse_lazy('dashboard'))
-
-
 # NOTE: Views for the account app
 
 
@@ -47,7 +43,7 @@ class SignUpView(FormView):
         if request.user.is_authenticated:
             return redirect(reverse_lazy('dashboard'))
         return super(SignUpView, self).dispatch(request, *args, **kwargs)
-
+    
     def form_valid(self, request):
         data = self.request.POST
         username = data['username']

@@ -80,7 +80,8 @@
               </div>
             </div>
             <form action"{% url 'dashboard' %}" method="post" class="dashboard-tab-content">
-              {% csrf_token %} {{ form.non_field_errors }}
+              {% csrf_token %} 
+              <span style="font-size: 14px;">{{ form.non_field_errors }}</span>
               <h2 class="h4-heading">My Information</h2>
               <div class="dashboard-row">
                 
@@ -105,7 +106,7 @@
                       <div class="account-form-div">
                         <div id="w-node-_6c96194b-262c-23cf-81db-5c4df3519fc9-fd0192b4">
                           {% render_field form.username type="text" class="account-input w-input" placeholder="Enter new username..." %}
-                          {{ form.username.errors }}
+                          <span style="font-size: 14px;">{{ form.username.errors }}</span>
                         </div>
                         <div>
                           <button class="dashboard-heading-small gray">Update</button>
@@ -123,7 +124,7 @@
                       <div class="account-form-div">
                         <div id="w-node-_6c96194b-262c-23cf-81db-5c4df3519fc9-fd0192b4">
                           {% render_field form.full_name type="text" class="account-input w-input" placeholder="Enter your full name..." %}
-                          {{ form.full_name.errors }}
+                          <span style="font-size: 14px;">{{ form.full_name.errors }}</span>
                         </div>
                         <div>
                           <button class="dashboard-heading-small gray">Update</button>
@@ -141,7 +142,7 @@
                       <div class="account-form-div">
                         <div id="w-node-_6c96194b-262c-23cf-81db-5c4df3519fc9-fd0192b4">
                           {% render_field form.email type="text" class="account-input w-input" placeholder="Enter new email address..."%}
-                          {{ form.email.errors }}
+                          <span style="font-size: 14px;">{{ form.email.errors }}</span>
                         </div>
                         <div>
                           <button class="dashboard-heading-small gray">Update</button>

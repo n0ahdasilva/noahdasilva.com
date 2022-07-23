@@ -14,7 +14,8 @@
       <p>Deleting an account is permanent and cannot be recovered. Do you wish to proceed?</p>
       <div class="auth-form w-form">
         <form method="post" action="{% url 'delete_account_done' %}" class="auth-form">
-            {% csrf_token %} {{ form.non_field_errors }}
+            {% csrf_token %}
+            <span style="font-size: 14px;">{{ form.non_field_errors }}</span>
             <button class="submit-btn w-button">Delete permanently</button>  
         </forn>
       </div>

@@ -21,36 +21,37 @@
           action="#"
           method="POST"
           enctype="multipart/form-data">
-          {% csrf_token %} {{ form.media }} {{ form.non_field_errors }}
+          {% csrf_token %} {{ form.media }}
+          <span style="font-size: 14px;">{{ form.non_field_errors }}</span>
           <div>
             {{ form.name.label_tag }}
             {{ form.name|add_class:"input w-input" }}
-            {{ form.name.errors }}
+            <span style="font-size: 14px;">{{ form.name.errors }}</span>
           </div>
           <div>
             {{ form.description.label_tag }}
             {{ form.description|add_class:"input form-message w-input" }}
-            {{ form.author.errors }}
+            <span style="font-size: 14px;">{{ form.author.errors }}</span>
           </div>
           <div>
             {{ form.category.label_tag }}
             {{ form.category|add_class:"input w-input" }}
-            {{ form.category.errors }}
+            <span style="font-size: 14px;">{{ form.category.errors }}</span>
           </div>
           <div>
             {{ form.url.label_tag }}
             {{ form.url|add_class:"input w-input" }}
-            {{ form.url.errors }}
+            <span style="font-size: 14px;">{{ form.url.errors }}</span>
           </div>
           <div>
             {{ form.image.label_tag }}
             {{ form.image|add_class:"input w-input" }}
-            {{ form.image.errors }}
+            <span style="font-size: 14px;">{{ form.image.errors }}</span>
           </div>
           <div>
             {{ form.tags.label_tag }}
             {{ form.tags|add_class:"input form-selection w-input" }}
-            {{ form.tags.errors }}
+            <span style="font-size: 14px;">{{ form.tags.errors }}</span>
           </div>
           <div>
             <button class="submit-btn w-button">Publish</button>

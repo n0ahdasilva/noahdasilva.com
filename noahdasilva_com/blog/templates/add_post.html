@@ -21,41 +21,42 @@
           action="#"
           method="POST"
           enctype="multipart/form-data">
-          {% csrf_token %} {{ form.media }} {{ form.non_field_errors }}
+          {% csrf_token %} {{ form.media }}
+          <span style="font-size: 14px;">{{ form.non_field_errors }}</span>
           <div>
             {{ form.title.label_tag }}
             {{ form.title|add_class:"input w-input" }}
-            {{ form.title.errors }}
+            <span style="font-size: 14px;">{{ form.title.errors }}</span>
           </div>
           <div>
             {{ form.author.label_tag }}
             {{ form.author|add_class:"input form-selection w-input" }}
-            {{ form.author.errors }}
+            <span style="font-size: 14px;">{{ form.author.errors }}</span>
           </div>
           <div>
             {{ form.author_plug.label_tag }}
             {{ form.author_plug|add_class:"input w-input" }}
-            {{ form.author_plug.errors }}
+            <span style="font-size: 14px;">{{ form.author_plug.errors }}</span>
           </div>
           <div>
             {{ form.image.label_tag }}
             {{ form.image|add_class:"input w-input" }}
-            {{ form.image.errors }}
+            <span style="font-size: 14px;">{{ form.image.errors }}</span>
           </div>
           <div>
             {{ form.tags.label_tag }}
             {{ form.tags|add_class:"input form-message w-input" }}
-            {{ form.tags.errors }}
+            <span style="font-size: 14px;">{{ form.tags.errors }}</span>
           </div>
           <div>
             {{ form.summary.label_tag }}
             {{ form.summary|add_class:"input form-message w-input" }}
-            {{ form.summary.errors }}
+            <span style="font-size: 14px;">{{ form.summary.errors }}</span>
           </div>
           <div>
             {{ form.content.label_tag }}
             {{ form.content|add_class:"input form-message w-input" }}
-            {{ form.content.errors }}
+            <span style="font-size: 14px;">{{ form.content.errors }}</span>
           </div>
           <div>
             <button class="submit-btn w-button">Post</button>

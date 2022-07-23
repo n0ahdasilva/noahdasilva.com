@@ -20,30 +20,25 @@
       <h1 class="h4-heading">Sign up</h1>
       <div class="auth-form w-form">
         <form method="post" action="{% url 'sign_up' %}" class="auth-form">
-          {% csrf_token %} {{ form.non_field_errors }}
+          {% csrf_token %}
+          <span style="font-size: 14px;">{{ form.non_field_errors }}</span>
           <div>
             <label>Username</label>
             {% render_field form.username type="text" class="input w-input" placeholder="Enter a username..." %}
-            {{ form.username.errors }}
+            <span style="font-size: 14px;">{{ form.username.errors }}</span>
           </div>
           <div>
             <label>Email</label>
             {% render_field form.email type="email" class="input w-input" placeholder="Enter an email..." %}
-            {{ form.email.errors }}
+            <span style="font-size: 14px;">{{ form.email.errors }}</span>
           </div>
           <div>
             <label>Password</label>
             {% render_field form.password type="password" class="input w-input" placeholder="Enter a strong password..." %}
-            {{ form.password.errors }}
+            <span style="font-size: 14px;">{{ form.password.errors }}</span>
           </div>
           <button class="submit-btn w-button">Sign up</button>    
-          <div class="auth-form-redirect-div">
-            <a href="{% url 'login' %}" class="auth-redirect-link w-inline-block">
-              <div>Already have an account?</div>
-              <div><span class="gradient-span">Log in</span></div>
-            </a>
-          </div>
-          <p style="font-size: 12px;">
+          <p style="font-size: 12px; margin-bottom: 0;">
             By signing up to create an account, you agree to our
             <a href="{% url 'terms_and_conditions' %}" target="_blank" style="text-decoration: none;">
               <span class="gradient-span">Terms &amp; Conditions</span>
@@ -52,6 +47,12 @@
               <span class="gradient-span">Privacy Policy</span>
             </a>.
           </p>
+          <div class="auth-form-redirect-div">
+            <a href="{% url 'login' %}" class="auth-redirect-link w-inline-block">
+              <div>Already have an account?</div>
+              <div><span class="gradient-span">Log in</span></div>
+            </a>
+          </div>
         </form>
       </div>
     </div>
