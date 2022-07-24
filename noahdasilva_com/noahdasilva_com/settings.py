@@ -48,7 +48,7 @@ if PRODUCTION:
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
 
-    ALLOWED_HOSTS = ['www.noahdasilva.com', 'noahdasilva.com', 'localhost']
+    ALLOWED_HOSTS = ['www.noahdasilva.com', 'localhost']
 
 
     # Database
@@ -182,11 +182,11 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 # Default primary key field type
