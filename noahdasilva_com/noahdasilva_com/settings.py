@@ -57,7 +57,7 @@ if PRODUCTION:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'noahdasilva_com',
+            'NAME': os.getenv("DB_NAME"),
             'USER': os.getenv("DB_USER"),
             'PASSWORD': os.getenv('DB_PASSWORD'),
             'HOST': 'localhost',
