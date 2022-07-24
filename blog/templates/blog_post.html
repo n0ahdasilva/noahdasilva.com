@@ -150,7 +150,7 @@
     <div class="w-form">
       <form action="{% url 'comment_post' post.pk %}" method="POST" class="comment-form" >
         {% csrf_token %}
-        <span style="font-size: 14px;">{{ form.non_field_errors }}</span>
+        {{ form.non_field_errors }}
         <div id="w-node-cbc712d9-4784-f4ef-e32c-b56909c41c6d-bb83a922">
           <label>Leave a reply</label>
           <textarea

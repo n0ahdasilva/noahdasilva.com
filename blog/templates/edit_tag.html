@@ -23,7 +23,7 @@
           enctype="multipart/form-data"
         >
           {% csrf_token %} {{ form.media }}
-          <span style="font-size: 14px;">{{ form.non_field_errors }}</span>
+          {{ form.non_field_errors }}
           <div>
             {{ form.name.label_tag }}
             {{ form.name|add_class:"input w-input" }}

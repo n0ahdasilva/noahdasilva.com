@@ -3,7 +3,7 @@
 
 {% block seo %}
 <meta name=”robots” content=”noindex”/>
-<title>Add Post | Noah Da Silva</title>
+<title>Edit Post | Noah Da Silva</title>
 {% endblock %}
 
 {% block content %}
@@ -14,15 +14,15 @@
 <div class="default-section wf-section">
   <div class="default-section-content">
     <div class="form-wrapper">
-      <h1 class="h3-heading">Add post...</h1>
+      <h1 class="h3-heading">Edit post...</h1>
       <div class="w-form">
         <form
           class="auth-form"
           action="#"
           method="POST"
-          enctype="multipart/form-data">
+          enctype="multipart/form-data"
+        >
           {% csrf_token %} {{ form.media }}
-          <span style="font-size: 14px;">{{ form.non_field_errors }}</span>
           <div>
             {{ form.title.label_tag }}
             {{ form.title|add_class:"input w-input" }}
@@ -59,8 +59,9 @@
             <span style="font-size: 14px;">{{ form.content.errors }}</span>
           </div>
           <div>
-            <button class="submit-btn w-button">Post</button>
+            <button class="submit-btn w-button">Update</button>
           </div>
+          {{ form.non_field_errors }}
         </form>
       </div>
     </div>

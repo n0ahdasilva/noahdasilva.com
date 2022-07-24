@@ -81,7 +81,6 @@
             </div>
             <form action"{% url 'dashboard' %}" method="post" class="dashboard-tab-content">
               {% csrf_token %} 
-              <span style="font-size: 14px;">{{ form.non_field_errors }}</span>
               <h2 class="h4-heading">My Information</h2>
               <div class="dashboard-row">
                 
@@ -145,6 +144,7 @@
                           <span style="font-size: 14px;">{{ form.email.errors }}</span>
                         </div>
                         <div>
+                          {{ form.non_field_errors }}
                           <button class="dashboard-heading-small gray">Update</button>
                         </div>
                       </div>

@@ -44,7 +44,6 @@
             class="contact-form"
             action="{% url 'contact' %}">
           {% csrf_token %}
-          <span style="font-size: 14px;">{{ form.non_field_errors }}</span>
             <div id="w-node-_92f09ec5-7e34-2292-6911-ac82a81f1d73-9383a921">
               <label for="Contact-Name">Your Name <span class="text-color-purple">*</span></label>
               {% render_field form.name type="text" class="input w-input" placeholder="Enter your name..." %}
@@ -76,6 +75,7 @@
               <span style="font-size: 14px;">{{ form.message.errors }}</span>
             </div>
             <button id="w-node-_92f09ec5-7e34-2292-6911-ac82a81f1d8b-9383a921" class="submit-btn w-button">Send message</button>
+            {{ form.non_field_errors }}
           </form>
         </div>
 
