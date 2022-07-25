@@ -1,4 +1,12 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# Virtual environment
 django-venv/
-env/
-.DS_Store
+
+# Environment variables (secret variables)
 .env
+
+# macOS file system cache
+.DS_Store
