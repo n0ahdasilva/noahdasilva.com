@@ -10,3 +10,6 @@ django-venv/
 
 # macOS file system cache
 .DS_Store
+
+# Database and content
+db.sqlite3
