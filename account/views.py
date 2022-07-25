@@ -140,8 +140,13 @@ class DeleteAccountView(LoginRequiredMixin, TemplateView):
 def delete_account_done_view(request):
     if request.method == 'POST':
         user = request.user
-        user.delete()
-        logout(request)
+
+        if request.user.is_staff or request.user.is_superuser:
+            return redirect(reverse_lazy('dashboard'))
+        else:
+            user.delete()
+            logout(request)
+            
     return redirect(reverse_lazy('login'))
 
 
