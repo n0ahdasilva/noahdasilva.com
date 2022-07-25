@@ -100,112 +100,118 @@
         Explore posts which cover the topics you care most about.
       </p>
     </div>
+    
+    {% if tag_list.7 %}
+
     <div class="w-layout-grid topics-grid">
       <div class="topic-col">
-        <a href="{% url 'tag-detail' tag_list.1.slug %}" class="topic-link w-inline-block">
+        <a href="{% url 'tag-detail' tag_list.0.slug %}" class="topic-link w-inline-block">
           <div class="w-layout-grid topic-div-short hue45">
             <div id="w-node-_10b6ca44-f128-3665-c075-6c06e011f18d-4280d04e" class="topic-icon">
-              <span class="fa900solid-span" style="font-size: 2rem;">{{ tag_list.1.special }}</span>
+              <span class="fa900solid-span" style="font-size: 2rem;">{{ tag_list.0.special }}</span>
             </div>
             <h3
               id="w-node-_7e0434aa-2d13-374e-9e6b-efbf680490be-4280d04e"
               class="h5-heading">
-              {{ tag_list.1.name }}
+              {{ tag_list.0.name }}
             </h3>
           </div>
         </a>
-        <a href="{% url 'tag-detail' tag_list.2.slug %}" class="topic-link w-inline-block">
+        <a href="{% url 'tag-detail' tag_list.1.slug %}" class="topic-link w-inline-block">
           <div class="w-layout-grid topic-div-tall hue315">
+            <div id="w-node-_10b6ca44-f128-3665-c075-6c06e011f18d-4280d04e" class="topic-icon">
+              <span class="fa900solid-span" style="font-size: 2rem;">{{ tag_list.1.special }}</span>
+            </div>
+            <h3
+              id="w-node-f0c680e1-d1fd-cc7c-2d50-64e7f478fff8-4280d04e"
+              class="h5-heading">
+            {{ tag_list.1.name }}
+            </h3>
+          </div>
+        </a>
+      </div>
+      <div class="topic-col">
+        <a href="{% url 'tag-detail' tag_list.2.slug %}" class="topic-link w-inline-block">
+          <div class="w-layout-grid topic-div-tall">
             <div id="w-node-_10b6ca44-f128-3665-c075-6c06e011f18d-4280d04e" class="topic-icon">
               <span class="fa900solid-span" style="font-size: 2rem;">{{ tag_list.2.special }}</span>
             </div>
             <h3
-              id="w-node-f0c680e1-d1fd-cc7c-2d50-64e7f478fff8-4280d04e"
+              id="w-node-_3b806504-33c5-9c38-7e96-7c4a9f838ba5-4280d04e"
               class="h5-heading">
             {{ tag_list.2.name }}
             </h3>
           </div>
         </a>
-      </div>
-      <div class="topic-col">
         <a href="{% url 'tag-detail' tag_list.3.slug %}" class="topic-link w-inline-block">
-          <div class="w-layout-grid topic-div-tall">
+          <div class="w-layout-grid topic-div-short hue315">
             <div id="w-node-_10b6ca44-f128-3665-c075-6c06e011f18d-4280d04e" class="topic-icon">
               <span class="fa900solid-span" style="font-size: 2rem;">{{ tag_list.3.special }}</span>
             </div>
             <h3
-              id="w-node-_3b806504-33c5-9c38-7e96-7c4a9f838ba5-4280d04e"
+              id="w-node-_5fa38e5f-245a-8f81-d3ca-14d3737075ae-4280d04e"
               class="h5-heading">
             {{ tag_list.3.name }}
             </h3>
           </div>
         </a>
+      </div>
+      <div class="topic-col">
         <a href="{% url 'tag-detail' tag_list.4.slug %}" class="topic-link w-inline-block">
-          <div class="w-layout-grid topic-div-short hue315">
+          <div class="w-layout-grid topic-div-short">
             <div id="w-node-_10b6ca44-f128-3665-c075-6c06e011f18d-4280d04e" class="topic-icon">
               <span class="fa900solid-span" style="font-size: 2rem;">{{ tag_list.4.special }}</span>
             </div>
             <h3
-              id="w-node-_5fa38e5f-245a-8f81-d3ca-14d3737075ae-4280d04e"
+              id="w-node-_9343c46b-43e3-c143-896a-77a19f29dfef-4280d04e"
               class="h5-heading">
             {{ tag_list.4.name }}
             </h3>
           </div>
         </a>
-      </div>
-      <div class="topic-col">
         <a href="{% url 'tag-detail' tag_list.5.slug %}" class="topic-link w-inline-block">
-          <div class="w-layout-grid topic-div-short">
+          <div class="w-layout-grid topic-div-tall hue45">
             <div id="w-node-_10b6ca44-f128-3665-c075-6c06e011f18d-4280d04e" class="topic-icon">
               <span class="fa900solid-span" style="font-size: 2rem;">{{ tag_list.5.special }}</span>
             </div>
             <h3
-              id="w-node-_9343c46b-43e3-c143-896a-77a19f29dfef-4280d04e"
+              id="w-node-_0688155b-d1df-7ff1-c4e1-e803ba07d302-4280d04e"
               class="h5-heading">
             {{ tag_list.5.name }}
             </h3>
           </div>
         </a>
+      </div>
+      <div class="topic-col">
         <a href="{% url 'tag-detail' tag_list.6.slug %}" class="topic-link w-inline-block">
-          <div class="w-layout-grid topic-div-tall hue45">
+          <div class="w-layout-grid topic-div-tall hue315">
             <div id="w-node-_10b6ca44-f128-3665-c075-6c06e011f18d-4280d04e" class="topic-icon">
               <span class="fa900solid-span" style="font-size: 2rem;">{{ tag_list.6.special }}</span>
             </div>
             <h3
-              id="w-node-_0688155b-d1df-7ff1-c4e1-e803ba07d302-4280d04e"
+              id="w-node-_6687eb29-4a62-e3b9-dc0d-544e6bed7982-4280d04e"
               class="h5-heading">
             {{ tag_list.6.name }}
             </h3>
           </div>
         </a>
-      </div>
-      <div class="topic-col">
         <a href="{% url 'tag-detail' tag_list.7.slug %}" class="topic-link w-inline-block">
-          <div class="w-layout-grid topic-div-tall hue315">
+          <div class="w-layout-grid topic-div-short">
             <div id="w-node-_10b6ca44-f128-3665-c075-6c06e011f18d-4280d04e" class="topic-icon">
               <span class="fa900solid-span" style="font-size: 2rem;">{{ tag_list.7.special }}</span>
             </div>
             <h3
-              id="w-node-_6687eb29-4a62-e3b9-dc0d-544e6bed7982-4280d04e"
-              class="h5-heading">
-            {{ tag_list.7.name }}
-            </h3>
-          </div>
-        </a>
-        <a href="{% url 'tag-detail' tag_list.8.slug %}" class="topic-link w-inline-block">
-          <div class="w-layout-grid topic-div-short">
-            <div id="w-node-_10b6ca44-f128-3665-c075-6c06e011f18d-4280d04e" class="topic-icon">
-              <span class="fa900solid-span" style="font-size: 2rem;">{{ tag_list.8.special }}</span>
-            </div>
-            <h3
               id="w-node-_45ae0213-42ed-960e-9143-28556713062b-4280d04e"
               class="h5-heading">
-              {{ tag_list.8.name }}
+              {{ tag_list.7.name }}
             </h3>
           </div>
         </a>
       </div>
     </div>
+
+    {% endif %}
+
   </div>
 </div>
 <div class="default-section-light-purple wf-section">
