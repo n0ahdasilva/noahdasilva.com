@@ -4,30 +4,58 @@ from django.contrib.auth import forms as auth_forms
 import re
 
 
+#NOTE: Global variables
+
+
+MIN_PASS_LENGTH = 8
+MAX_PASS_LENGTH = 128
+
+MIN_USER_LENGTH = 4
+MAX_USER_LENGTH = 24
+
+MIN_NAME_LENGTH = 2
+MAX_NAME_LENGTH = 64
+
+
+# NOTE: Forms for the account app
+
+
 class SignUpForm(forms.ModelForm):
-    password = forms.CharField(max_length=255, widget=forms.PasswordInput)
+    password = forms.CharField(max_length=128, widget=forms.PasswordInput)
     
     class Meta:
         model = get_user_model()
         fields = ['username', 'email', 'password',]
 
-    MIN_LENGTH = 8
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        
+        # Must be between 4 and 24 characters long
+        if len(username) < MIN_USER_LENGTH or len(username) > MAX_USER_LENGTH:
+            raise forms.ValidationError("Username must be between %d and %d characters " \
+                "long." % (MIN_USER_LENGTH, MAX_USER_LENGTH))
+
+        # Only allows for alphanumeric characters and underscores
+        if re.search(r'[^a-zA-Z0-9_]', username) is not None:
+            raise forms.ValidationError(
+                "Username can only contain letters, numbers, and underscores.")
+
+        return username
+
     def clean_password(self):
         password = self.cleaned_data.get('password')
 
-        # At least 8 characters long
-        if len(password) < self.MIN_LENGTH:
-            raise forms.ValidationError("Password must be at least %d characters long." % self.MIN_LENGTH)
-        
+        # Must be between 8 and 128 characters long
+        if len(password) < MIN_PASS_LENGTH or len(password) > MAX_PASS_LENGTH:
+            raise forms.ValidationError("Password must be between %d and %d characters " \
+                "long." % (MIN_PASS_LENGTH, MAX_PASS_LENGTH))
+
         # searching for digits
         digit_error = re.search(r"\d", password) is None
-
         # searching for uppercase
         uppercase_error = re.search(r"[A-Z]", password) is None
-
         # searching for lowercase
         lowercase_error = re.search(r"[a-z]", password) is None
-
         # searching for symbols
         symbol_error = re.search(r"[ !#$%&'()*+,-./[\\\]^_`{|}~"+r'"]', password) is None
 
@@ -36,10 +64,7 @@ class SignUpForm(forms.ModelForm):
         
         if not password_valid:
             raise forms.ValidationError(
-                "The new password must contain at least one letter, number," \
-                " and special character.")
-
-        # ... any other validation you want ...
+                "The new password must contain at least one letter, number, and special character.")
 
         return password
 
@@ -54,30 +79,57 @@ class UserUpdateForm(forms.ModelForm):
         model = get_user_model()
         fields = ['username', 'full_name', 'email',]
 
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        
+        # Must be between 4 and 24 characters long
+        if len(username) < MIN_USER_LENGTH or len(username) > MAX_USER_LENGTH:
+            raise forms.ValidationError("Username must be between %d and %d characters " \
+                "long." % (MIN_USER_LENGTH, MAX_USER_LENGTH))
+
+        # Only allows for alphanumeric characters and underscores
+        if re.search(r'[^a-zA-Z0-9_]', username) is not None:
+            raise forms.ValidationError(
+                "Username can only contain letters, numbers, and underscores.")
+
+        return username
+
+    def clean_full_name(self):
+        full_name = self.cleaned_data.get('full_name')
+
+        # Must be between 2 and 64 characters long
+        if  len(full_name) < MIN_NAME_LENGTH or len(full_name) > MAX_NAME_LENGTH:
+            raise forms.ValidationError("Name must be between %d and %d characters " \
+                "long." % (MIN_NAME_LENGTH, MAX_NAME_LENGTH))
+
+        # Only allow letters, dashs, and spaces
+        if re.search(r'[^a-zA-Z- ]', full_name) is not None:
+            raise forms.ValidationError(
+                "Name can only contain letters, dashs, and spaces.")
+            
+        return full_name
+
 
 class CustomSetPasswordForm(auth_forms.SetPasswordForm):
-    MIN_LENGTH = 8
     def clean_new_password2(self):
         password = self.cleaned_data.get('new_password2')
         first_password = self.cleaned_data.get('new_password1')
 
         # Passwords must match
         if password != first_password:
-            raise forms.ValidationError("Passwords do not match.")
+            raise auth_forms.ValidationError("Passwords do not match.")
         
-        # At least 8 characters long
-        if len(password) < self.MIN_LENGTH:
-            raise auth_forms.ValidationError("Password must be at least %d characters long." % self.MIN_LENGTH)
-        
+        # Must be between 8 and 128 characters long
+        if len(password) < MIN_PASS_LENGTH or len(password) > MAX_PASS_LENGTH:
+            raise auth_forms.ValidationError("Password must be between %d and %d characters " \
+                " long." % (MIN_PASS_LENGTH, MAX_PASS_LENGTH))
+
         # searching for digits
         digit_error = re.search(r"\d", password) is None
-
         # searching for uppercase
         uppercase_error = re.search(r"[A-Z]", password) is None
-
         # searching for lowercase
         lowercase_error = re.search(r"[a-z]", password) is None
-
         # searching for symbols
         symbol_error = re.search(r"[ !#$%&'()*+,-./[\\\]^_`{|}~"+r'"]', password) is None
 
@@ -86,37 +138,32 @@ class CustomSetPasswordForm(auth_forms.SetPasswordForm):
 
         if not password_valid:
             raise auth_forms.ValidationError(
-                "The new password must contain at least one letter, number," \
-                " and special character.")
-
-        # ... any other validation you want ...
+                "The new password must contain at least one letter, number, and special character.")
 
         return password
 
 
 class CustomPasswordChangeForm(auth_forms.PasswordChangeForm):
-    MIN_LENGTH = 8
     def clean_new_password2(self):
         password = self.cleaned_data.get('new_password2')
         old_password = self.cleaned_data.get('old_password')
 
         # Must be new password
         if password == old_password:
-            raise auth_forms.ValidationError("New password must be different from old password.")
+            raise auth_forms.ValidationError(
+                "New password must be different from old password.")
 
-        # At least 8 characters long
-        if len(password) < self.MIN_LENGTH:
-            raise auth_forms.ValidationError("Password must be at least %d characters long." % self.MIN_LENGTH)
-        
+        # Must be between 8 and 128 characters long
+        if len(password) < MIN_PASS_LENGTH or len(password) > MAX_PASS_LENGTH:
+            raise auth_forms.ValidationError("Password must be between %d and %d characters " \
+                "long." % (MIN_PASS_LENGTH, MAX_PASS_LENGTH))
+
         # searching for digits
         digit_error = re.search(r"\d", password) is None
-
         # searching for uppercase
         uppercase_error = re.search(r"[A-Z]", password) is None
-
         # searching for lowercase
         lowercase_error = re.search(r"[a-z]", password) is None
-
         # searching for symbols
         symbol_error = re.search(r"[ !#$%&'()*+,-./[\\\]^_`{|}~"+r'"]', password) is None
 
@@ -125,9 +172,6 @@ class CustomPasswordChangeForm(auth_forms.PasswordChangeForm):
 
         if not password_valid:
             raise auth_forms.ValidationError(
-                "The new password must contain at least one letter, number," \
-                " and special character.")
-
-        # ... any other validation you want ...
+                "The new password must contain at least one letter, number, and special character.")
 
         return password
