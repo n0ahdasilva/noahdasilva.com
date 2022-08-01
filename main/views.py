@@ -4,7 +4,7 @@ from django.http import BadHeaderError, HttpResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.core.mail import send_mail
 from blog.models import Post
-from main.decorators import check_recaptcha
+from .decorators import check_recaptcha
 from .forms import ContactForm
 
 
