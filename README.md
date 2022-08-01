@@ -26,7 +26,7 @@ We will need to pull the latest version of the project's repository.
 git pull
 ```
 
-Note: If there are local overwrite issues, try to reset the branch instead. This will erase anything tracked by Git and will not touch untracked local files.
+Note: If there are local overwrite issues, you can reset the branch. This will erase anything tracked by Git and will not touch untracked local files.
 
 ```bash
 git fetch --all

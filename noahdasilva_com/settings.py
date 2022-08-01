@@ -28,6 +28,7 @@ load_dotenv(dotenv_path=ENV_PATH)
 
 PRODUCTION = os.getenv('PRODUCTION', 'False') == 'True'
 
+
 # NOTE: SETTINGS FOR PRODUCTION ENVIRONMENT
 if PRODUCTION:
 
@@ -65,6 +66,7 @@ if PRODUCTION:
         }
     }
 
+
 # NOTE: SETTINGS FOR DEVELOPMENT ENVIRONMENT
 else:
 
@@ -88,6 +90,10 @@ else:
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
+
+
+# NOTE: END OF PRODUCTION DEPENDENT SETTINGS
+RECAPTCHA_SECRET_KEY = os.getenv('RECAPTCHA_SECRET_KEY')
 
 
 # Application definition
