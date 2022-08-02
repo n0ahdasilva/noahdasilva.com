@@ -38,7 +38,6 @@
         <h1 class="h3-heading">Contact form</h1>
         <div class="w-form">
           <form
-            id="recaptchaForm"
             name="email-form"
             data-name="Email Form"
             method="post"
@@ -75,7 +74,6 @@
               {% render_field form.message type="textarea" class="input form-message w-input" placeholder="How can we help you?" %}
               <span style="font-size: 14px;">{{ form.message.errors }}</span>
             </div>
-            <input id="recaptcha" type="hidden" name="g-recaptcha-response"/>
             <button id="w-node-_92f09ec5-7e34-2292-6911-ac82a81f1d8b-9383a921" class="submit-btn w-button">Send message</button>
             {{ form.non_field_errors }}
           </form>
@@ -87,24 +85,4 @@
     </div>
   </div>
 </div>
-{% endblock %}
-
-{% block scripts %}
-<!-- dependencies -->
-<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-<script src="https://www.google.com/recaptcha/api.js?render={{ recaptcha_key }}"></script>
-
-<!-- Google reCAPTCHA Integration -->
-<script>
-  grecaptcha.ready(function() {
-    $('#recaptchaForm').submit(function(e){
-      var form = this;
-      e.preventDefault()
-      grecaptcha.execute('{{ recaptcha_key }}', {action: 'recaptchaForm'}).then(function(token) {
-        $('#recaptcha').val(token)
-          form.submit()
-      });
-    })
-  });
-</script>
 {% endblock %}

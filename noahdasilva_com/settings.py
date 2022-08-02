@@ -28,7 +28,6 @@ load_dotenv(dotenv_path=ENV_PATH)
 
 PRODUCTION = os.getenv('PRODUCTION', 'False') == 'True'
 
-
 # NOTE: SETTINGS FOR PRODUCTION ENVIRONMENT
 if PRODUCTION:
 
@@ -49,11 +48,7 @@ if PRODUCTION:
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
 
-    ALLOWED_HOSTS = [
-        'noahdasilva.com',
-        'www.noahdasilva.com',
-        'localhost'
-    ]
+    ALLOWED_HOSTS = ['noahdasilva.com', 'www.noahdasilva.com', 'localhost']
 
 
     # Database
@@ -70,7 +65,6 @@ if PRODUCTION:
         }
     }
 
-
 # NOTE: SETTINGS FOR DEVELOPMENT ENVIRONMENT
 else:
 
@@ -82,12 +76,7 @@ else:
     DEBUG = True
 
 
-    ALLOWED_HOSTS = [
-        'noahdasilva.com',
-        'www.noahdasilva.com',
-        'localhost', 
-        '127.0.0.1'
-    ]
+    ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
     # Database
@@ -99,14 +88,6 @@ else:
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
-
-
-# NOTE: END OF PRODUCTION DEPENDENT SETTINGS
-
-
-# Google reCAPTCHA settings
-RECAPTCHA_SECRET_KEY = os.getenv('RECAPTCHA_SECRET_KEY')
-RECAPTCHA_SITE_KEY = os.getenv('RECAPTCHA_SITE_KEY')
 
 
 # Application definition
