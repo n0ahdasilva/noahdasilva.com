@@ -49,7 +49,11 @@ if PRODUCTION:
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
 
-    ALLOWED_HOSTS = ['noahdasilva.com', 'www.noahdasilva.com', 'localhost']
+    ALLOWED_HOSTS = [
+        'noahdasilva.com',
+        'www.noahdasilva.com',
+        'localhost'
+    ]
 
 
     # Database
@@ -78,7 +82,12 @@ else:
     DEBUG = True
 
 
-    ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+    ALLOWED_HOSTS = [
+        'noahdasilva.com',
+        'www.noahdasilva.com',
+        'localhost', 
+        '127.0.0.1'
+    ]
 
 
     # Database
