@@ -105,7 +105,8 @@ else:
 
 
 # Google reCAPTCHA settings
-GOOGLE_RECAPTCHA_SECRET_KEY = os.getenv('GOOGLE_RECAPTCHA_SECRET_KEY')
+RECAPTCHA_SECRET_KEY = os.getenv('RECAPTCHA_SECRET_KEY')
+RECAPTCHA_SITE_KEY = os.getenv('RECAPTCHA_SITE_KEY')
 
 
 # Application definition

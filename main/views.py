@@ -1,10 +1,11 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, TemplateView
+from django.views.generic import ListView, DetailView, TemplateView, FormView
 from django.http import BadHeaderError, HttpResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.core.mail import send_mail
+from django.conf import settings
+import requests
 from blog.models import Post
-from .decorators import check_recaptcha
 from .forms import ContactForm
 
 
@@ -17,34 +18,55 @@ class HomeView(ListView):
 def about_view(request):
     return render(request, 'about.html', {})
 
-@check_recaptcha
-def contact_view(request):
-    if request.method == 'POST':
-        form = ContactForm(request.POST)
-        if form.is_valid() and request.recaptcha_is_valid:
-            name = form.cleaned_data['name']
-            from_email = form.cleaned_data['email']
-            company = form.cleaned_data['company']
-            phone = form.cleaned_data['phone']
-            subject = form.cleaned_data['subject']
-            raw_message = form.cleaned_data['message']
 
-            formatted_message = 'NAME: ' + name + '\nEMAIL: ' + from_email + '\nCOMPANY: ' + company + '\nPHONE: ' + phone + '\nSUBJECT: ' + subject + '\n\nMESSAGE:\n' + raw_message
-            
-            try:
-                send_mail(
-                    'noahdasilva.com Contact Form',
-                    formatted_message,
-                    from_email,
-                    ['noah@noahdasilva.com',],
-                )
-            except BadHeaderError:
-                return HttpResponse('Invalid header found.')
-            return render(request, 'contact.html', {'form': form, 'from_email': from_email})
-    else:
-        form = ContactForm()
+class ContactView(FormView):
+    template_name = 'contact.html'
+    form_class = ContactForm
+    success_url = ''
+    extra_context = {
+        'recaptcha_key': settings.RECAPTCHA_SITE_KEY
+    }
 
-    return render(request, 'contact.html', {'form': form})
+    def form_valid(self, form):
+        # Retrieve token
+        token = self.request.POST('g-recaptcha-response')
+        if token:
+            data = {
+                'secret': settings.RECAPTCHA_SECRET_KEY,
+                'response': token
+            }
+            # Verify response with Google
+            response = requests.post(
+                'https://www.google.com/recaptcha/api/siteverify',
+                data = data
+            )
+            result = response.json()
+            # check results
+            if result['success'] == True and result['score'] >= 0.5:
+                form.save()
+                name = form.cleaned_data['name']
+                from_email = form.cleaned_data['email']
+                company = form.cleaned_data['company']
+                phone = form.cleaned_data['phone']
+                subject = form.cleaned_data['subject']
+                raw_message = form.cleaned_data['message']
+
+                formatted_message = 'NAME: ' + name + '\nEMAIL: ' + from_email + '\nCOMPANY: ' + company + '\nPHONE: ' + phone + '\nSUBJECT: ' + subject + '\n\nMESSAGE:\n' + raw_message
+                
+                try:
+                    send_mail(
+                        'noahdasilva.com Contact Form',
+                        formatted_message,
+                        from_email,
+                        ['noah@noahdasilva.com',],
+                    )
+                except BadHeaderError:
+                    return HttpResponse('Invalid header found.')
+                return render(self.request, 'contact.html', 
+                    {'form': self.get_form(), 'from_email': from_email})
+            else:
+                return render(self.request, 'contact.html', 
+                    {'form': self.get_form()})
 
 
 def terms_and_conditions_view(request):

@@ -7,7 +7,7 @@ urlpatterns = [
     path('about/',views.about_view, name="about"),
     path('terms-and-conditions/',views.terms_and_conditions_view, name="terms_and_conditions"),
     path('privacy-policy/',views.privacy_policy_view, name="privacy_policy"),
-    path('contact/', views.contact_view, name="contact"),
+    path('contact/', views.ContactView.as_view(), name="contact"),
 ]
 
 handler404 = 'main.views.error_404'
