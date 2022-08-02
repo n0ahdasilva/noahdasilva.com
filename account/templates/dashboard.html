@@ -381,81 +381,16 @@
               </div>
             </div>
             <div class="dashboard-tab-content">
-              <h2 class="h4-heading">My Account</h2>
-              <div class="dashboard-row">
-                <div class="dashboard-info-box full-width">
-                  <div class="dashboard-box-padding horizontal-flex">
-                    <div>
-                      <h3 class="dashboard-heading-small">Email</h3>
-                    </div>
-                    <div>
-
-                    {% if user.is_active %}
-
-                      <div class="dashboard-heading-small green">Verified</div>
-
-                    {% else %}
-
-                      <div class="dashboard-heading-small red">Not Verified</div>
-
-                    {% endif %}
-
-                    </div>
-                  </div>
-                </div>
-                <div class="dashboard-info-box full-width">
-                  <div class="dashboard-box-padding horizontal-flex">
-                    <div>
-                      <h3 class="dashboard-heading-small">Password</h3>
-                    </div>
-                    <div class="account-form w-form">
-                      <a href="{% url 'password_change' %}" class="dashboard-heading-small gray">Update</a>
-                    </div>
-                  </div>
-                </div>
-
-                {% if not user %}
-
-                <div class="dashboard-info-box full-width">
-                  <div class="dashboard-box-padding horizontal-flex">
-                    <div>
-                      <h3 class="dashboard-heading-small">2FA via Email</h3>
-                    </div>
-                    <div>
-                      <a href="#" class="dashboard-heading-small gray">Setup</a>
-                      <div class="dashboard-heading-small red">Inactive</div>
-                      <div class="dashboard-heading-small green">Active</div>
-                    </div>
-                  </div>
-                  <div class="dashboard-box-padding horizontal-flex">
-                    <div>
-                      <h3 class="dashboard-heading-small">2FA via App</h3>
-                    </div>
-                    <div>
-                      <a href="#" class="dashboard-heading-small gray">Setup</a>
-                      <div class="dashboard-heading-small red">Inactive</div>
-                      <div class="dashboard-heading-small green">Active</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="dashboard-info-box full-width">
-                  <div class="dashboard-box-padding horizontal-flex">
-                    <div>
-                      <h3 class="dashboard-heading-small">Recovery Codes</h3>
-                    </div>
-                    <div>
-                      <a href="#" class="dashboard-heading-small gray">View</a>
-                    </div>
-                  </div>
-                </div>
-
-                {% endif %}
-
-              </div>
-            </div>
-            <div class="dashboard-tab-content">
               <h2 class="h4-heading">Manage Account</h2>
               <div class="dashboard-row">
+                <a href="{% url 'password_change' %}" class="dashboard-info-box link-box w-inline-block">
+                  <div class="dashboard-box-padding horizontal-flex">
+                    <div>
+                      <h3 class="dashboard-heading-small">Change Password</h3>
+                      <div class="dashboard-heading-small gray">Update</div>
+                    </div>
+                  </div>
+                </a>
                 <a href="{% url 'delete_account' %}" class="dashboard-info-box link-box w-inline-block">
                   <div class="dashboard-box-padding horizontal-flex">
                     <div>
