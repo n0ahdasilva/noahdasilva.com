@@ -15,7 +15,9 @@ class UserAdmin(BaseUserAdmin):
             'last_login', 
             'previous_login',
             'failed_login_attempts',
-            'previous_failed_login_attempts')}),
+            'previous_failed_login_attempts',
+            'original_email',
+        )}),
         ('Permissions', {'fields': (
             'is_active', 
             'is_staff', 
@@ -35,9 +37,29 @@ class UserAdmin(BaseUserAdmin):
         ),
     )
 
-    list_display = ('email', 'username', 'full_name', 'is_staff', 'last_login', 'date_joined')
-    list_filter = ('is_active', 'is_staff', 'is_superuser', 'is_superadmin', 'groups')
-    readonly_fields = ['date_joined', 'previous_login', 'last_login', 'failed_login_attempts', 'previous_failed_login_attempts']
+    list_display = (
+        'email', 
+        'username', 
+        'full_name', 
+        'is_staff', 
+        'last_login', 
+        'date_joined'
+    )
+    list_filter = (
+        'is_active', 
+        'is_staff', 
+        'is_superuser', 
+        'is_superadmin', 
+        'groups'
+    )
+    readonly_fields = (
+        'original_email', 
+        'date_joined', 
+        'previous_login', 
+        'last_login', 
+        'failed_login_attempts', 
+        'previous_failed_login_attempts'
+    )
     search_fields = ('email',)
     ordering = ('email',)
     filter_horizontal = ('groups', 'user_permissions',)

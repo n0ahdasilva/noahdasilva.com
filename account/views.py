@@ -50,7 +50,11 @@ class SignUpView(FormView):
         email = data['email']
         password = data['password']
         
-        user = User.objects.create_user(email=email, password=password, username=username)
+        user = User.objects.create_user(
+            email=email,
+            password=password, 
+            username=username,
+        )
         user.is_active = False
         user.save()
 
@@ -69,8 +73,9 @@ class LoginView(FormView):
     def form_valid(self, form):
         credentials = form.cleaned_data
 
-        user = authenticate(username=credentials['email'],
-                            password=credentials['password'])
+        user = authenticate(
+            username=credentials['email'],
+            password=credentials['password'])
 
         if user is not None and user.is_active is False:
             send_verification_email(self.request, user)

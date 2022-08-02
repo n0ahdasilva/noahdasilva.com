@@ -81,7 +81,7 @@ class UserUpdateForm(forms.ModelForm):
 
     def clean_username(self):
         username = self.cleaned_data['username']
-        
+
         # Must be between 4 and 24 characters long
         if len(username) < MIN_USER_LENGTH or len(username) > MAX_USER_LENGTH:
             raise forms.ValidationError("Username must be between %d and %d characters " \
@@ -96,6 +96,10 @@ class UserUpdateForm(forms.ModelForm):
 
     def clean_full_name(self):
         full_name = self.cleaned_data.get('full_name')
+
+        # Check if user currently has a name
+        if full_name is None:
+            return full_name
 
         # Must be between 2 and 64 characters long
         if  len(full_name) < MIN_NAME_LENGTH or len(full_name) > MAX_NAME_LENGTH:

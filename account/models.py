@@ -12,7 +12,7 @@ class CustomUserManager(BaseUserManager):
         if not email:
             raise ValueError('The given email must be set')
         email = self.normalize_email(email)
-        user = self.model(email=email, **extra_fields)
+        user = self.model(email=email, original_email=email, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
         return user
@@ -35,6 +35,7 @@ class CustomUserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_('email'), unique=True, default='')
+    original_email = models.EmailField(_('original email'), default='')
     date_joined = models.DateTimeField(_('date joined'), auto_now_add=True)
     username = models.CharField(_('username'), max_length=24, unique=True)
     full_name = models.CharField(_('full name'), max_length=64, null=True, blank=True)

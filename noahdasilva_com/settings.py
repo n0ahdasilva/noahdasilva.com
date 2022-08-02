@@ -28,7 +28,10 @@ load_dotenv(dotenv_path=ENV_PATH)
 
 PRODUCTION = os.getenv('PRODUCTION', 'False') == 'True'
 
-# NOTE: SETTINGS FOR PRODUCTION ENVIRONMENT
+#############################################
+# NOTE: SETTINGS FOR PRODUCTION ENVIRONMENT #
+#############################################
+
 if PRODUCTION:
 
     # SECURITY WARNING: keep the secret key used in production secret!
@@ -65,8 +68,11 @@ if PRODUCTION:
         }
     }
 
-# NOTE: SETTINGS FOR DEVELOPMENT ENVIRONMENT
-else:
+##############################################
+# NOTE: SETTINGS FOR DEVELOPMENT ENVIRONMENT #
+##############################################
+
+if not PRODUCTION:
 
     # SECURITY WARNING: keep the secret key used in production secret!
     SECRET_KEY = get_random_secret_key()
@@ -89,6 +95,9 @@ else:
         }
     }
 
+##############################################
+# NOTE: END OF PRODUCTION DEPENDENT SETTINGS #
+##############################################
 
 # Application definition
 
