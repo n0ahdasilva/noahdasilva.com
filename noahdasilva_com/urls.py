@@ -15,9 +15,25 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.contrib.sitemaps.views import sitemap
 
 from django.conf import settings
 from django.conf.urls.static import static
+
+from account.sitemaps import AccountStaticSitemap
+from blog.sitemaps import TagSitemap, PostSitemap, BlogStaticSitemap
+from main.sitemaps import MainStaticSitemap
+from portfolio.sitemaps import ProjectSitemap, PortfolioStaticSitemap
+
+sitemaps = {
+    'main-static': MainStaticSitemap,
+    'account-static': AccountStaticSitemap,
+    'blog-static': BlogStaticSitemap,
+    'portfolio-static': PortfolioStaticSitemap,
+    'tags': TagSitemap,
+    'posts': PostSitemap,
+    'projects': ProjectSitemap,
+}
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,5 +42,7 @@ urlpatterns = [
     path('', include('django.contrib.auth.urls')),
     path('', include('account.urls')),
     path('', include('portfolio.urls')),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
+	    name='django.contrib.sitemaps.views.sitemap'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) \
  + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
