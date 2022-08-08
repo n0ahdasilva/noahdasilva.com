@@ -13,6 +13,11 @@
 <meta propety="og:image" content="{% static 'main/img/IMG_0074-1250px.png' %}"/>
 {% endblock %}
 
+{% block head_scripts %}
+ <!-- reCAPTCHA API -->
+ <script src='https://www.google.com/recaptcha/api.js?render={{ recaptcha_site_key }}'></script>
+{% endblock %}
+
 {% block content %}
 <div class="default-section wf-section">
   <div class="default-section-content">
@@ -74,7 +79,20 @@
               {% render_field form.message type="textarea" class="input form-message w-input" placeholder="How can we help you?" %}
               <span style="font-size: 14px;">{{ form.message.errors }}</span>
             </div>
+            <!-- reCAPTCHA input -->
+            <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response"> 
             <button id="w-node-_92f09ec5-7e34-2292-6911-ac82a81f1d8b-9383a921" class="submit-btn w-button">Send message</button>
+            <!-- reCAPTCHA Privacy and Terms of Service disclosure -->
+            <p style="font-size: 12px; margin-bottom: 0;" id="w-node-_92f09ec5-7e34-2292-6911-ac82a81f1d8b-9383a921">
+              This page is protected by Google reCAPTCHA.
+              <a href="https://policies.google.com/privacy" target="_blank" style="text-decoration: none;">
+                <span class="gradient-span">Privacy</span>
+              </a>
+              &amp;
+              <a href="https://policies.google.com/terms" target="_blank" style="text-decoration: none;">
+                <span class="gradient-span">Terms</span>
+              </a>.
+            </p>
             {{ form.non_field_errors }}
           </form>
         </div>
@@ -85,4 +103,20 @@
     </div>
   </div>
 </div>
+{% endblock %}
+
+{% block body_scripts %}
+<style>
+  .grecaptcha-badge {
+       opacity:0; !important;
+  }
+</style>
+<script>
+  //Global grecaptcha
+  grecaptcha.ready(function() {
+    grecaptcha.execute('{{ recaptcha_site_key }}', {action: "/contact/"}).then(function(token) {
+      document.getElementById('g-recaptcha-response').value = token;
+    });
+  });
+</script>
 {% endblock %}

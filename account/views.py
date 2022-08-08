@@ -1,7 +1,7 @@
 from django.http import HttpRequest, HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic import FormView, UpdateView, TemplateView
-from django.contrib.auth.views import PasswordResetView 
+from django.contrib.auth.views import PasswordResetView
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -12,8 +12,9 @@ from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
+from django.conf import settings
 from .tokens import account_activation_token
-from .forms import SignUpForm, LoginForm, UserUpdateForm
+from .forms import CustomPasswordResetForm, SignUpForm, LoginForm, UserUpdateForm
 from .models import User
 
 
@@ -39,12 +40,17 @@ class SignUpView(FormView):
     form_class = SignUpForm
     template_name = 'registration/sign_up.html'
 
+    def get_context_data(self, **kwargs):          
+        context = super().get_context_data(**kwargs)                     
+        context["recaptcha_site_key"] = settings.RECAPTCHA_SITE_KEY
+        return context
+
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
             return redirect(reverse_lazy('dashboard'))
         return super(SignUpView, self).dispatch(request, *args, **kwargs)
     
-    def form_valid(self, request):
+    def form_valid(self, form):
         data = self.request.POST
         username = data['username']
         email = data['email']
@@ -156,6 +162,12 @@ def delete_account_done_view(request):
 
 
 class ResetPasswordView(PasswordResetView):
+    form_class = CustomPasswordResetForm
     template_name = 'password_reset.html'
     email_template_name = 'password_reset_email.html'
     success_url = reverse_lazy('password_reset_done')
+    
+    def get_context_data(self, **kwargs):          
+        context = super().get_context_data(**kwargs)                     
+        context["recaptcha_site_key"] = settings.RECAPTCHA_SITE_KEY
+        return context

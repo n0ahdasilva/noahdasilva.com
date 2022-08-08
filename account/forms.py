@@ -1,7 +1,9 @@
 from django.contrib.auth import get_user_model
 from django import forms
 from django.contrib.auth import forms as auth_forms
+import requests
 import re
+from django.conf import settings
 
 
 #NOTE: Global variables
@@ -22,7 +24,12 @@ MAX_NAME_LENGTH = 64
 
 class SignUpForm(forms.ModelForm):
     password = forms.CharField(max_length=128, widget=forms.PasswordInput)
-    
+    recaptcha = forms.CharField(
+        widget=forms.HiddenInput(),
+        max_length=1024,
+        required=False
+    )
+
     class Meta:
         model = get_user_model()
         fields = ['username', 'email', 'password',]
@@ -68,6 +75,22 @@ class SignUpForm(forms.ModelForm):
 
         return password
 
+    def clean_recaptcha(self):
+        cleaned_data = super(SignUpForm, self).clean()
+        recaptcha_response = cleaned_data.get('recaptcha')
+        data = {
+            'secret': settings.RECAPTCHA_SECRET_KEY,
+            'response': recaptcha_response
+        }
+        r = requests.post(settings.RECAPTCHA_URL, data=data)
+        result = r.json()
+
+        if result.get('success') and result.get('score') > 0.5:
+            # client is human
+            pass
+        else:
+            raise forms.ValidationError('You are robot!')
+
 
 class LoginForm(forms.Form):
     username = forms.CharField()
@@ -112,6 +135,29 @@ class UserUpdateForm(forms.ModelForm):
                 "Name can only contain letters, dashs, and spaces.")
             
         return full_name
+
+
+class CustomPasswordResetForm(auth_forms.PasswordResetForm):
+    recaptcha = forms.CharField(
+        widget=forms.HiddenInput(),
+        max_length=1024,
+        required=False
+    )
+
+    def clean(self):
+        cleaned_data = super(CustomPasswordResetForm, self).clean()
+        recaptcha_response = cleaned_data.get('recaptcha')
+        data = {
+            'secret': settings.RECAPTCHA_SECRET_KEY,
+            'response': recaptcha_response
+        }
+        r = requests.post(settings.RECAPTCHA_URL, data=data)
+        result = r.json()
+        if result.get('success') and result.get('score') > 0.5:
+            # client is human
+            pass
+        else:
+            raise forms.ValidationError('You are robot!')
 
 
 class CustomSetPasswordForm(auth_forms.SetPasswordForm):

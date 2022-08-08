@@ -223,3 +223,8 @@ EMAIL_HOST_PASSWORD = str(os.getenv('EMAIL_HOST_PASSWORD'))
 
 # Custom user model
 AUTH_USER_MODEL = 'account.User'
+
+# Google reCAPTCHA keys
+RECAPTCHA_SITE_KEY = str(os.getenv('RECAPTCHA_SITE_KEY'))
+RECAPTCHA_SECRET_KEY = str(os.getenv('RECAPTCHA_SECRET_KEY'))
+RECAPTCHA_URL = 'https://www.google.com/recaptcha/api/siteverify'
