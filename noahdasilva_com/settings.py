@@ -229,3 +229,7 @@ AUTH_USER_MODEL = 'account.User'
 RECAPTCHA_SITE_KEY = str(os.getenv('RECAPTCHA_SITE_KEY'))
 RECAPTCHA_SECRET_KEY = str(os.getenv('RECAPTCHA_SECRET_KEY'))
 RECAPTCHA_URL = 'https://www.google.com/recaptcha/api/siteverify'
+
+
+# Password reset settings
+PASSWORD_RESET_TIMEOUT = 2700   # 45 minutes in seconds
