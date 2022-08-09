@@ -4,6 +4,7 @@ from django.contrib.auth import forms as auth_forms
 import requests
 import re
 from django.conf import settings
+from django.contrib.auth import authenticate
 
 
 #NOTE: Global variables
@@ -111,7 +112,6 @@ class LoginForm(forms.Form):
         r = requests.post(settings.RECAPTCHA_URL, data=data)
         result = r.json()
 
-        print(result)
         if result.get('success') and result.get('score') > 0.5:
             # client is human
             pass

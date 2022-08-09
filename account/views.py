@@ -80,13 +80,14 @@ class LoginView(FormView):
         context = super().get_context_data(**kwargs)                     
         context["recaptcha_site_key"] = settings.RECAPTCHA_SITE_KEY
         return context
-
+    
     def form_valid(self, form):
         credentials = form.cleaned_data
 
-        user = authenticate(
+        user = authenticate(self.request,
             username=credentials['username'],
-            password=credentials['password'])
+            password=credentials['password']
+        )
 
         if user is not None and user.is_active is False:
             send_verification_email(self.request, user)

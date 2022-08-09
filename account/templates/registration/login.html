@@ -58,6 +58,13 @@
           {% endif %}
 
           {{ form.non_field_errors }}
+          
+          {% if messages %}
+            {% for message in messages %}
+          {{ message }}
+            {% endfor %}
+          {% endif %}
+          
           <button class="submit-btn w-button">Sign in</button>
           <!-- reCAPTCHA Privacy and Terms of Service disclosure -->
           <p style="font-size: 12px; margin-bottom: 0;">
