@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.sitemaps.views import sitemap
+from django.views.generic.base import TemplateView
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -24,6 +25,7 @@ from account.sitemaps import DashboardStaticSitemap, RegistrationStaticSitemap
 from blog.sitemaps import TagSitemap, PostSitemap, BlogStaticSitemap
 from main.sitemaps import HomeSitemap, AboutSitemap, ContactSitemap, LegalSitemap
 from portfolio.sitemaps import ProjectSitemap, PortfolioStaticSitemap
+
 
 sitemaps = {
     'home': HomeSitemap,
@@ -48,5 +50,7 @@ urlpatterns = [
     path('', include('portfolio.urls')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
 	    name='django.contrib.sitemaps.views.sitemap'),
+    path("robots.txt",TemplateView.as_view(
+        template_name="robots.txt", content_type="text/plain")),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) \
  + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

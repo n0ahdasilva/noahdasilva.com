@@ -1,0 +1,17 @@
+User-Agent: *
+
+Disallow: /like/
+Disallow: /comment/
+Disallow: /*/edit
+Disallow: /*/remove
+Disallow: /delete-account/
+Disallow: /email-verification/
+Disallow: /forgot/
+Disallow: /logout
+Disallow: /admin/
+Disallow: /account-activation-sent
+Disallow: /add-*
+
+Allow: /forgot/password-reset
+
+Sitemap: https://www.noahdasilva.com/sitemap.xml

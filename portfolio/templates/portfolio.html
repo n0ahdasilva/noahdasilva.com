@@ -1,6 +1,31 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block seo %}
+<title>Porfolio | Noah Da Silva</title>
+<meta name="author" content="Noah Da Silva">
+<meta name="keywords" content="portfolio, web development, web design, noahdasilva">
+<meta name="description" content="Passionate for our craft, we seek to accomplish unique and elegant website designs, and to wow our clients along with their customers. All while fitting their plan and goals." />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Noah Da Silva" />
+<meta propety="og:title" content="Portfolio" />
+<meta propety="og:description" content="Passionate for our craft, we seek to accomplish unique and elegant website designs, and to wow our clients along with their customers. All while fitting their plan and goals." />
+<meta property="og:url" content="https://www.noahdasilva.com/portfolio/"/>
+<meta propety="og:image" content="{% static 'main/img/IMG_0074-1250px.png' %}" />
+{% endblock %} 
+
+{% block head_scripts %}
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DFMQWT6N7S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-DFMQWT6N7S');
+</script>
+{% endblock %}
+
 {% block content %}
 <div class="hero-section wf-section">
   <div class="default-section-content">

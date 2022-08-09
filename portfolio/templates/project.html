@@ -14,6 +14,18 @@
 <meta propety="og:image" content="{{ project.image.url }}" />
 {% endblock %} 
 
+{% block head_scripts %}
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DFMQWT6N7S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-DFMQWT6N7S');
+</script>
+{% endblock %}
+
 {% block content %}
 <div class="default-section wf-section">
   <div class="w-layout-grid grid-blog-post">

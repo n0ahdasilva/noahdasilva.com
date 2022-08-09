@@ -15,6 +15,18 @@
 <meta propety="og:image" content="{% static 'main/img/IMG_0074-1250px.png' %}" />
 {% endblock %}
 
+{% block head_scripts %}
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DFMQWT6N7S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-DFMQWT6N7S');
+</script>
+{% endblock %}
+
 {% block content %}
 <div class="auth-section wf-section">
   <div class="form-wrapper">
