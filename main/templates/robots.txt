@@ -12,6 +12,6 @@ Disallow: /admin/
 Disallow: /account-activation-sent
 Disallow: /add-*
 
-Allow: /forgot/password-reset
+Allow: /forgot/password-reset$
 
 Sitemap: https://www.noahdasilva.com/sitemap.xml
