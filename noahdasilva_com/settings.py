@@ -232,4 +232,4 @@ RECAPTCHA_URL = 'https://www.google.com/recaptcha/api/siteverify'
 
 
 # Password reset settings
-PASSWORD_RESET_TIMEOUT = 2700   # 45 minutes in seconds
+PASSWORD_RESET_TIMEOUT = 900   # 15 minutes in seconds
