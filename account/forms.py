@@ -89,7 +89,7 @@ class SignUpForm(forms.ModelForm):
             # client is human
             pass
         else:
-            raise forms.ValidationError('You are robot!')
+            raise forms.ValidationError('reCAPTCHA verification faile, please try again.')
 
 
 class LoginForm(forms.Form):
@@ -157,7 +157,7 @@ class CustomPasswordResetForm(auth_forms.PasswordResetForm):
             # client is human
             pass
         else:
-            raise forms.ValidationError('You are robot!')
+            raise forms.ValidationError('reCAPTCHA verification faile, please try again.')
 
 
 class CustomSetPasswordForm(auth_forms.SetPasswordForm):
