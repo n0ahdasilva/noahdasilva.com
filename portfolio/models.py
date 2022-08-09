@@ -12,6 +12,7 @@ class Project(models.Model):
     image = models.ImageField(null=True, blank=True, upload_to='portfolio_images/')
     tags = models.CharField(max_length=255, null=True, blank=True)
     tags = models.CharField(max_length=128, default='website, HTML, CSS')
+    updated_on = models.DateTimeField(auto_now=True, blank=True)
 
     class Meta:
         ordering = ['name']

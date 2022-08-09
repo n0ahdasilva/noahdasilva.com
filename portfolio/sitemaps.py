@@ -5,18 +5,25 @@ from .models import Project
 
 
 class ProjectSitemap(Sitemap):
-		changefreq = "weekly"
-		priority = 0.5
-		
-		def items(self):
-				return Project.objects.all()
+	changefreq = "yearly"
+	priority = 0.7
+	
+	def items(self):
+		return Project.objects.all()
+	
+	def lastmod(self, obj):
+		return obj.updated_on
+			
 
 class PortfolioStaticSitemap(Sitemap):
-		changefreq = "never"
-		priority = 0.5
-		
-		def items(self):
-				return ['portfolio',]
-				
-		def location(self, item):
-				return reverse(item)
+	changefreq = "monthly"
+	priority = 0.8
+	
+	def items(self):
+		return ['portfolio',]
+			
+	def location(self, item):
+		return reverse(item)
+	
+	def lastmod(self):
+		return '2022-08-08'

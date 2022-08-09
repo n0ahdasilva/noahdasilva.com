@@ -16,6 +16,7 @@ class Tag(models.Model):
     slug = models.SlugField(max_length=64, unique=True, null=True, blank=True)
     special = models.CharField(max_length=1, default='#')
     description = models.TextField(max_length=512, default='Tag description.')
+    updated_on = models.DateTimeField(auto_now=True, blank=True)
 
     class Meta:
         ordering = ['name']

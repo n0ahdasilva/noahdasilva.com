@@ -2,12 +2,29 @@ from django.contrib.sitemaps import Sitemap
 from django.urls import reverse
 
 
-class AccountStaticSitemap(Sitemap):
-		changefreq = "never"
-		priority = 0.5
+class DashboardStaticSitemap(Sitemap):
+	changefreq = "yearly"
+	priority = 0.4
+	
+	def items(self):
+		return ['dashboard']
+			
+	def location(self, item):
+		return reverse(item)
+	
+	def lastmod(self):
+		return '2022-08-08'
+
+
+class RegistrationStaticSitemap(Sitemap):
+	changefreq = "yearly"
+	priority = 0.8
+	
+	def items(self):
+		return ['login', 'sign_up', 'password_reset']
 		
-		def items(self):
-				return ['login', 'sign_up', 'dashboard', 'password_reset']
-				
-		def location(self, item):
-				return reverse(item)
+	def location(self, item):
+		return reverse(item)
+	
+	def lastmod(self):
+		return '2022-08-08'

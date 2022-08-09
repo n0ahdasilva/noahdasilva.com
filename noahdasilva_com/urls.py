@@ -20,14 +20,18 @@ from django.contrib.sitemaps.views import sitemap
 from django.conf import settings
 from django.conf.urls.static import static
 
-from account.sitemaps import AccountStaticSitemap
+from account.sitemaps import DashboardStaticSitemap, RegistrationStaticSitemap
 from blog.sitemaps import TagSitemap, PostSitemap, BlogStaticSitemap
-from main.sitemaps import MainStaticSitemap
+from main.sitemaps import HomeSitemap, AboutSitemap, ContactSitemap, LegalSitemap
 from portfolio.sitemaps import ProjectSitemap, PortfolioStaticSitemap
 
 sitemaps = {
-    'main-static': MainStaticSitemap,
-    'account-static': AccountStaticSitemap,
+    'home': HomeSitemap,
+    'about': AboutSitemap,
+    'contact': ContactSitemap,
+    'legal': LegalSitemap,
+    'dashboard': DashboardStaticSitemap,
+    'registration-static': RegistrationStaticSitemap,
     'blog-static': BlogStaticSitemap,
     'portfolio-static': PortfolioStaticSitemap,
     'tags': TagSitemap,
