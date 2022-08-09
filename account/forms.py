@@ -89,12 +89,34 @@ class SignUpForm(forms.ModelForm):
             # client is human
             pass
         else:
-            raise forms.ValidationError('reCAPTCHA verification faile, please try again.')
+            raise forms.ValidationError('reCAPTCHA verification failed, please try again.')
 
 
 class LoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(max_length=255, widget=forms.PasswordInput)
+    recaptcha = forms.CharField(
+        widget=forms.HiddenInput(),
+        max_length=1024,
+        required=False
+    )
+
+    def clean_recaptcha(self):
+        cleaned_data = super(LoginForm, self).clean()
+        recaptcha_response = cleaned_data.get('recaptcha')
+        data = {
+            'secret': settings.RECAPTCHA_SECRET_KEY,
+            'response': recaptcha_response
+        }
+        r = requests.post(settings.RECAPTCHA_URL, data=data)
+        result = r.json()
+
+        print(result)
+        if result.get('success') and result.get('score') > 0.5:
+            # client is human
+            pass
+        else:
+            raise forms.ValidationError('reCAPTCHA verification failed, please try again.')
 
 
 class UserUpdateForm(forms.ModelForm):
@@ -157,7 +179,7 @@ class CustomPasswordResetForm(auth_forms.PasswordResetForm):
             # client is human
             pass
         else:
-            raise forms.ValidationError('reCAPTCHA verification faile, please try again.')
+            raise forms.ValidationError('reCAPTCHA verification failed, please try again.')
 
 
 class CustomSetPasswordForm(auth_forms.SetPasswordForm):

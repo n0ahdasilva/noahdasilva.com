@@ -11,7 +11,7 @@
 <meta property="og:site_name" content="Noah Da Silva" />
 <meta propety="og:title" content="Log In" />
 <meta propety="og:description" content="Sign into your account." />
-<meta property="og:url" content="https://www.noahdasilva.com/login/"/>
+<meta property="" content="https://www.noahdasilva.com/login"/>
 <meta propety="og:image" content="{% static 'main/img/webclip.png' %}" />
 {% endblock %}
 
@@ -25,6 +25,9 @@
 
   gtag('config', 'G-DFMQWT6N7S');
 </script>
+
+<!-- reCAPTCHA API -->
+ <script src='https://www.google.com/recaptcha/api.js?render={{ recaptcha_site_key }}'></script>
 {% endblock %}
 
 {% block content %}
@@ -45,15 +48,28 @@
             {% render_field form.password type="password" class="input w-input" placeholder="Enter your password..." %}
             <span style="font-size: 14px;">{{ form.password.errors }}</span>
           </div>
+          <!-- reCAPTCHA input -->
+          {% render_field form.recaptcha type="hidden" id="g-recaptcha-response" %}
 
           {% if request.GET.next %}
 
             <input type="hidden" name="next" value="{{ request.GET.next }}">
           
           {% endif %}
-          
+
           {{ form.non_field_errors }}
           <button class="submit-btn w-button">Sign in</button>
+          <!-- reCAPTCHA Privacy and Terms of Service disclosure -->
+          <p style="font-size: 12px; margin-bottom: 0;">
+            This page is protected by Google reCAPTCHA.
+            <a href="https://policies.google.com/privacy" target="_blank" style="text-decoration: none;">
+              <span class="gradient-span">Privacy</span>
+            </a>
+            &amp;
+            <a href="https://policies.google.com/terms" target="_blank" style="text-decoration: none;">
+              <span class="gradient-span">Terms</span>
+            </a>.
+          </p>
           <div class="auth-form-redirect-div">
             <a
               href="{% url 'sign_up' %}"
@@ -72,4 +88,20 @@
     </div>
   </div>
 </div>
+{% endblock %}
+
+{% block body_scripts %}
+<style>
+  .grecaptcha-badge {
+       opacity:0; !important;
+  }
+</style>
+<script>
+  //Global grecaptcha
+  grecaptcha.ready(function() {
+    grecaptcha.execute('{{ recaptcha_site_key }}', {action: "/login/"}).then(function(token) {
+      document.getElementById('g-recaptcha-response').value = token;
+    });
+  });
+</script>
 {% endblock %}

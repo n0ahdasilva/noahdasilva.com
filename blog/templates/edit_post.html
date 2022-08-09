@@ -58,10 +58,10 @@
             {{ form.content|add_class:"input form-message w-input" }}
             <span style="font-size: 14px;">{{ form.content.errors }}</span>
           </div>
+          {{ form.non_field_errors }}
           <div>
             <button class="submit-btn w-button">Update</button>
           </div>
-          {{ form.non_field_errors }}
         </form>
       </div>
     </div>

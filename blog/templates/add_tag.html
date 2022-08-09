@@ -38,9 +38,9 @@
             <span style="font-size: 14px;">{{ form.description.errors }}</span>
           </div>
           <div>
+            {{ form.non_field_errors }}
             <button class="submit-btn w-button">Create tag</button>
           </div>
-          {{ form.non_field_errors }}
         </form>
       </div>
     </div>

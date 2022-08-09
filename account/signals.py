@@ -24,9 +24,8 @@ def user_logged_out_callback(sender, request, user, **kwargs):
 
 @receiver(user_login_failed)
 def user_login_failed_callback(sender, request, credentials, **kwargs):
-    login_email_used = credentials['username']
-    
     ip = request.META.get('REMOTE_ADDR')
+    login_email_used = credentials['username']
     AuditEntry.objects.create(action='user_login_failed', ip=ip, username=login_email_used)
     
     try:

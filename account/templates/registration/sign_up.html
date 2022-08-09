@@ -11,7 +11,7 @@
 <meta property="og:site_name" content="Noah Da Silva" />
 <meta propety="og:title" content="Sign Up" />
 <meta propety="og:description" content="Create an account." />
-<meta property="og:url" content="https://www.noahdasilva.com/sign-up"/>
+<meta property="" content="https://www.noahdasilva.com/sign-up"/>
 <meta propety="og:image" content="{% static 'main/img/webclip.png' %}" />
 {% endblock %}
 
@@ -55,6 +55,7 @@
           </div>
           <!-- reCAPTCHA input -->
           {% render_field form.recaptcha type="hidden" id="g-recaptcha-response" %}
+          {{ form.non_field_errors }}
           <button class="submit-btn w-button">Sign up</button>    
           <p style="font-size: 12px; margin-bottom: 0;">
             By signing up to create an account, you agree to our
@@ -80,7 +81,6 @@
               <div><span class="gradient-span">Log in</span></div>
             </a>
           </div>
-          {{ form.non_field_errors }}
         </form>
       </div>
     </div>

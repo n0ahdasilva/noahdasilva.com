@@ -52,10 +52,10 @@
             {{ form.tags|add_class:"input form-selection w-input" }}
             <span style="font-size: 14px;">{{ form.tags.errors }}</span>
           </div>
+          {{ form.non_field_errors }}
           <div>
             <button class="submit-btn w-button">Publish</button>
           </div>
-          {{ form.non_field_errors }}
         </form>
       </div>
     </div>

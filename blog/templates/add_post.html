@@ -22,7 +22,6 @@
           method="POST"
           enctype="multipart/form-data">
           {% csrf_token %} {{ form.media }}
-          {{ form.non_field_errors }}
           <div>
             {{ form.title.label_tag }}
             {{ form.title|add_class:"input w-input" }}
@@ -58,6 +57,7 @@
             {{ form.content|add_class:"input form-message w-input" }}
             <span style="font-size: 14px;">{{ form.content.errors }}</span>
           </div>
+          {{ form.non_field_errors }}
           <div>
             <button class="submit-btn w-button">Post</button>
           </div>

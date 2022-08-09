@@ -11,7 +11,7 @@
 <meta property="og:site_name" content="Noah Da Silva" />
 <meta propety="og:title" content="Contact"/>
 <meta propety="og:description" content="The Internet is one giant phone book, so get one browser search ahead of your competitors, and make the switch."/>
-<meta property="og:url" content="https://www.noahdasilva.com/contact/"/>
+<meta property="og:url" content="https://www.noahdasilva.com/contact"/>
 <meta propety="og:image" content="{% static 'main/img/webclip.png' %}"/>
 {% endblock %}
 
@@ -93,6 +93,7 @@
             </div>
             <!-- reCAPTCHA input -->
             <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response"> 
+            {{ form.non_field_errors }}
             <button id="w-node-_92f09ec5-7e34-2292-6911-ac82a81f1d8b-9383a921" class="submit-btn w-button">Send message</button>
             <!-- reCAPTCHA Privacy and Terms of Service disclosure -->
             <p style="font-size: 12px; margin-bottom: 0;" id="w-node-_92f09ec5-7e34-2292-6911-ac82a81f1d8b-9383a921">
@@ -105,7 +106,6 @@
                 <span class="gradient-span">Terms</span>
               </a>.
             </p>
-            {{ form.non_field_errors }}
           </form>
         </div>
 

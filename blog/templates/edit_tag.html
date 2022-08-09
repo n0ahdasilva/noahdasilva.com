@@ -23,7 +23,6 @@
           enctype="multipart/form-data"
         >
           {% csrf_token %} {{ form.media }}
-          {{ form.non_field_errors }}
           <div>
             {{ form.name.label_tag }}
             {{ form.name|add_class:"input w-input" }}
@@ -39,6 +38,7 @@
             {{ form.description|add_class:"input form-message w-input" }}
             <span style="font-size: 14px;">{{ form.description.errors }}</span>
           </div>
+          {{ form.non_field_errors }}
           <div>
             <button class="submit-btn w-button">Update</button>
           </div>
