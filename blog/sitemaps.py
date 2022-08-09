@@ -6,7 +6,7 @@ from .models import Post
 
 
 class TagSitemap(Sitemap):
-	changefreq = "yearly"
+	changefreq = "monthly"
 	priority = 0.6
 	
 	def items(self):
