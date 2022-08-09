@@ -89,11 +89,7 @@ class LoginView(FormView):
             password=credentials['password']
         )
 
-        if user is not None and user.is_active is False:
-            send_verification_email(self.request, user)
-            return HttpResponseRedirect(reverse_lazy('email_verification'))
-
-        elif user is not None:
+        if user is not None:
             login(self.request, user)
             if 'next' in self.request.POST:
                 return HttpResponseRedirect(self.request.POST['next'])
