@@ -57,11 +57,11 @@
                     <div class="nav-menu-link-block w-nav-button"><img src="{% static 'main/img/nav-menu-img.png' %}"
                             loading="lazy"
                             srcset="{% static 'main/img/nav-menu-img-p-500.png' %} 500w, {% static 'main/img/nav-menu-img.png' %} 512w"
-                            sizes="(max-width: 767px) 26px, (max-width: 991px) 3vw, 26px" alt=""
+                            sizes="(max-width: 767px) 26px, (max-width: 991px) 3vw, 26px" alt="navbar hamburger menu icon"
                             class="nav-menu-icon small"></div>
                     <a href="{% url 'home' %}" id="w-node-_073a6cad-f6aa-4cb3-d13c-226c4e6884fb-4e6884ef" aria-current="page"
                         class="brand-logo-link w-inline-block"><img
-                            src="{% static 'main/img/webclip.png' %}" loading="lazy" alt=""
+                            src="{% static 'main/img/webclip.png' %}" loading="lazy" alt="Noah Da Silva purple self portrait"
                             class="brand-logo-img">
                         <div>noah</div>
                     </a>
@@ -69,30 +69,22 @@
                 <div class="w-layout-grid nav-menu-grid">
                     <a href="{% url 'tags' %}" id="w-node-_073a6cad-f6aa-4cb3-d13c-226c4e688500-4e6884ef"
                         class="nav-link-block w-inline-block"><img src="{% static 'main/img/search-img.png' %}"
-                            loading="lazy" alt="" class="nav-menu-icon small"></a>
+                            loading="lazy" alt="maginifying glass search icon" class="nav-menu-icon small"></a>
                     
                     {% if user.is_authenticated %}
 
                     <a href="{% url 'dashboard'%}" id="w-node-_073a6cad-f6aa-4cb3-d13c-226c4e688502-4e6884ef"
                         class="nav-link-block w-inline-block" style="text-decoration: none;">
-                        
-                        {% if user %}
-
                         <span class="gradient-span fa900solid" style="font-weight: 700;">@{{ user.username.0 }}{{ user.username.1 }}{{ user.username.2 }}{{ user.username.3 }}{% if user.username.4 %}...{% endif %}</span>
-
-                        {% else %}
-
-                        <img src="{% static 'main/img/account-img.png' %}" loading="lazy" alt="" class="nav-menu-icon small">
-                        
-                        {% endif %}    
-
                     </a>
 
                     {% else %}
 
                     <a href="{% url 'login'%}" id="w-node-_073a6cad-f6aa-4cb3-d13c-226c4e688502-4e6884ef"
-                    class="nav-link-block w-inline-block"><img src="{% static 'main/img/account-img.png' %}"
-                        loading="lazy" alt="" class="nav-menu-icon small"></a>
+                    class="nav-link-block w-inline-block">
+                        <img src="{% static 'main/img/account-img.png' %}"
+                        loading="lazy" alt="logged out account icon" class="nav-menu-icon small">
+                    </a>
                     
                     {% endif %}
 
@@ -138,7 +130,7 @@
             <div class="w-layout-grid footer-grid">
                 <div id="w-node-_5cb3cddc-fa2b-074d-8094-68ef9e17681e-9e176815" class="footer-link-column top">
                     <a href="{% url 'home' %}" class="brand-logo-link w-inline-block"><img
-                            src="{% static 'main/img/58f322539377c4d97bfdc4882eb80ab9-256.png' %}" loading="lazy" alt=""
+                            src="{% static 'main/img/webclip.png' %}" loading="lazy" alt="Noah Da Silva purple self portrait"
                             class="brand-logo-img">
                         <div>noah</div>
                     </a>
