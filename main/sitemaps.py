@@ -11,9 +11,6 @@ class HomeSitemap(Sitemap):
 			
 	def location(self, item):
 		return reverse(item)
-	
-	def lastmod(self):
-		return '2022-08-08'
 
 
 class AboutSitemap(Sitemap):
@@ -25,9 +22,6 @@ class AboutSitemap(Sitemap):
 			
 	def location(self, item):
 		return reverse(item)
-	
-	def lastmod(self):
-		return '2022-08-08'
 
 
 class ContactSitemap(Sitemap):
@@ -39,9 +33,6 @@ class ContactSitemap(Sitemap):
 			
 	def location(self, item):
 		return reverse(item)
-	
-	def lastmod(self):
-		return '2022-08-08'
 
 
 class LegalSitemap(Sitemap):
@@ -53,6 +44,3 @@ class LegalSitemap(Sitemap):
 			
 	def location(self, item):
 		return reverse(item)
-	
-	def lastmod(self):
-		return '2022-08-08'

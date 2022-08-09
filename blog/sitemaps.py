@@ -36,6 +36,3 @@ class BlogStaticSitemap(Sitemap):
 			
 	def location(self, item):
 		return reverse(item)
-
-	def lastmod(self):
-		return '2022-08-08'
