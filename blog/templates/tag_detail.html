@@ -3,7 +3,7 @@
 {% load widget_tweaks %}
 
 {% block seo %}
-<title>{{ tag.name}} Tag | Noah Da Silva</title>
+<title>{{ tag.name}} | Tags | Noah Da Silva</title>
 <meta name="author" content="Noah Da Silva">
 <meta name="keywords" content="blog, {{ tag.name }}, noahdasilva">
 <meta name="description" content="{{ tag.description }}" />
@@ -12,7 +12,7 @@
 <meta propety="og:title" content="{{ tag.name }} Tag" />
 <meta propety="og:description" content="{{ tag.description }}" />
 <meta property="og:url" content="https://www.noahdasilva.com/blog/tags/{{ tag.slug }}"/>
-<meta propety="og:image" content="{% static 'main/img/IMG_0074-1250px.png' %}"/>
+<meta propety="og:image" content="{% static 'main/img/webclip.png' %}"/>
 {% endblock %}
 
 {% block head_scripts %}
