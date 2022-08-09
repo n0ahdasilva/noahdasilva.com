@@ -13,7 +13,7 @@ class TagSitemap(Sitemap):
 		return Tag.objects.all()
 	
 	def lastmod(self, obj):
-		return obj.date_updated
+		return obj.updated_on
 
 
 class PostSitemap(Sitemap):

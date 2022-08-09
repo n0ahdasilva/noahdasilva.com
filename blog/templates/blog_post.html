@@ -3,6 +3,8 @@
 
 {% block seo %}
 <title>{{ post.title }} | Blog | Noah Da Silva</title>
+<meta name="author" content="{{ post.author }}">
+<meta name="keywords" content="{% for tag in post.get_tags %}{{ tag }}, {% endfor %}noahdasilva">
 <meta name="description" content="{{ post.summary }}" />
 <meta property="og:type" content="article" />
 <meta property="og:site_name" content="Noah Da Silva" />
