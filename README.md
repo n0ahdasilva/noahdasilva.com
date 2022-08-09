@@ -42,13 +42,23 @@ python manage.py migrate
 deactivate
 ```
 
-Finally, we can restart the server.
+**Finally, we can restart the server.**
+
+If you update your Django application, you can restart the Gunicorn process to pick up the changes. The gunicorn socket might also need to be restarted.
+
+```bash
+sudo systemctl restart gunicorn
+```
 
 If you change the Nginx server block configuration, test the configuration and then restart the Nginx process.
 
-If you update your Django application, you can restart the Gunicorn process to pick up the changes.
-
 ```bash
 sudo nginx -t && sudo systemctl restart nginx
-sudo systemctl restart gunicorn
+```
+
+If you change Gunicorn socket or service files, reload the daemon and restart the process.
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl restart gunicorn.socket gunicorn.service
 ```
