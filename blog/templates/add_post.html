@@ -43,6 +43,11 @@
             <span style="font-size: 14px;">{{ form.image.errors }}</span>
           </div>
           <div>
+            {{ form.image_alt_text.label_tag }}
+            {{ form.image_alt_text|add_class:"input w-input" }}
+            <span style="font-size: 14px;">{{ form.image_alt_text.errors }}</span>
+          </div>
+          <div>
             {{ form.tags.label_tag }}
             {{ form.tags|add_class:"input form-message w-input" }}
             <span style="font-size: 14px;">{{ form.tags.errors }}</span>

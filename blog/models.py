@@ -38,6 +38,7 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='post_author')
     author_plug = models.URLField(max_length=128, default='https://linktr.ee/ndasilva')
     image = models.ImageField(null=True, blank=True, upload_to='blog_images/')
+    image_alt_text = models.CharField(null=True, blank=True, max_length=255)
     tags = models.CharField(max_length=255, default='blog')
     summary = models.TextField(max_length=512)
     content = RichTextField(blank=True, null=True)

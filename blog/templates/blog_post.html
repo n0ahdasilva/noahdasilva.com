@@ -36,7 +36,7 @@
         sizes="92vw"
         loading="lazy"
         src="{{ post.image.url }}"
-        alt="blog post decorative image"
+        alt="{{ post.image_alt_text }}"
         class="img-blog-post"/>
     </div>
     <div class="w-layout-grid grid-title-blog">
@@ -242,7 +242,9 @@
 
       <a href="{% url 'blog-post' post.slug %}"
         class="blog-card-square w-inline-block"
-        style="background-image: url({{ post.image.url }});">
+        style="background-image: url({{ post.image.url }});"
+        role="img"
+        aria-label="{{ post.image_alt_text }}">
         <div class="blog-card-div">
           <div class="tag-flex">
 

@@ -71,7 +71,9 @@
       <a href="{% url 'blog-post' post_list.0.slug %}" class="blog-card w-inline-block">
         <div
           class="blog-card-left"
-          style="background-image: url({{ post_list.0.image.url }});">
+          style="background-image: url({{ post_list.0.image.url }});"
+          role="img"
+          aria-label="{{ post_list.0.image_alt_text }}">
         </div>
         <div class="blog-card-right">
           <div class="top-wrapper">
@@ -255,7 +257,9 @@
 
       <a href="{% url 'blog-post' post_list.1.slug %}"
         class="blog-card-square w-inline-block"
-        style="background-image: url({{ post.image.url }});">
+        style="background-image: url({{ post.image.url }});"
+        role="img"
+        aria-label="{{ post.image_alt_text }}">
         <div class="blog-card-div">
           <div class="tag-flex">
 

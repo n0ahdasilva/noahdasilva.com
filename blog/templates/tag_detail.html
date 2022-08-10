@@ -66,7 +66,9 @@
       <a href="{% url 'blog-post' post.slug %}" class="blog-card w-inline-block">
         <div 
           class="blog-card-left"
-          style="background-image: url({{ post.image.url }});">
+          style="background-image: url({{ post.image.url }});"
+          role="img"
+          aria-label="{{ post.image_alt_text }}">
         </div>
         <div class="blog-card-right">
           <div class="top-wrapper">
