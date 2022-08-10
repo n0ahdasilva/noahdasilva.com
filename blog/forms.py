@@ -1,5 +1,6 @@
 from django import forms
 from .models import Post, Tag
+#import re
 
 
 class PostForm(forms.ModelForm):
@@ -16,11 +17,21 @@ class PostForm(forms.ModelForm):
             'summary' : forms.Textarea(attrs={'maxlength': 512, 'placeholder': 'Blog summary, max 512 characters (one or two sentences)...'}),
             'content' : forms.Textarea(attrs={'placeholder': 'Blog content, write away...'}),
         }
-    
+
     def __init__(self, *args, **kwargs):
         kwargs.setdefault('label_suffix', '')
+#        self.request = kwargs.pop('request', None)
         super(PostForm, self).__init__(*args, **kwargs)
-        self.fields['tags'] = forms.TypedMultipleChoiceField(choices=Tag.objects.all().values_list('name', 'name'))
+
+        self.fields['tags'] = forms.MultipleChoiceField(
+            choices=Tag.objects.all().values_list('name', 'name'))
+
+        # Get current post based on request URL.
+#        post_slug= re.search("'/blog/(.*)/edit'>", str(self.request)).group(1)
+#        current_tags = Post.objects.filter(slug=post_slug)[0].tags
+
+#        self.initial['tags'] = current_tags          
+#        self.initial['image'] = Post.objects.filter(slug=post_slug)[0].image
 
 
 class TagForm(forms.ModelForm):

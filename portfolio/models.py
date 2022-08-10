@@ -10,7 +10,6 @@ class Project(models.Model):
     category = models.CharField(max_length=64)
     url = models.URLField(max_length=128, null=True, blank=True)
     image = models.ImageField(null=True, blank=True, upload_to='portfolio_images/')
-    tags = models.CharField(max_length=255, null=True, blank=True)
     tags = models.CharField(max_length=128, default='website, HTML, CSS')
     updated_on = models.DateTimeField(auto_now=True, blank=True)
 

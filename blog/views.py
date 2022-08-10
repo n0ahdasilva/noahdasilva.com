@@ -1,5 +1,4 @@
-import imp
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy, reverse
 from .models import Post, Tag, Comment, Like
@@ -38,6 +37,11 @@ class EditPostView(UpdateView):
     model = Post
     template_name = 'edit_post.html'
     form_class = PostForm
+
+#    def get_form_kwargs(self):
+#        kwargs = super(EditPostView, self).get_form_kwargs()
+#        kwargs['request'] = self.request
+#        return kwargs
 
 
 @method_decorator([login_required, 
