@@ -62,3 +62,11 @@ If you change Gunicorn socket or service files, reload the daemon and restart th
 sudo systemctl daemon-reload
 sudo systemctl restart gunicorn.socket gunicorn.service
 ```
+
+## Blog posts
+
+To write code on a blog post, you will need to select 'Source' under the content editor and add the following code:
+
+```html
+<pre><code>code goes here</code></pre>
+```

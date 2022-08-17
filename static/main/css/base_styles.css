@@ -62,6 +62,12 @@ img {
 html.w-mod-touch * {
   background-attachment: scroll !important;
 }
+a {
+  color: #6e44ff;
+}
+code {
+  border-radius: 1.5rem 0.75rem;
+}
 .w-block {
   display: block;
 }
