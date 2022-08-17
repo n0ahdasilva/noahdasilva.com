@@ -113,6 +113,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'widget_tweaks',
     'django_filters',
+    'django_social_share',
     'main',
     'blog',
     'account',

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load social_share %}
 
 {% block seo %}
 <title>{{ post.title }} | Blog | Noah Da Silva</title>
@@ -154,6 +155,28 @@
       {% endif %}
 
     </form>
+    <div class="post-like-div">
+      <div>
+        <h2 class="h6-heading">Share this post with others</h2>
+        <p class="comment-paragraph">
+        </p>
+      </div>
+      <div class="like-btn-div" style="  display: flex;  
+      flex-wrap: wrap;">
+        <div class="share-div fa900solid-span gradient-span">
+          {% post_to_twitter "{{ post.title }}" object_or_url "" %}
+        </div>
+        <div class="share-div fa900solid-span gradient-span">
+          {% post_to_facebook object_or_url "" %}
+        </div>
+        <div class="share-div fa900solid-span gradient-span">
+          {% post_to_reddit "{{ post.title }}" object_or_url "" %}
+        </div>
+        <div class="share-div fa900solid-span gradient-span">
+          {% send_email post.title "{{ post.title }}" object_or_url "" %}
+        </div>
+      </div>
+    </div>
     <h2 class="h5-heading">{{ total_comments }} Comments</h2>
     <div class="w-form">
       <form action="{% url 'comment_post' post.pk %}" method="POST" class="comment-form" >
