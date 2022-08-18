@@ -13,9 +13,10 @@ from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
+from django.contrib.auth.hashers import check_password
 from django.conf import settings
 from .tokens import account_activation_token
-from .forms import CustomPasswordResetForm, SignUpForm, LoginForm, LoginOTPForm, UserUpdateForm, OTPForm
+from .forms import ConfirmPasswordForm, CustomPasswordResetForm, SignUpForm, LoginForm, LoginOTPForm, UserUpdateForm, OTPForm
 from .models import User
 from .otp import OTP
 
@@ -93,14 +94,11 @@ class LoginView(FormView):
 
         if user is not None:
             if user.otp_secret is not None:
-                next_url = None
                 if 'next' in self.request.POST:
-                    next_url = self.request.POST['next']
-                return redirect(
-                    reverse_lazy('login_otp'),
-                    username=credentials['username'],
-                    password=credentials['password'],
-                    next_url=next_url)
+                    self.request.session['next_url'] = self.request.POST['next']
+                self.request.session['username'] = credentials['username']
+                self.request.session['password'] = credentials['password']                
+                return HttpResponseRedirect(reverse_lazy('login_otp'))
             else:
                 login(self.request, user)
             if 'next' in self.request.POST:
@@ -119,8 +117,7 @@ class LoginOTPView(FormView):
     success_url = reverse_lazy('account')
 
     def dispatch(self, request, *args, **kwargs):
-        if not self.request.session.get('username'):
-            print('username not in session')
+        if not self.request.session.get('username') and not self.request.session.get('password'):
             return redirect(reverse_lazy('login'))
         return super(LoginOTPView, self).dispatch(request, *args, **kwargs)
 
@@ -130,23 +127,18 @@ class LoginOTPView(FormView):
         return context
     
     def form_valid(self, form):
-        otp = form.cleaned_data
+        otp = form.cleaned_data['otp']
         
         username = self.request.session.get('username')
         password = self.request.session.get('password')
-
-        print(username, password)
-
-        del self.request.session['username']
-        del self.request.session['password']
 
         user = authenticate(self.request,
             username=username,
             password=password
         )
-
-
-        print(user)
+        # Remove the session variables after authenticating the user.
+        del self.request.session['username']
+        del self.request.session['password']
 
         if OTP.verify_otp(user.otp_secret, otp):
             login(self.request, user)
@@ -156,7 +148,7 @@ class LoginOTPView(FormView):
                 return HttpResponseRedirect(self.success_url)
 
         else:
-            messages.add_message(self.request, messages.INFO, 'Invalid code, please try again')
+            messages.add_message(self.request, messages.INFO, 'Invalid 2FA code, please try again')
             return HttpResponseRedirect(reverse_lazy('login_otp'))
 
 
@@ -250,8 +242,6 @@ class AddOTPView(LoginRequiredMixin, FormView):
         otp = form.cleaned_data
         otp_secret = self.request.POST.get('otp_secret', None)
         user = self.request.user
-        print(OTP.verify_otp(otp_secret=otp_secret, otp=otp))
-        print(otp_secret)
         if OTP.verify_otp(otp_secret=otp_secret, otp=otp):
             user.otp_secret = otp_secret
             user.save(update_fields=['otp_secret'])
@@ -259,6 +249,24 @@ class AddOTPView(LoginRequiredMixin, FormView):
 
 
 class RemoveOTPView(LoginRequiredMixin, FormView):
-    #form_class = OTPForm
+    form_class = ConfirmPasswordForm
+    model = User
     template_name = 'otp_remove.html'
     success_url = reverse_lazy('account')
+
+    def get_context_data(self, **kwargs):          
+        context = super().get_context_data(**kwargs)                     
+        context["recaptcha_site_key"] = settings.RECAPTCHA_SITE_KEY
+        return context
+
+    def form_valid(self, form):
+        form_password = form.cleaned_data['password']
+        user = self.request.user
+
+        if user.check_password(form_password):
+            user.otp_secret = None
+            user.save(update_fields=['otp_secret'])
+            return HttpResponseRedirect(self.success_url)
+        else:
+            messages.add_message(self.request, messages.INFO, 'Password does not match')
+            return HttpResponseRedirect(reverse_lazy('otp_remove'))

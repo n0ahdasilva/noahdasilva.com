@@ -3,6 +3,7 @@ from django import forms
 from django.contrib.auth import forms as auth_forms
 import requests
 import re
+from django.contrib.auth.hashers import check_password 
 from django.conf import settings
 from .otp import OTP
 
@@ -287,4 +288,29 @@ class OTPForm(forms.Form):
         if not OTP.verify_otp(otp=otp, otp_secret=otp_secret):
             raise forms.ValidationError("Invalid code, please try again.")
         return otp
+    
+class ConfirmPasswordForm(forms.Form):
+    password = forms.CharField(max_length=128, widget=forms.PasswordInput)
+    recaptcha = forms.CharField(
+        widget=forms.HiddenInput(),
+        max_length=1024,
+        required=False
+    )
+
+    def clean_recaptcha(self):
+        cleaned_data = super(ConfirmPasswordForm, self).clean()
+        recaptcha_response = cleaned_data.get('recaptcha')
+        data = {
+            'secret': settings.RECAPTCHA_SECRET_KEY,
+            'response': recaptcha_response
+        }
+        r = requests.post(settings.RECAPTCHA_URL, data=data)
+        result = r.json()
+
+        if result.get('success') and result.get('score') > 0.5:
+            # client is human
+            pass
+        else:
+            raise forms.ValidationError('reCAPTCHA verification failed, please try again.')
+
     

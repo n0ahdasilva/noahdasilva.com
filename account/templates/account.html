@@ -406,7 +406,7 @@
                 
                 {% if not user.otp_secret %}
                 
-                <a href="{% url 'add_otp' %}" class="dashboard-info-box link-box w-inline-block">
+                <a href="{% url 'otp_add' %}" class="dashboard-info-box link-box w-inline-block">
                   <div class="dashboard-box-padding horizontal-flex">
                     <div>
                       <h3 class="dashboard-heading-small">Add 2FA via App</h3>
@@ -417,7 +417,7 @@
 
                 {% else %}
 
-                <a href="{% url 'remove_otp' %}" class="dashboard-info-box link-box w-inline-block">
+                <a href="{% url 'otp_remove' %}" class="dashboard-info-box link-box w-inline-block">
                   <div class="dashboard-box-padding horizontal-flex">
                     <div>
                       <h3 class="dashboard-heading-small">Remove 2FA via App</h3>

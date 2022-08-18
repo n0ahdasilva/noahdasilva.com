@@ -3,15 +3,15 @@
 {% load static %}
 
 {% block seo %}
-<title>Two-Factor Authentication | Noah Da Silva</title>
+<title>Account Settings | Noah Da Silva</title>
 <meta name="author" content="Noah Da Silva">
 <meta name="keywords" content="blog, technology, noahdasilva">
 <meta name="description" content="Sign into your account." />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Noah Da Silva" />
-<meta propety="og:title" content="Two-Factor Authentication" />
+<meta propety="og:title" content="Account Settings" />
 <meta propety="og:description" content="Sign into your account." />
-<meta property="" content="https://www.noahdasilva.com/login/otp/"/>
+<meta property="" content="https://www.noahdasilva.com/account/remove-otp"/>
 <meta propety="og:image" content="{% static 'main/img/webclip.png' %}" />
 {% endblock %}
 
@@ -27,24 +27,26 @@
 </script>
 
 <!-- reCAPTCHA API -->
- <script src='https://www.google.com/recaptcha/api.js?render={{ recaptcha_site_key }}'></script>
+<script src='https://www.google.com/recaptcha/api.js?render={{ recaptcha_site_key }}'></script>
 {% endblock %}
 
 {% block content %}
 <div class="auth-section wf-section">
   <div class="form-wrapper">
     <div class="auth-form-card-invisible">
-      <h1 class="h4-heading">Sign in</h1>
+      <h1 class="h4-heading">Remove 2FA</h1>
       <div class="auth-form w-form">
-        <form method="POST" action="{% url 'login_otp' %}" class="auth-form">
+        <form method="POST" action="{% url 'otp_remove' %}" class="auth-form">
           {% csrf_token %}
-          <p style="font-size: 12px; margin-bottom: 0;">
-            Enter the sign-in 2FA code from your authenticator app.
-          </p>
           <div>
-            <label>2FA Code</label>
-            {% render_field form.otp type="text" class="input w-input" placeholder="Enter your 2FA code..." %}
-            <span style="font-size: 14px;">{{ form.otp.errors }}</span>
+            <p style="font-size: 12px; margin-bottom: 0;">
+              Enter your current password to remove 2FA.
+            </p>
+          </div>
+          <div>
+            <label>Password</label>
+            {% render_field form.password type="password" class="input w-input" placeholder="Enter your password..." %}
+            <span style="font-size: 14px;">{{ form.confirm_password.errors }}</span>
           </div>
           <!-- reCAPTCHA input -->
           {% render_field form.recaptcha type="hidden" id="g-recaptcha-response" %}
@@ -59,7 +61,7 @@
             {% endfor %}
           {% endif %}
           
-          <button class="submit-btn w-button">Enter</button>
+          <button class="submit-btn w-button">Confirm password</button>
           <!-- reCAPTCHA Privacy and Terms of Service disclosure -->
           <p style="font-size: 12px; margin-bottom: 0;">
             This page is protected by Google reCAPTCHA.

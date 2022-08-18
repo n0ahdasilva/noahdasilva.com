@@ -3,15 +3,15 @@
 {% load static %}
 
 {% block seo %}
-<title>Log In | Noah Da Silva</title>
+<title>Account Settings | Noah Da Silva</title>
 <meta name="author" content="Noah Da Silva">
 <meta name="keywords" content="blog, technology, noahdasilva">
 <meta name="description" content="Sign into your account." />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Noah Da Silva" />
-<meta propety="og:title" content="Log In" />
+<meta propety="og:title" content="Account Settings" />
 <meta propety="og:description" content="Sign into your account." />
-<meta property="" content="https://www.noahdasilva.com/login"/>
+<meta property="" content="https://www.noahdasilva.com/account/add-otp"/>
 <meta propety="og:image" content="{% static 'main/img/webclip.png' %}" />
 {% endblock %}
 
@@ -33,7 +33,7 @@
     <div class="auth-form-card-invisible">
       <h1 class="h4-heading">Set up 2FA</h1>
       <div class="auth-form w-form">
-        <form method="POST" action="{% url 'add_otp' %}" class="auth-form">
+        <form method="POST" action="{% url 'otp_add' %}" class="auth-form">
           {% csrf_token %}
           <div>
             <p style="font-size: 12px; margin-bottom: 0;">
@@ -63,6 +63,7 @@
             
             {% endfor %}
           {% endif %}
+          
           {% render_field form.otp_secret type="hidden" id="otp_secret" %}
           <button class="submit-btn w-button">Add to account</button>
         </form>
