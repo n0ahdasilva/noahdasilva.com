@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+
+{% block seo %}
+<title>Log In | Noah Da Silva</title>
+<meta name="author" content="Noah Da Silva">
+<meta name="keywords" content="blog, technology, noahdasilva">
+<meta name="description" content="Sign into your account." />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Noah Da Silva" />
+<meta propety="og:title" content="Log In" />
+<meta propety="og:description" content="Sign into your account." />
+<meta property="" content="https://www.noahdasilva.com/login"/>
+<meta propety="og:image" content="{% static 'main/img/webclip.png' %}" />
+{% endblock %}
+
+{% block head_scripts %}
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DFMQWT6N7S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-DFMQWT6N7S');
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="auth-section wf-section">
+  <div class="form-wrapper">
+    <div class="auth-form-card-invisible">
+      <h1 class="h4-heading">Set up 2FA</h1>
+      <div class="auth-form w-form">
+        <form method="POST" action="{% url 'add_otp' %}" class="auth-form">
+          {% csrf_token %}
+          <div>
+            <p style="font-size: 12px; margin-bottom: 0;">
+              Scan the QR code using your authenticator app.
+            </p>
+          {{ qr_code|safe }}
+            <p style="font-size: 12px; margin-bottom: 0;">
+              Or alternatively, manually enter the following code into your authenticator app: <br>
+              <b><pre>{{ otp_secret }}</pre></b>
+            </p>
+            <p style="font-size: 12px; margin-bottom: 0;">
+              Once your authenticator app generates its own 6-digit code, enter it below.
+            </p>
+         </div>
+          <div>
+            <label>2FA Code</label>
+            {% render_field form.otp type="text" class="input w-input" placeholder="Enter the 2FA code..." %}
+            <span style="font-size: 14px;">{{ form.otp.errors }}</span>
+          </div>
+
+          {{ form.non_field_errors }}
+          
+          {% if messages %}
+            {% for message in messages %}
+
+              {{ message }}
+            
+            {% endfor %}
+          {% endif %}
+          {% render_field form.otp_secret type="hidden" id="otp_secret" %}
+          <button class="submit-btn w-button">Add to account</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block body_scripts %}
+<script>
+    
+  $( document ).ready(function() {
+      // after the page elements are all loaded, then run the script
+      // Set the hidden input field with the secret key
+
+      $("#otp_secret").val('{{ otp_secret }}');
+      
+      });
+      
+</script>  
+{% endblock %}

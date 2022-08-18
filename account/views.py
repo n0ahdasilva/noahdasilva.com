@@ -1,3 +1,4 @@
+import re
 from django.http import HttpRequest, HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic import FormView, UpdateView, TemplateView
@@ -14,8 +15,9 @@ from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
 from django.conf import settings
 from .tokens import account_activation_token
-from .forms import CustomPasswordResetForm, SignUpForm, LoginForm, UserUpdateForm
+from .forms import CustomPasswordResetForm, SignUpForm, LoginForm, LoginOTPForm, UserUpdateForm, OTPForm
 from .models import User
+from .otp import OTP
 
 
 # NOTE: Global functions used by many views
@@ -47,9 +49,9 @@ class SignUpView(FormView):
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            return redirect(reverse_lazy('dashboard'))
+            return redirect(reverse_lazy('account'))
         return super(SignUpView, self).dispatch(request, *args, **kwargs)
-    
+
     def form_valid(self, form):
         data = self.request.POST
         username = data['username']
@@ -74,7 +76,7 @@ class SignUpView(FormView):
 class LoginView(FormView):
     form_class = LoginForm
     template_name = 'registration/login.html'
-    success_url = reverse_lazy('dashboard')
+    success_url = reverse_lazy('account')
 
     def get_context_data(self, **kwargs):          
         context = super().get_context_data(**kwargs)                     
@@ -90,20 +92,77 @@ class LoginView(FormView):
         )
 
         if user is not None:
-            login(self.request, user)
+            if user.otp_secret is not None:
+                next_url = None
+                if 'next' in self.request.POST:
+                    next_url = self.request.POST['next']
+                return redirect(
+                    reverse_lazy('login_otp'),
+                    username=credentials['username'],
+                    password=credentials['password'],
+                    next_url=next_url)
+            else:
+                login(self.request, user)
             if 'next' in self.request.POST:
                 return HttpResponseRedirect(self.request.POST['next'])
             else:
                 return HttpResponseRedirect(self.success_url)
 
         else:
-            messages.add_message(self.request, messages.INFO, 'Wrong credentials please try again')
+            messages.add_message(self.request, messages.INFO, 'Wrong credentials, please try again')
             return HttpResponseRedirect(reverse_lazy('login'))
+
+
+class LoginOTPView(FormView):
+    form_class = LoginOTPForm
+    template_name = 'registration/login-otp.html'
+    success_url = reverse_lazy('account')
+
+    def dispatch(self, request, *args, **kwargs):
+        if not self.request.session.get('username'):
+            print('username not in session')
+            return redirect(reverse_lazy('login'))
+        return super(LoginOTPView, self).dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):          
+        context = super().get_context_data(**kwargs)                     
+        context["recaptcha_site_key"] = settings.RECAPTCHA_SITE_KEY
+        return context
+    
+    def form_valid(self, form):
+        otp = form.cleaned_data
+        
+        username = self.request.session.get('username')
+        password = self.request.session.get('password')
+
+        print(username, password)
+
+        del self.request.session['username']
+        del self.request.session['password']
+
+        user = authenticate(self.request,
+            username=username,
+            password=password
+        )
+
+
+        print(user)
+
+        if OTP.verify_otp(user.otp_secret, otp):
+            login(self.request, user)
+            if self.request.session.get('next_url'):
+                return HttpResponseRedirect(self.request.session.get('next_url'))
+            else:
+                return HttpResponseRedirect(self.success_url)
+
+        else:
+            messages.add_message(self.request, messages.INFO, 'Invalid code, please try again')
+            return HttpResponseRedirect(reverse_lazy('login_otp'))
 
 
 def logout_view(request):
     logout(request)
-    return redirect(reverse_lazy('dashboard'))
+    return redirect(reverse_lazy('account'))
 
 
 class AccountActivationSentView(TemplateView):
@@ -111,7 +170,7 @@ class AccountActivationSentView(TemplateView):
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            return redirect(reverse_lazy('dashboard'))
+            return redirect(reverse_lazy('account'))
         return super(AccountActivationSentView, self).dispatch(request, *args, **kwargs)
 
 
@@ -132,10 +191,10 @@ def email_verification_view(request, uidb64, token):
         return HttpResponse('Activation link is invalid!')
 
 
-class DashboardView(LoginRequiredMixin, UpdateView):
+class AccountView(LoginRequiredMixin, UpdateView):
     form_class = UserUpdateForm
     model = User
-    template_name = 'dashboard.html'
+    template_name = 'account.html'
 
     def form_valid(self, form):
         form.save()
@@ -155,7 +214,7 @@ def delete_account_done_view(request):
         user = request.user
 
         if request.user.is_staff or request.user.is_superuser:
-            return redirect(reverse_lazy('dashboard'))
+            return redirect(reverse_lazy('account'))
         else:
             user.delete()
             logout(request)
@@ -173,3 +232,33 @@ class ResetPasswordView(PasswordResetView):
         context = super().get_context_data(**kwargs)                     
         context["recaptcha_site_key"] = settings.RECAPTCHA_SITE_KEY
         return context
+
+
+class AddOTPView(LoginRequiredMixin, FormView):
+    form_class = OTPForm
+    model = User
+    template_name = 'otp_add.html'
+    success_url = reverse_lazy('account')
+
+    def get_context_data(self, **kwargs):          
+        context = super().get_context_data(**kwargs)
+        context['otp_secret'] = OTP.generate_secret()
+        context['qr_code'] = OTP.generate_qrcode(name=self.request.user.username, secret=context['otp_secret'])
+        return context
+
+    def form_valid(self, form):
+        otp = form.cleaned_data
+        otp_secret = self.request.POST.get('otp_secret', None)
+        user = self.request.user
+        print(OTP.verify_otp(otp_secret=otp_secret, otp=otp))
+        print(otp_secret)
+        if OTP.verify_otp(otp_secret=otp_secret, otp=otp):
+            user.otp_secret = otp_secret
+            user.save(update_fields=['otp_secret'])
+        return super().form_valid(form)
+
+
+class RemoveOTPView(LoginRequiredMixin, FormView):
+    #form_class = OTPForm
+    template_name = 'otp_remove.html'
+    success_url = reverse_lazy('account')

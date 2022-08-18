@@ -45,6 +45,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     previous_login = models.DateTimeField(null=True, blank=True)
     failed_login_attempts = models.IntegerField(default=0)
     previous_failed_login_attempts = models.IntegerField(default=0)
+    otp_secret = models.CharField(_('OTP secret'), max_length=64, null=True, blank=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
@@ -58,7 +59,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.username
 
     def get_absolute_url(self):
-        return reverse('dashboard')
+        return reverse('account')
     
     def get_total_posts_likes(self):
         likes = self.like_set.all()

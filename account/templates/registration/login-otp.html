@@ -36,26 +36,18 @@
     <div class="auth-form-card-invisible">
       <h1 class="h4-heading">Sign in</h1>
       <div class="auth-form w-form">
-        <form method="POST" action="{% url 'login' %}" class="auth-form">
+        <form method="POST" action="{% url 'login_otp' %}" class="auth-form">
           {% csrf_token %}
+          <p style="font-size: 12px; margin-bottom: 0;">
+            Enter the sign-in 2FA code from your authenticator app.
+          </p>
           <div>
-            <label>Email</label>
-            {% render_field form.username type="email" class="input w-input" placeholder="Enter your email..." %}
-            <span style="font-size: 14px;">{{ form.username.errors }}</span>
-          </div>
-          <div>
-            <label>Password</label>
-            {% render_field form.password type="password" class="input w-input" placeholder="Enter your password..." %}
-            <span style="font-size: 14px;">{{ form.password.errors }}</span>
+            <label>2FA Code</label>
+            {% render_field form.otp type="text" class="input w-input" placeholder="Enter your 2FA code..." %}
+            <span style="font-size: 14px;">{{ form.otp.errors }}</span>
           </div>
           <!-- reCAPTCHA input -->
           {% render_field form.recaptcha type="hidden" id="g-recaptcha-response" %}
-
-          {% if request.GET.next %}
-
-            <input type="hidden" name="next" value="{{ request.GET.next }}">
-          
-          {% endif %}
 
           {{ form.non_field_errors }}
           
@@ -67,7 +59,7 @@
             {% endfor %}
           {% endif %}
           
-          <button class="submit-btn w-button">Sign in</button>
+          <button class="submit-btn w-button">Enter</button>
           <!-- reCAPTCHA Privacy and Terms of Service disclosure -->
           <p style="font-size: 12px; margin-bottom: 0;">
             This page is protected by Google reCAPTCHA.
@@ -79,19 +71,6 @@
               <span class="gradient-span">Terms</span>
             </a>.
           </p>
-          <div class="auth-form-redirect-div">
-            <a
-              href="{% url 'sign_up' %}"
-              class="auth-redirect-link w-inline-block">
-              <div>Don&#x27;t have an account?</div>
-              <div><span class="gradient-span">Create one</span></div>
-            </a>
-            <a
-              href="{% url 'password_reset' %}"
-              class="auth-redirect-link w-inline-block">
-              <div><span class="gradient-span">Forgot password?</span></div>
-            </a>
-          </div>
         </form>
       </div>
     </div>

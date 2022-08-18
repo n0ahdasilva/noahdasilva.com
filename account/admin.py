@@ -7,7 +7,8 @@ from .models import User, AuditEntry
 class UserAdmin(BaseUserAdmin):
     fieldsets = (
         (None, {'fields': (
-            'password', 
+            'password',
+            'otp_secret', 
             'email',
             'username', 
             'full_name', 
@@ -53,6 +54,7 @@ class UserAdmin(BaseUserAdmin):
         'groups'
     )
     readonly_fields = (
+        'otp_secret',
         'original_email', 
         'date_joined', 
         'previous_login', 

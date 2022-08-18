@@ -4,7 +4,7 @@ from django.contrib.auth import forms as auth_forms
 import requests
 import re
 from django.conf import settings
-from django.contrib.auth import authenticate
+from .otp import OTP
 
 
 #NOTE: Global variables
@@ -104,6 +104,31 @@ class LoginForm(forms.Form):
 
     def clean_recaptcha(self):
         cleaned_data = super(LoginForm, self).clean()
+        recaptcha_response = cleaned_data.get('recaptcha')
+        data = {
+            'secret': settings.RECAPTCHA_SECRET_KEY,
+            'response': recaptcha_response
+        }
+        r = requests.post(settings.RECAPTCHA_URL, data=data)
+        result = r.json()
+
+        if result.get('success') and result.get('score') > 0.5:
+            # client is human
+            pass
+        else:
+            raise forms.ValidationError('reCAPTCHA verification failed, please try again.')
+
+
+class LoginOTPForm(forms.Form):
+    otp = forms.CharField(max_length=6)
+    recaptcha = forms.CharField(
+        widget=forms.HiddenInput(),
+        max_length=1024,
+        required=False
+    )
+
+    def clean_recaptcha(self):
+        cleaned_data = super(LoginOTPForm, self).clean()
         recaptcha_response = cleaned_data.get('recaptcha')
         data = {
             'secret': settings.RECAPTCHA_SECRET_KEY,
@@ -247,3 +272,19 @@ class CustomPasswordChangeForm(auth_forms.PasswordChangeForm):
                 "The new password must contain at least one letter, number, and special character.")
 
         return password
+
+
+class OTPForm(forms.Form):
+    otp = forms.CharField(max_length=6)
+    otp_secret = forms.CharField(max_length=64, widget=forms.HiddenInput())
+
+    def clean(self):
+        cleaned_data = super(OTPForm, self).clean()
+        otp = cleaned_data.get('otp')
+        otp_secret = cleaned_data.get('otp_secret')
+
+        # Verify OTP
+        if not OTP.verify_otp(otp=otp, otp_secret=otp_secret):
+            raise forms.ValidationError("Invalid code, please try again.")
+        return otp
+    

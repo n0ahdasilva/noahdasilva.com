@@ -2,12 +2,12 @@ from django.contrib.sitemaps import Sitemap
 from django.urls import reverse
 
 
-class DashboardStaticSitemap(Sitemap):
+class AccountStaticSitemap(Sitemap):
 	changefreq = "yearly"
 	priority = 0.4
 	
 	def items(self):
-		return ['dashboard']
+		return ['account']
 			
 	def location(self, item):
 		return reverse(item)

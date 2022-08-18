@@ -21,7 +21,7 @@ from django.views.generic.base import TemplateView
 from django.conf import settings
 from django.conf.urls.static import static
 
-from account.sitemaps import DashboardStaticSitemap, RegistrationStaticSitemap
+from account.sitemaps import AccountStaticSitemap, RegistrationStaticSitemap
 from blog.sitemaps import TagSitemap, PostSitemap, BlogStaticSitemap
 from main.sitemaps import HomeSitemap, AboutSitemap, ContactSitemap, LegalSitemap
 from portfolio.sitemaps import ProjectSitemap, PortfolioStaticSitemap
@@ -32,7 +32,7 @@ sitemaps = {
     'about': AboutSitemap,
     'contact': ContactSitemap,
     'legal': LegalSitemap,
-    'dashboard': DashboardStaticSitemap,
+    'account': AccountStaticSitemap,
     'registration-static': RegistrationStaticSitemap,
     'blog-static': BlogStaticSitemap,
     'portfolio-static': PortfolioStaticSitemap,

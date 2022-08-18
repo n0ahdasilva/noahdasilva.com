@@ -3,15 +3,15 @@
 {% load static %}
 
 {% block seo %}
-<title>Dashboard | Noah Da Silva</title>
+<title>My Account | Noah Da Silva</title>
 <meta name="author" content="Noah Da Silva">
 <meta name="keywords" content="blog, technology, noahdasilva">
 <meta name="description" content="Welcome back! View your account information." />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Noah Da Silva" />
-<meta propety="og:title" content="Dashboard" />
+<meta propety="og:title" content="Account" />
 <meta propety="og:description" content="Welcome back! View your account information." />
-<meta property="" content="https://www.noahdasilva.com/dashboard/"/>
+<meta property="" content="https://www.noahdasilva.com/account/"/>
 <meta propety="og:image" content="{% static 'main/img/webclip.png' %}" />
 {% endblock %}
 
@@ -99,7 +99,7 @@
                 </div>
               </div>
             </div>
-            <form action"{% url 'dashboard' %}" method="post" class="dashboard-tab-content">
+            <form action"{% url 'account' %}" method="post" class="dashboard-tab-content">
               {% csrf_token %} 
               <h2 class="h4-heading">My Information</h2>
               <div class="dashboard-row">
@@ -320,7 +320,7 @@
                           <div class="progress-icon">
                             <div>3</div>
                           </div>
-                          <div>Full name</div>
+                          <div>2FA</div>
                         </div>
                       </div>
                       <div class="progress-bar-wrap">
@@ -333,7 +333,7 @@
 
                         <div class="progress-bar" style="width: 66%"></div>
                           
-                          {% if user.full_name %}
+                          {% if user.otp_secret %}
 
                           <div class="progress-bar" style="width: 100%"></div>
 
@@ -403,11 +403,36 @@
             <div class="dashboard-tab-content">
               <h2 class="h4-heading">Manage Account</h2>
               <div class="dashboard-row">
+                
+                {% if not user.otp_secret %}
+                
+                <a href="{% url 'add_otp' %}" class="dashboard-info-box link-box w-inline-block">
+                  <div class="dashboard-box-padding horizontal-flex">
+                    <div>
+                      <h3 class="dashboard-heading-small">Add 2FA via App</h3>
+                      <div class="dashboard-heading-small green">Recommended</div>
+                    </div>
+                  </div>
+                </a>
+
+                {% else %}
+
+                <a href="{% url 'remove_otp' %}" class="dashboard-info-box link-box w-inline-block">
+                  <div class="dashboard-box-padding horizontal-flex">
+                    <div>
+                      <h3 class="dashboard-heading-small">Remove 2FA via App</h3>
+                      <div class="dashboard-heading-small red">Not Recommended</div>
+                    </div>
+                  </div>
+                </a>
+
+                {% endif %}
+
                 <a href="{% url 'password_change' %}" class="dashboard-info-box link-box w-inline-block">
                   <div class="dashboard-box-padding horizontal-flex">
                     <div>
                       <h3 class="dashboard-heading-small">Change Password</h3>
-                      <div class="dashboard-heading-small gray">Update</div>
+                      <div class="dashboard-heading-small yellow">Update</div>
                     </div>
                   </div>
                 </a>
