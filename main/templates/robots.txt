@@ -1,23 +1,18 @@
-User-Agent: *
+User-agent: *
 
-Disallow: /like/
-Disallow: /like
-Disallow: /comment/
-Disallow: /comment
-Disallow: /*/edit
-Disallow: /*/remove
-Disallow: /delete-account/
-Disallow: /delete-account
-Disallow: /email-verification/
-Disallow: /email-verification
-Disallow: /forgot/
-Disallow: /logout/
-Disallow: /logout
-Disallow: /admin/
-Disallow: /admin
-Disallow: /account-activation-sent
-Disallow: /add-*
+Disallow: /
 
+Allow: /$
+Allow: /about/$
+Allow: /contact/$
+Allow: /terms-and-conditions/$
+Allow: /privacy-policy/$
+Allow: /account/$
+Allow: /login/$
+Allow: /sign-up/$
 Allow: /forgot/password-reset/$
+Allow: /blog/
+Allow: /tags/
+Allow: /portfolio/
 
 Sitemap: https://www.noahdasilva.com/sitemap.xml

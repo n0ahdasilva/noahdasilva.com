@@ -3,16 +3,8 @@
 {% load static %}
 
 {% block seo %}
+<meta name=”robots” content=”noindex”/>
 <title>Account Settings | Noah Da Silva</title>
-<meta name="author" content="Noah Da Silva">
-<meta name="keywords" content="blog, technology, noahdasilva">
-<meta name="description" content="Sign into your account." />
-<meta property="og:type" content="website" />
-<meta property="og:site_name" content="Noah Da Silva" />
-<meta propety="og:title" content="Account Settings" />
-<meta propety="og:description" content="Sign into your account." />
-<meta property="" content="https://www.noahdasilva.com/account/add-otp"/>
-<meta propety="og:image" content="{% static 'main/img/webclip.png' %}" />
 {% endblock %}
 
 {% block head_scripts %}
@@ -33,7 +25,7 @@
     <div class="auth-form-card-invisible">
       <h1 class="h4-heading">Set up 2FA</h1>
       <div class="auth-form w-form">
-        <form method="POST" action="{% url 'otp_add' %}" class="auth-form">
+        <form method="POST" action="{% url 'tfa_add' %}" class="auth-form">
           {% csrf_token %}
           <div>
             <p style="font-size: 12px; margin-bottom: 0;">

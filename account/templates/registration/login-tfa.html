@@ -3,16 +3,8 @@
 {% load static %}
 
 {% block seo %}
+<meta name=”robots” content=”noindex”/>
 <title>Two-Factor Authentication | Noah Da Silva</title>
-<meta name="author" content="Noah Da Silva">
-<meta name="keywords" content="blog, technology, noahdasilva">
-<meta name="description" content="Sign into your account." />
-<meta property="og:type" content="website" />
-<meta property="og:site_name" content="Noah Da Silva" />
-<meta propety="og:title" content="Two-Factor Authentication" />
-<meta propety="og:description" content="Sign into your account." />
-<meta property="" content="https://www.noahdasilva.com/login/otp/"/>
-<meta propety="og:image" content="{% static 'main/img/webclip.png' %}" />
 {% endblock %}
 
 {% block head_scripts %}
@@ -36,7 +28,7 @@
     <div class="auth-form-card-invisible">
       <h1 class="h4-heading">Sign in</h1>
       <div class="auth-form w-form">
-        <form method="POST" action="{% url 'login_otp' %}" class="auth-form">
+        <form method="POST" action="{% url 'login_tfa' %}" class="auth-form">
           {% csrf_token %}
           <p style="font-size: 12px; margin-bottom: 0;">
             Enter the sign-in 2FA code from your authenticator app.
@@ -44,7 +36,7 @@
           <div>
             <label>2FA Code</label>
             {% render_field form.otp type="text" class="input w-input" placeholder="Enter your 2FA code..." %}
-            <span style="font-size: 14px;">{{ form.otp.errors }}</span>
+            <span style="font-size: 14px;">{{ form..errors }}</span>
           </div>
           <!-- reCAPTCHA input -->
           {% render_field form.recaptcha type="hidden" id="g-recaptcha-response" %}

@@ -98,7 +98,7 @@ class LoginView(FormView):
                     self.request.session['next_url'] = self.request.POST['next']
                 self.request.session['username'] = credentials['username']
                 self.request.session['password'] = credentials['password']                
-                return HttpResponseRedirect(reverse_lazy('login_otp'))
+                return HttpResponseRedirect(reverse_lazy('login_tfa'))
             else:
                 login(self.request, user)
             if 'next' in self.request.POST:
@@ -113,7 +113,7 @@ class LoginView(FormView):
 
 class LoginOTPView(FormView):
     form_class = LoginOTPForm
-    template_name = 'registration/login-otp.html'
+    template_name = 'registration/login-tfa.html'
     success_url = reverse_lazy('account')
 
     def dispatch(self, request, *args, **kwargs):
@@ -149,7 +149,7 @@ class LoginOTPView(FormView):
 
         else:
             messages.add_message(self.request, messages.INFO, 'Invalid 2FA code, please try again')
-            return HttpResponseRedirect(reverse_lazy('login_otp'))
+            return HttpResponseRedirect(reverse_lazy('login_tfa'))
 
 
 def logout_view(request):
@@ -229,7 +229,7 @@ class ResetPasswordView(PasswordResetView):
 class AddOTPView(LoginRequiredMixin, FormView):
     form_class = OTPForm
     model = User
-    template_name = 'otp_add.html'
+    template_name = 'tfa_add.html'
     success_url = reverse_lazy('account')
 
     def get_context_data(self, **kwargs):          
@@ -251,7 +251,7 @@ class AddOTPView(LoginRequiredMixin, FormView):
 class RemoveOTPView(LoginRequiredMixin, FormView):
     form_class = ConfirmPasswordForm
     model = User
-    template_name = 'otp_remove.html'
+    template_name = 'tfa_remove.html'
     success_url = reverse_lazy('account')
 
     def get_context_data(self, **kwargs):          
@@ -269,4 +269,4 @@ class RemoveOTPView(LoginRequiredMixin, FormView):
             return HttpResponseRedirect(self.success_url)
         else:
             messages.add_message(self.request, messages.INFO, 'Password does not match')
-            return HttpResponseRedirect(reverse_lazy('otp_remove'))
+            return HttpResponseRedirect(reverse_lazy('tfa_remove'))
