@@ -25,8 +25,10 @@ load_dotenv()
 ENV_PATH = os.path.join(BASE_DIR, '.env')
 load_dotenv(dotenv_path=ENV_PATH)
 
-
+# Determine if environment is production or development.
 PRODUCTION = os.getenv('PRODUCTION', 'False') == 'True'
+
+
 
 #############################################
 # NOTE: SETTINGS FOR PRODUCTION ENVIRONMENT #
@@ -98,6 +100,8 @@ if not PRODUCTION:
 ##############################################
 # NOTE: END OF PRODUCTION DEPENDENT SETTINGS #
 ##############################################
+
+
 
 # Application definition
 

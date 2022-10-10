@@ -3,7 +3,7 @@ __pycache__/
 *.py[cod]
 
 # Virtual environment
-django-venv/
+venv/
 
 # Environment variables (secret variables)
 .env
