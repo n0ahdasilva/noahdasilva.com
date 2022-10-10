@@ -12,7 +12,7 @@
 <meta propety="og:title" content="{{ post.title }}" />
 <meta propety="og:description" content="{{ post.summary }}" />
 <meta property="og:url" content="https://www.noahdasilva.com/blog/{{ post.slug }}"/>
-<meta propety="og:image" content="{% static 'main/img/webclip.png' %}" />
+<meta propety="og:image" content="{{ post.image.url }}" />
 {% endblock %} 
 
 {% block head_scripts %}
